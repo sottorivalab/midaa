@@ -28,3 +28,42 @@ def create_z_fix(dim_latent_space):
             z_fixed_t[k, j] = (-1.0 / float(dim_latent_space) - s) / z_fixed_t[k, k]
             z_fixed = z_fixed_t.t()
     return z_fixed
+
+def sample_batch(input_matrix, model_matrix, batch_size):
+    
+    if model_matrix is None:
+        return sample_batch_aux(input_matrix[0].shape[0], batch_size)
+    else:
+        # TODO implement class specific subsample
+        return sample_batch_aux_by_class(input_matrix[0].shape[0], batch_size)
+            
+
+def sample_batch_aux(max_value, batch_size):
+    max_sample = torch.min(torch.tensor(max_value), torch.tensor(batch_size))
+    ret = torch.randint(max_sample.item(), size = (max_sample, ))
+    return ret
+
+
+def sample_batch_by_class_aux(max,model_matrix ,batch_size):
+    max_sample = torch.max(max, torch.tensor(batch_size))
+    ret = torch.randint(max_sample.item, size = (batch_size, ))
+    return ret
+
+def to_cpu_ot_iterate(x):
+    if isinstance(x, list):
+        ret = [val.cpu() for val in x]
+    else:
+        ret = x.cpu()
+        
+    return ret
+    
+
+def detach_or_iterate(x):
+    if isinstance(x, list):
+        ret = [val.detach().numpy() for val in x]
+    else:
+        ret = x.detach().numpy()
+        
+    return ret
+    
+    

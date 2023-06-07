@@ -1,6 +1,6 @@
 # scdeepaa
 
-A package to perform deep Archetypal Analysis on all single cell data types
+scdeepAA is a package designed for performing Deep Archetypal Analysis on multiomics data. This package is designed to help researchers, bioinformaticians, and data scientists uncover the hidden archetypes in complex, high-dimensional multiomics datasets.
 
 ## Installation
 
@@ -8,9 +8,27 @@ A package to perform deep Archetypal Analysis on all single cell data types
 $ pip install scdeepaa
 ```
 
-## Usage
+## Quick
 
-- TODO
+scDeepAA can be run on a single datset in anndata(scanpy) format by just running 
+
+```python
+import scdeepaa as aa
+import scanpy as sc
+
+adata =  sc.datasets.pbmc3k_processed()
+input_matrix, norm_factors, input_distribution = aa.get_input_params_adata(adata)
+
+narchetypes = 5
+
+aa_result = scdeepaa.fit_deepAA(
+    input_matrix,
+    norm_factors,
+    input_distribution,
+    narchetypes = narchetypes)
+
+
+```
 
 ## Contributing
 

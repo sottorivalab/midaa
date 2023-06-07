@@ -1,87 +1,111 @@
-import pyro
-import pyro.distributions as dist
-from torch.functional import F
-
-import pyro.optim as optim
-from pyro.infer import SVI, Trace_ELBO, TraceEnum_ELBO
-
-import torch.distributions.constraints as constraints
-
 import torch
 import torch.nn as nn
 
+from scdeepaa.Utils_net import build_last_layer_from_output_dist, build_sequential_layer
+
 class Decoder(nn.Module):
-  def __init__(self, input_size, z_dim, hidden_dims_dec, bifurcate, output_type,input_size_aux = None, trifurcate = False):
-      super().__init__()
-      # setup the linear transformations used
-      self.fc1 = nn.Linear(z_dim, hidden_dims_dec[0])
-      self.fc2 = nn.Linear(hidden_dims_dec[0], hidden_dims_dec[1])
-      self.fc3 = nn.Linear(hidden_dims_dec[1], hidden_dims_dec[2])
-      self.fc11 = nn.Linear(hidden_dims_dec[2], input_size)
-      
-      # setup the non-linearities
-      self.relu = nn.ReLU()
-      self.sofmax = nn.Softmax()
-      self.bifurcate = bifurcate
-      self.output_type = output_type
-      self.trifurcate = trifurcate
-      self.input_size_aux = input_size_aux
-      
-      if bifurcate:
-        self.fc21 = nn.Linear(hidden_dims_dec[2], input_size_aux[0])
-        if self.output_type == "gaussian":
-          self.fc22 = nn.Linear(hidden_dims_dec[2], input_size_aux[0])
-      if trifurcate:
-        self.fc21 = nn.Linear(hidden_dims_dec[2], input_size_aux[0])
-        self.fc31 = nn.Linear(hidden_dims_dec[2], input_size_aux[1])
-        # if self.output_type[0] == "gaussian":
-        #   self.fc22 = nn.Linear(hidden_dims_dec[2], input_size_aux[0])
-        # if self.output_type[1] == "gaussian":
-        #   self.fc32 = nn.Linear(hidden_dims_dec[2], input_size_aux[1])
-          
-  def forward(self, z):
-      # define the forward computation on the latent z
-      # first compute the hidden units
-      hidden1 = self.relu(self.fc1(z))
-      hidden2 = self.relu(self.fc2(hidden1))
-      hidden3 = self.relu(self.fc3(hidden2))
-      # return the parameter for the output
-      loc_x = self.fc11(hidden3)
-      
-      if self.bifurcate:
-        if self.output_type == "categorical":
-          loc_y = self.sofmax(self.fc21(hidden3))
-          return loc_x, loc_y
-        if self.output_type == "gaussian":
-          loc_y = self.fc21(hidden3)
-          # sigma_y = torch.exp(self.fc22(hidden3))
-          # return loc_x, loc_y, sigma_y
-          return loc_x, loc_y
+    def __init__(self, input_size, z_dim, hidden_dims_dec_common,hidden_dims_dec_last, 
+                 output_types_input,input_size_aux = None, output_types_side = None):
+        super().__init__()
+        ### Network attributes ###
+
+        self.layers_common = nn.ModuleList()
+        self.layers_independent_input = nn.ModuleList()
+        self.hidden_dims_dec_last = hidden_dims_dec_last
+        self.hidden_dims_dec_common = hidden_dims_dec_common
+        self.n_inputs = len(output_types_input)
         
-      if self.trifurcate:
-        if self.output_type[0] == "categorical" and self.output_type[1] == "categorical":
-          loc_y = self.sofmax(self.fc21(hidden3))
-          loc_v =  self.sofmax(self.fc31(hidden3))
-          return loc_x, loc_y, loc_v
-        if self.output_type[0] == "gaussian" and self.output_type[1] == "gaussian":
-          loc_y = self.fc21(hidden3)
-          loc_v =  self.fc31(hidden3)
-          # sigma_y = torch.exp(self.fc22(hidden3))
-          # sigma_v = torch.exp(self.fc32(hidden3))
-          # return loc_x, loc_y, loc_v, sigma_y, sigma_v
-          return loc_x, loc_y, loc_v
-        if self.output_type[0] == "gaussian" and self.output_type[1] == "categorical":
-          loc_y = self.fc21(hidden3)
-          loc_v =  self.sofmax(self.fc31(hidden3))
-          # sigma_y = torch.exp(self.fc22(hidden3))
-          # return loc_x, loc_y, loc_v, sigma_y
-          return loc_x, loc_y, loc_v
-        if self.output_type[0] == "categorical" and self.output_type[1] == "gaussian":
-          loc_y = self.sofmax(self.fc21(hidden3))
-          loc_v =  self.fc31(hidden3)
-          # sigma_v = torch.exp(self.fc32(hidden3))
-          # return loc_x, loc_y,loc_v, sigma_v
-          return loc_x, loc_y, loc_v
+        self.n_layers_common = len(hidden_dims_dec_common)
+
         
-      return loc_x
-    
+        self.has_side = input_size_aux is not None
+        self.n_layers_ind = len(hidden_dims_dec_last)
+
+        if self.has_side:
+            self.n_side = len(output_types_side)
+            self.layers_independent_side = nn.ModuleList()
+        
+        self.output_types_input = output_types_input
+        self.output_types_lateral = output_types_side
+        self.input_size_aux = input_size_aux
+        self.input_size = input_size
+        
+        self.softmax = nn.Softmax(1)
+        
+        ### Layers building ###
+
+        self.layers_common.append(build_sequential_layer(z_dim, hidden_dims_dec_common[0]))
+
+
+        if self.n_layers_common > 1:
+            for i in range(self.n_layers_common - 1):
+                self.layers_common.append(
+                    build_sequential_layer(hidden_dims_dec_common[i], hidden_dims_dec_common[i + 1]))
+        
+        for k in range(self.n_inputs):
+            mod_list_tmp = nn.ModuleList()
+            for lay in range(self.n_layers_ind + 1):
+                if  lay == self.n_layers_ind:
+                    if self.n_layers_ind > 0:
+                        mod_list_tmp.append(build_last_layer_from_output_dist(hidden_dims_dec_last[-1],input_size[k], output_types_input[k]))
+                    else:
+                        mod_list_tmp.append(build_last_layer_from_output_dist(hidden_dims_dec_common[-1],input_size[k], output_types_input[k]))
+                elif lay == 0:
+                    mod_list_tmp.append(build_sequential_layer(hidden_dims_dec_common[-1],hidden_dims_dec_last[0]))
+                else:
+                    mod_list_tmp.append(build_sequential_layer(hidden_dims_dec_last[lay-1],hidden_dims_dec_last[lay]))
+            self.layers_independent_input.append(mod_list_tmp)
+
+        
+        if self.has_side:
+            for k in range(self.n_side):
+                mod_list_tmp = nn.ModuleList()
+                for lay in range(self.n_layers_ind + 1):
+                    if  lay == self.n_layers_ind:
+                        if self.n_layers_ind > 0:
+                            mod_list_tmp.append(build_last_layer_from_output_dist(hidden_dims_dec_last[-1],input_size_aux[k], output_types_side[k]))
+                        else:
+                            mod_list_tmp.append(build_last_layer_from_output_dist(hidden_dims_dec_common[-1],input_size_aux[k], output_types_side[k]))
+                    elif lay == 0:
+                        mod_list_tmp.append(build_sequential_layer(hidden_dims_dec_common[-1],hidden_dims_dec_last[0]))
+                    else:
+                        mod_list_tmp.append(build_sequential_layer(hidden_dims_dec_last[lay-1],hidden_dims_dec_last[lay]))
+                self.layers_independent_side.append(mod_list_tmp)
+
+  
+
+    def forward(self, z):
+    # define the forward computation on the latent z
+        # first compute the hidden units
+        hidden = self.layers_common[0](z)
+        
+        
+        
+        if self.n_layers_common > 1:
+            for lay in range(1, self.n_layers_common):
+                hidden = self.layers_common[lay](hidden)
+        
+        
+        
+        input_reconstructed = [None] * self.n_inputs
+        hidden_out_inp = [None] *  self.n_inputs
+        for k in range(self.n_inputs):
+            for lay in range(self.n_layers_ind + 1):
+                if lay == 0:
+                    hidden_out_inp[k] = self.layers_independent_input[k][lay](hidden)
+                else:
+                    hidden_out_inp[k] = self.layers_independent_input[k][lay](hidden_out_inp[k])
+            input_reconstructed[k] = hidden_out_inp[k]
+
+        if self.has_side:
+            lateral_reconstructed = [None] * self.n_side
+            hidden_out_side = [None] *  self.n_side
+            for k in range(self.n_side):
+                for lay in range(self.n_layers_ind + 1):
+                    if lay == 0:
+                        hidden_out_side[k] = self.layers_independent_side[k][lay](hidden)
+                    else:
+                        hidden_out_side[k] = self.layers_independent_side[k][lay](hidden_out_side[k])
+                lateral_reconstructed[k] = hidden_out_side[k]
+            return input_reconstructed, lateral_reconstructed             
+        return input_reconstructed, None
