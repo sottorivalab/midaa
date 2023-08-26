@@ -1,19 +1,19 @@
-# scdeepaa
+# multiDeepAA
 
-scdeepAA is a package designed for performing Deep Archetypal Analysis on multiomics data. This package is designed to help researchers, bioinformaticians, and data scientists uncover the hidden archetypes in complex, high-dimensional multiomics datasets.
+multideepaa is a package designed for performing Deep Archetypal Analysis on multiomics data. This package is designed to help researchers, bioinformaticians, and data scientists uncover the hidden archetypes in complex, high-dimensional multiomics datasets.
 
 ## Installation
 
 ```bash
-$ pip install scdeepaa
+$ pip install multideepaa
 ```
 
 ## Quick
 
-scDeepAA can be run on a single datset in anndata(scanpy) format by just running 
+multiDeepAA can be run on a single datset in anndata(scanpy) format by just running 
 
 ```python
-import scdeepaa as aa
+import multideepaa as aa
 import scanpy as sc
 
 adata =  sc.datasets.pbmc3k_processed()
@@ -36,8 +36,8 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`scdeepaa` was created by Salvatore Milite. It is licensed under the terms of the MIT license.
+`multideepaa` was created by Salvatore Milite. It is licensed under the terms of the MIT license.
 
 ## Credits
 
-`scdeepaa` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+`multideepaa` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
