@@ -2,6 +2,8 @@ import scipy
 from python_tsp.exact import solve_tsp_dynamic_programming
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import seaborn as sns
+import pandas as pd
 import numpy as np
 
 
@@ -40,8 +42,8 @@ def plot_archetypes_simplex(res, distance_type = "euclidean", cmap = "nipy_spect
         ax.set_rlabel_position(-2.5)  # Move radial labels away from plotted line
         ax.set_theta_direction(-1)
         ax.set_theta_zero_location('N')
-        legend1 = ax.legend(labels = colors_dict.keys(), handles = scatter.legend_elements()[0],
-                        loc="right", title="Classes")
+        #legend1 = ax.legend(labels = arc_names, handles = scatter.legend_elements()[0],
+        #                loc="right", title="Classes")
         #ax.add_artist(legend1)
         ax.grid(True)
 
@@ -72,3 +74,16 @@ def plot_ELBO(res):
     plt.plot(losses)
     plt.xlabel("SVI step")
     plt.ylabel("ELBO loss")
+    
+    
+    
+def plot_ELBO_across_runs(res_dictionary, warmup = 500):    
+    ELBOS = {k:obj["ELBO"][warmup:] for k,obj in res_dictionary.items()}
+    ELBO_plot = pd.DataFrame(ELBOS)
+    ELBO_plot =pd.melt(ELBO_plot)
+    plt.clf()
+    sns.boxplot(data=ELBO_plot, x = "variable", y = "value")
+    plt.xlabel("N archetypes")
+    plt.ylabel("ELBO")
+    plt.show()
+

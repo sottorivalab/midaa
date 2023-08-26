@@ -10,6 +10,15 @@ def build_sequential_layer(dim1, dim2):
         )
     
     return net
+
+def build_convolutional_layer(dim1, dim2):
+    net = nn.Sequential(
+            nn.Linear(dim1, dim2),
+            nn.BatchNorm1d(dim2),
+            nn.LeakyReLU()
+        )
+    
+    return net
         
 
 def build_last_layer_from_output_dist(dim,input_size, output_type):

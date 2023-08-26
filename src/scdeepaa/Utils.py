@@ -31,22 +31,22 @@ def create_z_fix(dim_latent_space):
 
 def sample_batch(input_matrix, model_matrix, batch_size):
     
-    if model_matrix is None:
-        return sample_batch_aux(input_matrix[0].shape[0], batch_size)
-    else:
-        # TODO implement class specific subsample
-        return sample_batch_aux_by_class(input_matrix[0].shape[0], batch_size)
-            
+    return sample_batch_aux(input_matrix[0].shape[0], batch_size)
+  
 
 def sample_batch_aux(max_value, batch_size):
-    max_sample = torch.min(torch.tensor(max_value), torch.tensor(batch_size))
-    ret = torch.randint(max_sample.item(), size = (max_sample, ))
-    return ret
+    ret = torch.randperm(torch.tensor(max_value).item())
+    rest = max_value % batch_size
+    N_splits = max_value // batch_size
+    ret_list = [ret[(i * batch_size):((i+1) * batch_size)] for i in range(N_splits)]
+    if rest > 0:
+        ret_list.append(ret[-rest:])
+    return ret_list
 
 
 def sample_batch_by_class_aux(max,model_matrix ,batch_size):
     max_sample = torch.max(max, torch.tensor(batch_size))
-    ret = torch.randint(max_sample.item, size = (batch_size, ))
+    ret = torch.randperm(max_sample.item, size = (batch_size, ))
     return ret
 
 def to_cpu_ot_iterate(x):

@@ -1,3 +1,3 @@
 from scdeepaa.Interface import fit_deepAA
-from scdeepaa.Utils_parsers import get_input_params_adata
-from scdeepaa.Plots import plot_archetypes_simplex, plot_ELBO
+from scdeepaa.Utils_parsers import get_input_params_adata, add_to_obs_adata
+from scdeepaa.Plots import plot_archetypes_simplex, plot_ELBO, plot_ELBO_across_runs

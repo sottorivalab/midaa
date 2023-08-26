@@ -13,10 +13,10 @@ def get_input_params_adata(adata, is_normalized = True):
 
 
 def add_to_obs_adata(inf_res, adata):
-    col_names = [ "arc" + str(i) for i in np.arange(res["hyperparametes"]["narchetypes"])]
+    col_names = [ "arc" + str(i + 1) for i in np.arange(inf_res["hyperparametes"]["narchetypes"])]
     for i in range(len(col_names)):
         adata.obs[col_names[i]] = inf_res["inferred_quantities"]["A"][:,i]
     adata.obsm["X_aa"] = inf_res["inferred_quantities"]["Z"]
-    return adata
+    return adata, col_names
 
 

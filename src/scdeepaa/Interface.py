@@ -37,23 +37,23 @@ def fit_deepAA(input_matrix,
                batch_size = 5128):
 
     if CUDA and torch.cuda.is_available():
-        torch.set_default_tensor_type('torch.cuda.DoubleTensor')
+        torch.set_default_tensor_type('torch.cuda.FloatTensor')
     else:
-        torch.set_default_tensor_type('torch.DoubleTensor')
+        torch.set_default_tensor_type('torch.FloatTensor')
 
 
     torch.manual_seed(torch_seed)
     pyro.clear_param_store()
 
-    input_matrix = [torch.tensor(input_matrix_i) for input_matrix_i in input_matrix]
+    input_matrix = [torch.tensor(input_matrix_i).float() for input_matrix_i in input_matrix]
     if model_matrix is not None:
-        model_matrix  =  torch.tensor(model_matrix)
+        model_matrix  =  torch.tensor(model_matrix).float()
     if normalization_factor is not None:
-        normalization_factor = [torch.tensor(normalization_facotr_i) for normalization_facotr_i in normalization_factor]
+        normalization_factor = [torch.tensor(normalization_facotr_i).float() for normalization_facotr_i in normalization_factor]
     else:
          normalization_factor = [torch.ones(input.matrix[i].shape[0]) for i in range(len(input_matrix))]
     if side_matrices is not None:
-        side_matrices =  [torch.tensor(side_matrices_i) for side_matrices_i in side_matrices]
+        side_matrices =  [torch.tensor(side_matrices_i).float() for side_matrices_i in side_matrices]
 
 
     ### prepare parameters for deepAA
@@ -89,26 +89,29 @@ def fit_deepAA(input_matrix,
     elbo_list = [] 
 
     for j in t:
-        
+        elbo_epoch = [] 
         batch_indexes = sample_batch(input_matrix, model_matrix,batch_size)
-        input_matrix_run = [input_matrix[i][batch_indexes,:] for i in range(len(input_matrix))]
-        normalization_factor_run = [normalization_factor[i][batch_indexes] for i in range(len(normalization_factor))] 
-        
-        if model_matrix is not None:
-            model_matrix_run = model_matrix[batch_indexes,:]
-        else:
-            model_matrix_run = None
+        for tt in range(len(batch_indexes)):
+            input_matrix_run = [input_matrix[i][batch_indexes[tt],:] for i in range(len(input_matrix))]
+            normalization_factor_run = [normalization_factor[i][batch_indexes[tt]] for i in range(len(normalization_factor))] 
 
-        if  side_matrices is not None:
-            side_matrices_run = [side_matrices[i][batch_indexes,:] for i in range(len(side_matrices))]
-        else:
-            side_matrices_run = None
-        
-        elbo = svi.step(input_matrix_run, model_matrix_run, 
-                        normalization_factor_run, side_matrices_run, loss_weights_reconstruction, 
-                        loss_weights_side)
-        elbo_list.append(elbo )
-        _ = t.set_description('ELBO: {:.5f}  '.format(elbo))
+            if model_matrix is not None:
+                model_matrix_run = model_matrix[batch_indexes[tt],:]
+            else:
+                model_matrix_run = None
+
+            if  side_matrices is not None:
+                side_matrices_run = [side_matrices[i][batch_indexes[tt],:] for i in range(len(side_matrices))]
+            else:
+                side_matrices_run = None
+
+            elbo = svi.step(input_matrix_run, model_matrix_run, 
+                            normalization_factor_run, side_matrices_run, loss_weights_reconstruction, 
+                            loss_weights_side)
+            elbo_epoch.append(elbo)
+        mean_elbo = sum(elbo_epoch) / len(batch_indexes)
+        elbo_list.append(mean_elbo )
+        _ = t.set_description('ELBO: {:.5f}  '.format(mean_elbo))
         _ = t.refresh()
 
     params_run = {}
@@ -143,8 +146,10 @@ def fit_deepAA(input_matrix,
         input_reconstructed, side_reconstructed = deepAA.decoder(A @ archetypes_inferred)
         
     
-
-    input_loss, side_loss,weights_reconstruction, weights_side, input_loss_no_reg,side_loss_no_reg, total_loss = deepAA.model(input_matrix_run, model_matrix_run, normalization_factor_run, side_matrices_run, loss_weights_reconstruction, loss_weights_side)
+    if fix_Z:
+        input_loss, side_loss,weights_reconstruction, weights_side, input_loss_no_reg,side_loss_no_reg, total_loss, Z_loss_no_reg ,Z_loss = deepAA.model(input_matrix_run, model_matrix_run, normalization_factor_run, side_matrices_run, loss_weights_reconstruction, loss_weights_side)
+    else:
+        input_loss, side_loss,weights_reconstruction, weights_side, input_loss_no_reg,side_loss_no_reg, total_loss = deepAA.model(input_matrix_run, model_matrix_run, normalization_factor_run, side_matrices_run, loss_weights_reconstruction, loss_weights_side)
     
     params_run["input_loss"] = input_loss
     params_run["total_loss"] = total_loss
@@ -156,6 +161,9 @@ def fit_deepAA(input_matrix,
         params_run["side_loss"] = side_loss
         params_run["weights_side"] = weights_side
         params_run["side_loss_unreg"] = side_loss_no_reg
+    if fix_Z:
+        params_run["Z_loss"] = Z_loss
+        params_run["Z_loss_unreg"] = Z_loss_no_reg
         
 
     
@@ -192,6 +200,7 @@ def fit_deepAA(input_matrix,
         "inferred_quantities" : params_run,
         "hyperparametes" : params_input,
         "ELBO" : elbo_list,
+        "deepAA_obj":deepAA
     }
     
     return final_dict

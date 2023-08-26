@@ -183,10 +183,13 @@ class DeepAA(nn.Module):
             with pyro.plate("archs", self.narchetypes ):
                 Z_predicted = pyro.sample("Z_predicted", dist.Uniform(-1000, 1000))
         
-        Z_loss = torch.nn.functional.mse_loss(Z_predicted, self.Z_fix, reduction='sum') * self.Z_fix_norm
-        pyro.factor("loss", reconstruction_loss_reg + side_loss_reg + Z_loss)
+        Z_loss = torch.nn.functional.mse_loss(Z_predicted, self.Z_fix, reduction='sum') 
+        Z_loss_reg = Z_loss * self.Z_fix_norm
+        pyro.factor("loss", reconstruction_loss_reg + side_loss_reg - Z_loss_reg)
+        return reconstruction_loss_reg,side_loss_reg,loss_weights_reconstruction, loss_weights_side,reconstruction_loss, side_loss, reconstruction_loss_reg + side_loss_reg, Z_loss,  Z_loss_reg
     else:
         pyro.factor("loss", reconstruction_loss_reg + side_loss_reg)
+        return reconstruction_loss_reg,side_loss_reg,loss_weights_reconstruction, loss_weights_side,reconstruction_loss, side_loss, reconstruction_loss_reg + side_loss_reg
         
     """         
     if write_log:
@@ -198,7 +201,7 @@ class DeepAA(nn.Module):
             file1.write(str(reconstruction_loss_sr) + "\t" + str(Z_loss_sr) + "\t" + str(archetype_loss_sr) + "\t" + str(cell_type_loss_sr) + "\n") 
     """
         
-    return reconstruction_loss_reg,side_loss_reg,loss_weights_reconstruction, loss_weights_side,reconstruction_loss, side_loss, reconstruction_loss_reg + side_loss_reg
+    
         
         
   def guide( self,input_matrix, model_matrix, 
