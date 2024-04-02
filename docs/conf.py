@@ -6,8 +6,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"scdeepaa"
-copyright = u"2023, Salvatore Milite"
+project = u"daario"
+copyright = u"2024, Salvatore Milite"
 author = u"Salvatore Milite"
 
 # -- General configuration ---------------------------------------------------

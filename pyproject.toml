@@ -1,18 +1,25 @@
 [tool.poetry]
-name = "scDeepAA"
+name = "daario"
 version = "0.1.0"
-description = "A package to perform deep Archetypal Analysis on all single cell data types"
+description = "A package to perform deep Archetypal Analysis on multi-omics data"
 authors = ["Salvatore Milite"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.9"
-torch = "*"
-numpy = "*"
-pyro-ppl = "*"
+python = ">=3.9,<4.0"
+pyro-ppl = "^1.9.0"
+tqdm = "^4.66.2"
+python-tsp = "^0.4.1"
+seaborn = "^0.13.2"
+
 
 [tool.poetry.dev-dependencies]
+
+[tool.poetry.group.dev.dependencies]
+myst-nb = "^1.0.0"
+sphinx-autoapi = "^3.0.0"
+sphinx-rtd-theme = "^2.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
