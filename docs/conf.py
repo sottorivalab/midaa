@@ -10,6 +10,9 @@ project = u"daario"
 copyright = u"2024, Salvatore Milite"
 author = u"Salvatore Milite"
 
+nb_execution_mode = "off"
+
+
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
