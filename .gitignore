@@ -140,6 +140,7 @@ dmypy.json
 
 notebooks/data
 docs/data
+docs_old/
 
 # MacOS
 .DS_Store
