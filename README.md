@@ -13,9 +13,11 @@ $ pip install daario
 
 DAARIO encodes you multi-modal data into a latent simplex: 
 
-$$ \mathbf{Z^*} =   \mathbf{A}  \mathbf{B}  \mathbf{Z} $$
+``{math}
+ \mathbf{Z^*} =   \mathbf{A}  \mathbf{B}  \mathbf{Z} 
+```
 
-DAARIO leans the matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{Z}$ in an amortized fashion, namely we learn a function that takes in input the different data modalities $\mathbf{X_g}$ indexed by $g$ and learns the 3 matrices. As you could have got from the name, we parametrize the function as a neural network. The network is implemented in a Variaitonal Autoencdoer fashion, so we have and encoding and decoding function as well as probabilistic definition of the matrix factorization problem above.
+DAARIO leans the matrices {math}`\mathbf{A}`, {math}`\mathbf{B}` and {math}`\mathbf{Z}` in an amortized fashion, namely we learn a function that takes in input the different data modalities {math}`\mathbf{X_g}` indexed by {math}`g` and learns the 3 matrices. As you could have got from the name, we parametrize the function as a neural network. The network is implemented in a Variaitonal Autoencdoer fashion, so we have and encoding and decoding function as well as probabilistic definition of the matrix factorization problem above.
 Both the encoder and the decoder have a shared portion where data fusion occurs and an independent piece where modality specific encoding and decoding takes place.
 
 
