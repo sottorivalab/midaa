@@ -2,10 +2,17 @@
 
 DARRIO is a package designed for performing Deep Archetypal Analysis on multiomics data. This package is designed to help researchers, bioinformaticians, and data scientists uncover the hidden archetypes in complex, high-dimensional multiomics datasets.
 
+*The package is under active development, expect breaking changes and incomplete documentat for a bit*
+*I'll try my best to speed this up, if something is broken or you need help please open an issue, dontt be shy!*
+
+
 ## Installation
 
-```bash
-$ pip install daario
+```{bash}
+# Soon on pypi
+git clone https://github.com/sottorivalab/daario.git
+# you need poetry installed
+poetry install 
 ```
 
 ## Quick Start
@@ -13,9 +20,12 @@ $ pip install daario
 
 DAARIO encodes you multi-modal data into a latent simplex: 
 
-$$ \mathbf{Z^*} =   \mathbf{A}  \mathbf{B}  \mathbf{Z} $$
+```{math}
+\mathbf{Z^*} =   \mathbf{A}  \mathbf{B}  \mathbf{Z} 
+```
 
-DAARIO leans the matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{Z}$ in an amortized fashion, namely we learn a function that takes in input the different data modalities $\mathbf{X_g}$ indexed by $g$ and learns the 3 matrices. As you could have got from the name, we parametrize the function as a neural network. The network is implemented in a Variaitonal Autoencdoer fashion, so we have and encoding and decoding function as well as probabilistic definition of the matrix factorization problem above.
+
+DAARIO leans the matrices {math}`\mathbf{A}`, {math}`\mathbf{B}` and {math}`\mathbf{Z}` in an amortized fashion, namely we learn a function that takes in input the different data modalities {math}`\mathbf{X_g}` indexed by {math}`g` and learns the 3 matrices. As you could have got from the name, we parametrize the function as a neural network. The network is implemented in a Variational Autoencdoer fashion, so we have and encoding and decoding function as well as probabilistic definition of the matrix factorization problem above.
 Both the encoder and the decoder have a shared portion where data fusion occurs and an independent piece where modality specific encoding and decoding takes place.
 
 
@@ -26,7 +36,7 @@ Otherwise the best way to start is to understand what DAARIO actually does in de
 
 A minimal example to run the tool:
 
-```python
+```{python}
 
 import multideepaa as daa
 import scanpy as sc
@@ -52,11 +62,14 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## ToDOs  (slow but steady) :chart_with_upwards_trend:
 
+- [ ] Final API Documnetation
+- [ ] Tutorial math on AA
+- [ ] Tutorial parameters and networks
+- [ ] Quick start single modality
+- [ ] Quick start multiomics
 - [ ] Allow the user to specify its own encoder/decoder
 - [ ] Provide some module builders
 - [ ] Test batch/covariate correction in latent space 
-- [ ] Example notebook CLL MOFA
-- [ ] Example notebook CD34+  
 
 ## License
 

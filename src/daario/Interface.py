@@ -9,8 +9,8 @@ from pyro.infer import SVI, Trace_ELBO, TraceMeanField_ELBO, TraceEnum_ELBO,JitT
 from tqdm import trange
 
 
-from scdeepaa.Utils import sample_batch, to_cpu_ot_iterate, detach_or_iterate, find_matching_indexes, select_elements_not_at_indexes, select_elements_at_indexes
-from scdeepaa.deepAA import DeepAA
+from daario.Utils import sample_batch, to_cpu_ot_iterate, detach_or_iterate, find_matching_indexes, select_elements_not_at_indexes, select_elements_at_indexes
+from daario.DAARIO import DAARIO
 
 
 def fit_DAARIO(input_matrix,
@@ -155,7 +155,7 @@ def fit_DAARIO(input_matrix,
         initialization_mode = True
     
 
-    deepAA = DeepAA(
+    deepAA = DAARIO(
                 n_dim_input = n_dim_input, 
                 input_types = input_types,
                 n_dim_input_side = n_dim_input_side, 

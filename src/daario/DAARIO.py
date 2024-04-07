@@ -11,7 +11,7 @@ from daario.Likelihood import *
 from daario.Utils_guide import compute_auxiliary_params_guide
 
 
-class DeepAA(nn.Module):
+class DAARIO(nn.Module):
     def __init__(self,
         n_dim_input, 
         input_types,
