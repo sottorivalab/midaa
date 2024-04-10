@@ -2,20 +2,25 @@
 
 DARRIO is a package designed for performing Deep Archetypal Analysis on multiomics data. The documentation can be find here [https://sottorivalab.github.io/daario/](https://sottorivalab.github.io/daario/)
 
-<img src="[[https://github.com/sottorivalab/daario/logo.png](https://github.com/sottorivalab/daario/blob/main/logo.png)](https://github.com/sottorivalab/daario/blob/main/logo.png)" width="400px" align="left">
+####  *The package is under active development, expect breaking changes and incomplete documentat for a bit*
+#### *I'll try my best to speed this up, if something is broken or you need help please open an issue, dontt be shy!*
+<br />
 
-*The package is under active development, expect breaking changes and incomplete documentat for a bit*
-*I'll try my best to speed this up, if something is broken or you need help please open an issue, dontt be shy!*
+<img src="https://github.com/sottorivalab/daario/blob/b5dac78f159dc85d27e9fca5ddc0c37d0a27f80a/logo.png?raw=true" width="200px" align="left">
+
+
 
 
 ## Installation
 
-```{bash}
+```bash
 # Soon on pypi
 git clone https://github.com/sottorivalab/daario.git
 # you need poetry installed
 poetry install 
 ```
+<br />
+
 
 ## Quick Start
 
@@ -27,7 +32,7 @@ $$
 $$
 
 
-DAARIO leans the matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{Z}$ in an amortized fashion, namely we learn a function that takes in input the different data modalities $\mathbf{X_g}$ indexed by $g` and learns the 3 matrices. As you could have got from the name, we parametrize the function as a neural network. 
+DAARIO leans the matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{Z}$ in an amortized fashion, namely we learn a function that takes in input the different data modalities $\mathbf{X_g}$ indexed by $g$ and learns the 3 matrices. As you could have got from the name, we parametrize the function as a neural network. 
 The network is implemented in a Variational Autoencdoer fashion, so we have and encoding and decoding function as well as probabilistic definition of the matrix factorization problem above.
 Both the encoder and the decoder have a shared portion where data fusion occurs and an independent piece where modality specific encoding and decoding takes place.
 
@@ -39,7 +44,7 @@ Otherwise the best way to start is to read [this](https://sottorivalab.github.io
 
 A minimal example to run the tool:
 
-```{python}
+```python
 
 import multideepaa as daa
 import scanpy as sc
@@ -77,7 +82,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 ## Citation 
 
 If you have used DAARIO in your research, consider citing:
-```{bibtex}
+```bibtex
 @article {milite2024,
 	author = {Salvatore Milite and Giulio Caravagna and Andrea Sottoriva},
 	title = {Interpretable Multi-Omics Data Integration with Deep Archetypal Analysis},
