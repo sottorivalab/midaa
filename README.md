@@ -2,7 +2,7 @@
 
 DARRIO is a package designed for performing Deep Archetypal Analysis on multiomics data. The documentation can be find here [https://sottorivalab.github.io/daario/](https://sottorivalab.github.io/daario/)
 
-<img src="https://github.com/sottorivalab/daario/logo.png" width="400px" align="left">
+<img src="[https://github.com/sottorivalab/daario/logo.png](https://github.com/sottorivalab/daario/blob/main/logo.png)" width="400px" align="left">
 
 *The package is under active development, expect breaking changes and incomplete documentat for a bit*
 *I'll try my best to speed this up, if something is broken or you need help please open an issue, dontt be shy!*
