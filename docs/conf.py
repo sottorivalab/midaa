@@ -12,7 +12,6 @@ author = u"Salvatore Milite"
 
 nb_execution_mode = "off"
 
-
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -23,7 +22,7 @@ extensions = [
     "autoapi.extension",
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
-    "sphinx.ext.githubpages",
+    "sphinx.ext.githubpages"
 ]
 autoapi_dirs = ["../src"]
 
@@ -38,3 +37,12 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 #
 html_theme = "sphinx_rtd_theme"
+
+
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "html_image"
+]

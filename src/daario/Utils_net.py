@@ -3,6 +3,13 @@ import torch.nn as nn
 import math
 
 
+def build_multimodal_linear_encoder():
+    pass
+
+def build_multimodal_linear_decoder():
+    pass
+
+
 def build_conv_layer(in_channels, out_channels, flatten = False, kernel_size=3, stride=1, padding=1, pool_size=2, pool_stride=2):
     if flatten:
         layer = nn.Sequential(

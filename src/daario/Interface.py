@@ -469,6 +469,7 @@ def handle_model_matrix(params_run, model_matrix, reconstruct_input_and_side, A,
     return params_run
 
 def calculate_loss(params_run, fix_Z, deepAA, input_matrix, model_matrix, normalization_factor, side_matrices, loss_weights_reconstruction, loss_weights_side):
+    
     if fix_Z:
         input_loss, side_loss, weights_reconstruction, weights_side, input_loss_no_reg, side_loss_no_reg, total_loss, Z_loss_no_reg, Z_loss = deepAA.model(input_matrix, 
             model_matrix, normalization_factor, side_matrices, loss_weights_reconstruction, loss_weights_side)
