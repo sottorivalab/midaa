@@ -2,10 +2,9 @@
 
 MIDAA is a package designed for performing Deep Archetypal Analysis on multiomics data. The documentation can be find here [https://sottorivalab.github.io/midaa/](https://sottorivalab.github.io/midaa/)
 
-####  *The package is under active development, expect breaking changes (we just changed the tool name ;) ) and incomplete documentat for a bit*
-#### *I'll try my best to speed this up, if something is broken or you need help please open an issue, dontt be shy!*
-<br />
-
+*The package is under active development, expect breaking changes (we just changed the tool name ;) ) and incomplete documentation for a bit*
+*I'll try my best to speed this up, if something is broken or you need help please open an issue, do not be shy!*
+<br/><br/>
 <img src="https://github.com/sottorivalab/daario/blob/69f8399cadfcb10ba1bc483cd4405b823efda64c/logo.png?raw=true" width="200px" align="left">
 
 
@@ -19,7 +18,7 @@ git clone https://github.com/sottorivalab/midaa.git
 # you need poetry installed
 poetry install 
 ```
-<br />
+<br/><br/>
 
 
 ## Quick Start
@@ -36,9 +35,9 @@ midaa leans the matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{Z}$ in an amort
 The network is implemented in a Variational Autoencdoer fashion, so we have and encoding and decoding function as well as probabilistic definition of the matrix factorization problem above.
 Both the encoder and the decoder have a shared portion where data fusion occurs and an independent piece where modality specific encoding and decoding takes place.
 
-If you are happy with that we have some cool tutorials that will show you how to use MIDAA on real [multi-omics data](https://sottorivalab.github.io/midaa/scMulti_multimodal.ipynb).
+If you are happy with that we have some cool tutorials that will show you how to use MIDAA on real [multi-omics data](https://sottorivalab.github.io/daario/scMulti_multimodal.ipynb).
 
-Otherwise, the best way to start is to read [this](https://sottorivalab.github.io/midaa/midaa_long_form.html) or the companion [paper](https://www.biorxiv.org/content/10.1101/2024.04.05.588238v1) and understand what MIDAA actually does in details and what are the [parameters](https://sottorivalab.github.io/midaa/implementation_and_parameters.ipynb) you can play with.
+Otherwise, the best way to start is to read [this](https://sottorivalab.github.io/daario/midaa_long_form.html) or the companion [paper](https://www.biorxiv.org/content/10.1101/2024.04.05.588238v1) and understand what MIDAA actually does in details and what are the [parameters](https://sottorivalab.github.io/daario/implementation_and_parameters.ipynb) you can play with.
 
 
 A minimal example to run the tool:

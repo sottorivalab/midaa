@@ -6,10 +6,8 @@
 :hidden:
 
 midaa_long_form.ipynb
-scRNA_single_modality.ipynb
-multiomics_10x_single_cell.ipynb
-multimodal_bulk_CLL.ipynb
-
+implementation_and_parameters.ipynb
+scMulti_multimodal.ipynb
 changelog.md
 contributing.md
 conduct.md
