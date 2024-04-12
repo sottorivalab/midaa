@@ -6,7 +6,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"daario"
+project = u"midaa"
 copyright = u"2024, Salvatore Milite"
 author = u"Salvatore Milite"
 
