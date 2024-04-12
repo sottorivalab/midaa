@@ -1,12 +1,12 @@
-# Deep Archetypal Analysis for Representation and Learning of Omics data (MIDAA)
+# Multiomics Integration via Deep Archetypal Analysis (MIDAA)
 
-DARRIO is a package designed for performing Deep Archetypal Analysis on multiomics data. The documentation can be find here [https://sottorivalab.github.io/midaa/](https://sottorivalab.github.io/midaa/)
+MIDAA is a package designed for performing Deep Archetypal Analysis on multiomics data. The documentation can be find here [https://sottorivalab.github.io/midaa/](https://sottorivalab.github.io/midaa/)
 
 ####  *The package is under active development, expect breaking changes (we just changed the tool name ;) ) and incomplete documentat for a bit*
 #### *I'll try my best to speed this up, if something is broken or you need help please open an issue, dontt be shy!*
 <br />
 
-<img src="https://github.com/sottorivalab/midaa/blob/b5dac78f159dc85d27e9fca5ddc0c37d0a27f80a/logo.png?raw=true" width="200px" align="left">
+<img src="https://github.com/sottorivalab/daario/blob/69f8399cadfcb10ba1bc483cd4405b823efda64c/logo.png?raw=true" width="200px" align="left">
 
 
 
