@@ -70,7 +70,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 - [ ] Final API Documnetation
 - [X] Tutorial math on AA
-- [ ] Tutorial parameters and networks
+- [X] Tutorial parameters and networks
 - [X] Quick start 
 - [ ] Allow the user to specify its own encoder/decoder
 - [ ] Provide some module builders
