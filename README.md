@@ -68,7 +68,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## ToDOs  (slow but steady):  🔨
 
-- [ ] Final API Documnetation
+- [X] Final API Documnetation
 - [X] Tutorial math on AA
 - [X] Tutorial parameters and networks
 - [X] Quick start 
