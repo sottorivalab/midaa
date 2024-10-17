@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>midaa &mdash; midaa  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="API Reference" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            midaa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../midaa_long_form.html">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../implementation_and_parameters.html">Finding your way in MIDAAs interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scMulti_multimodal.html">MIDAA 101 (on 10X multiome)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">midaa</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">midaa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">midaa</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/autoapi/midaa/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-midaa">
+<span id="midaa"></span><h1><a class="reference internal" href="#module-midaa" title="midaa"><code class="xref py py-mod docutils literal notranslate"><span class="pre">midaa</span></code></a><a class="headerlink" href="#module-midaa" title="Link to this heading"></a></h1>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.fit_MIDAA" title="midaa.fit_MIDAA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_MIDAA</span></code></a>(input_matrix[, normalization_factor, ...])</p></td>
+<td><p>Fits the MIDAA model to given input data, using specified architecture and optimization parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.load_model_from_state_dict" title="midaa.load_model_from_state_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_model_from_state_dict</span></code></a>(model, input_matrix, path)</p></td>
+<td><p>Loads a model's state dictionary from a specified path and updates the model with inferred quantities</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.get_input_params_adata" title="midaa.get_input_params_adata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_params_adata</span></code></a>(adata[, is_normalized])</p></td>
+<td><p>Prepare input parameters for archetypal analysis based on an AnnData object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.add_to_obs_adata" title="midaa.add_to_obs_adata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_to_obs_adata</span></code></a>(inf_res, adata)</p></td>
+<td><p>Add inferred archetype scores and embeddings to an AnnData object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.plot_archetypes_simplex" title="midaa.plot_archetypes_simplex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_archetypes_simplex</span></code></a>(res[, distance_type, cmap, ...])</p></td>
+<td><p>Plots the archetypes inferred by the model on a simplex represented in polar coordinates, optionally coloring</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.plot_ELBO" title="midaa.plot_ELBO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ELBO</span></code></a>(res)</p></td>
+<td><p>Plots the ELBO loss over SVI steps from the results of model fitting.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.plot_ELBO_across_runs" title="midaa.plot_ELBO_across_runs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ELBO_across_runs</span></code></a>(res_dictionary[, warmup])</p></td>
+<td><p>Plots a comparison of ELBO losses across different model runs, post-warmup phase.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.generate_synthetic_data" title="midaa.generate_synthetic_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_synthetic_data</span></code></a>(model, archetype_distribution)</p></td>
+<td><p>Generates synthetic data using a given model and archetype distribution parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.correlation_by_archetype" title="midaa.correlation_by_archetype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correlation_by_archetype</span></code></a>(matrix, inference_result[, ...])</p></td>
+<td><p>Compute correlations between archetype cell scores and variables in a matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.compute_feature_importance" title="midaa.compute_feature_importance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_feature_importance</span></code></a>(model, input_matrix[, ...])</p></td>
+<td><p>Compute feature importance in a MIDAA model by measuring the change in the latent space reconstruction</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.fit_MIDAA">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">fit_MIDAA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['NB']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights_reconstruction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side_matrices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_types_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_dec_common</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[256,</span> <span class="pre">512]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_dec_last</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1024]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_dec_last_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_enc_ind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1024]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_enc_common</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[512,</span> <span class="pre">256]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_enc_pre_Z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[256,</span> <span class="pre">128]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers_independent_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers_independent_types_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[256,</span> <span class="pre">256]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">narchetypes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">just_VAE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linearize_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linearize_decoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VAE_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CUDA</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_Z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_B_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z_fix_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z_fix_release_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reconstruct_input_and_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_steps_phase_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_lr_phase_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_steps_phase_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">350</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_lr_phase_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torch_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.fit_MIDAA" title="Link to this definition"></a></dt>
+<dd><p>Fits the MIDAA model to given input data, using specified architecture and optimization parameters.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><p>input_matrix (list of ndarray): Input data matrix, where each entry is a tensor representation of the input data for a different modality.</p></li>
+<li><p>normalization_factor (list of ndarray, optional): Normalization factors for the input data. Default is None.</p></li>
+<li><p>input_types (list of str, optional): Types of input data. Default is [“NB”].</p></li>
+<li><p>loss_weights_reconstruction (list of float, optional): Weights for the reconstruction loss. Default is None.</p></li>
+<li><p>side_matrices (list of ndarray, optional): Side information matrices. Default is None.</p></li>
+<li><p>input_types_side (list of str, optional): Types of side information. Default is None.</p></li>
+<li><p>loss_weights_side (list of float, optional): Weights for the side information loss. Default is None.</p></li>
+<li><p>hidden_dims_dec_common, hidden_dims_dec_last, hidden_dims_dec_last_side,
+hidden_dims_enc_ind, hidden_dims_enc_common, hidden_dims_enc_pre_Z (list of int, optional):
+Dimensions of various layers in the decoder and encoder. Defaults are specified for each.</p></li>
+<li><p>layers_independent_types, layers_independent_types_side (list of str, optional): Types of layers for independent modeling.</p></li>
+<li><p>image_size (list of int, optional): Size of the input images (width, height). Default is [256, 256].</p></li>
+<li><p>narchetypes (int, optional): Number of archetypes to model. Default is 10.</p></li>
+<li><p>model_matrix (ndarray, optional): Matrix representing the model. Default is None.</p></li>
+<li><p>just_VAE (bool, optional): Flag to run only the VAE without the archetypal analysis. Default is False.</p></li>
+<li><p>linearize_encoder, linearize_decoder (bool, optional): Flags to linearize encoder and decoder. Defaults are False.</p></li>
+<li><p>VAE_steps (int, optional): Number of steps to run the VAE. Default is None.</p></li>
+<li><p>CUDA (bool, optional): Flag to use CUDA if available. Default is True.</p></li>
+<li><p>lr (float, optional): Learning rate for the optimizer. Default is 0.005.</p></li>
+<li><p>gamma_lr (float, optional): Learning rate decay factor. Default is 0.1.</p></li>
+<li><p>steps (int, optional): Number of training steps. Default is 2000.</p></li>
+<li><p>fix_Z (bool, optional): Flag to fix Z during training. Default is False.</p></li>
+<li><p>initialization_B_weight (float, optional): Initial weight for B. Default is None.</p></li>
+<li><p>Z_fix_norm (float, optional): Normalization factor for Z when fixed. Default is None.</p></li>
+<li><p>Z_fix_release_step (int, optional): Step to release Z fix. Default is None.</p></li>
+<li><p>reconstruct_input_and_side (bool, optional): Flag to reconstruct both input and side information. Default is False.</p></li>
+<li><p>initialization_input (dict, optional): Initial values for the input. Default is None.</p></li>
+<li><p>initialization_steps_phase_1, initialization_steps_phase_2 (int, optional):
+Number of steps for the two phases of initialization. Defaults are specified.</p></li>
+<li><p>initialization_lr_phase_1, initialization_lr_phase_2 (float, optional):
+Learning rates for the two phases of initialization. Defaults are specified.</p></li>
+<li><p>torch_seed (int, optional): Seed for PyTorch’s RNG. Default is 3.</p></li>
+<li><p>batch_size (int, optional): Batch size for training. Default is 5128.</p></li>
+<li><p>kernel_size, stride, padding, pool_size, pool_stride (int, optional):
+Convolution and pooling parameters. Defaults are specified.</p></li>
+</ul>
+<p>Returns:
+dict: A dictionary containing the final parameters, input parameters, ELBO list, and the DeepAA instance.</p>
+<p>This function configures and trains a MIDAA model based on the specified parameters and data.
+It handles device setting, seed initialization, data preprocessing, and the training loop, including
+potential initialization phases for the model. The final output includes training diagnostics and the
+trained model itself, ready for further analysis or application.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.load_model_from_state_dict">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">load_model_from_state_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CUDA</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.load_model_from_state_dict" title="Link to this definition"></a></dt>
+<dd><p>Loads a model’s state dictionary from a specified path and updates the model with inferred quantities
+based on a provided input matrix.</p>
+<p>Parameters:
+- model (dict): A dictionary containing the model structure, including the ‘deepAA_obj’ (the model object)</p>
+<blockquote>
+<div><p>and ‘hyperparameters’. This dictionary will be updated with ‘inferred_quantities’ based on the input data.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>input_matrix (list of ndarray): The input data matrix to be used for inference after loading the model,
+where each entry is a tensor representation of the input data for a different modality.</p></li>
+<li><p>path (str): Path to the file containing the saved state dictionary of the model.</p></li>
+<li><p>CUDA (bool, optional): Indicates whether CUDA (GPU) should be used for loading and inference. If False,
+operations will be performed on the CPU. Default is False.</p></li>
+</ul>
+<p>The function loads the model’s state dictionary from the specified path, considering whether CUDA is enabled
+or not. It sets the model to evaluation mode, processes the provided input matrix, and performs inference to
+obtain and update the model with new inferred quantities such as A, B, and Z matrices. It also updates the
+model with any final parameters adjustments based on the model’s hyperparameters.</p>
+<p>Note:
+- The ‘model’ dictionary must contain ‘deepAA_obj’, an instance of the model, and ‘hyperparameters’, a dictionary</p>
+<blockquote>
+<div><p>specifying model configurations like ‘fix_Z’, ‘Z_fix_release_step’, and ‘steps’.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>After loading the state and performing inference, the function updates the ‘model’ dictionary with
+‘inferred_quantities’, which include the results from the inference.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.get_input_params_adata">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">get_input_params_adata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.get_input_params_adata" title="Link to this definition"></a></dt>
+<dd><p>Prepare input parameters for archetypal analysis based on an AnnData object.</p>
+<p>This function extracts the necessary input data, normalization factors, and input distribution types
+from an AnnData object for use in archetypal analysis or similar models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adata</strong> (<em>AnnData</em>) – An AnnData object containing the dataset. The data matrix <cite>adata.X</cite> should be accessible,
+and if <cite>is_normalized</cite> is False, the observation-level metadata <cite>adata.obs[“n_counts”]</cite>
+should be present.</p></li>
+<li><p><strong>is_normalized</strong> (<em>bool</em><em>, </em><em>optional</em><em> (</em><em>default=True</em><em>)</em>) – Indicates whether the data in <cite>adata.X</cite> is already normalized.
+- If <cite>True</cite>, no additional normalization is applied.
+- If <cite>False</cite>, normalization factors are computed based on the total counts per observation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>input_data</strong> (<em>list of np.ndarray</em>) – A list containing the input data matrix extracted from <cite>adata.X</cite>. The data matrix is wrapped
+in a list to maintain consistency with expected input formats for downstream analysis.</p></li>
+<li><p><strong>normalization</strong> (<em>list of np.ndarray</em>) – A list containing the normalization factors for each observation (cell).
+- If <cite>is_normalized</cite> is <cite>True</cite>, this is an array of ones, indicating no additional normalization.
+- If <cite>is_normalized</cite> is <cite>False</cite>, this is an array of normalization factors computed from <cite>adata.obs[“n_counts”]</cite> divided by the total counts across all observations.</p></li>
+<li><p><strong>input_distribution</strong> (<em>list of str</em>) – A list containing the input distribution type for the data.
+- If <cite>is_normalized</cite> is <cite>True</cite>, the distribution is set to <cite>“G”</cite> (Gaussian).
+- If <cite>is_normalized</cite> is <cite>False</cite>, the distribution is set to <cite>“NB”</cite> (Negative Binomial).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.add_to_obs_adata">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">add_to_obs_adata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inf_res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adata</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.add_to_obs_adata" title="Link to this definition"></a></dt>
+<dd><p>Add inferred archetype scores and embeddings to an AnnData object.</p>
+<p>This function updates an AnnData object by adding the inferred archetype scores to <cite>adata.obs</cite>
+and the low-dimensional embeddings to <cite>adata.obsm</cite> based on the results from an archetypal analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inf_res</strong> (<em>dict</em>) – <p>A dictionary containing the inference results from an archetypal analysis model.
+Expected keys in the dictionary:
+- <cite>“hyperparameters”</cite>: A dictionary with the key <cite>“narchetypes”</cite> indicating the number of archetypes.
+- <cite>“inferred_quantities”</cite>: A dictionary containing:</p>
+<blockquote>
+<div><ul>
+<li><p><cite>”A”</cite>: A 2D numpy array of shape <cite>(n_samples, narchetypes)</cite> with the archetype scores for each sample.</p></li>
+<li><p><cite>”Z”</cite>: A 2D numpy array with the low-dimensional embeddings for visualization or further analysis.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>adata</strong> (<em>AnnData</em>) – The AnnData object to be updated. The object will be modified in place with new observations
+and embeddings added.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>adata</strong> (<em>AnnData</em>) – The updated AnnData object with new fields added to <cite>.obs</cite> and <cite>.obsm</cite>.</p></li>
+<li><p><strong>col_names</strong> (<em>list of str</em>) – A list of column names added to <cite>adata.obs</cite>, corresponding to the archetype scores.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.plot_archetypes_simplex">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">plot_archetypes_simplex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nipy_spectral'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Group'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.plot_archetypes_simplex" title="Link to this definition"></a></dt>
+<dd><p>Plots the archetypes inferred by the model on a simplex represented in polar coordinates, optionally coloring
+points by a given attribute.</p>
+<p>Parameters:
+- res (dict): A dictionary containing model results, specifically ‘inferred_quantities’ with archetype coefficients ‘A’.
+- distance_type (str, optional): The type of distance metric to use for determining the order of archetypes. Defaults to “euclidean”.
+- cmap (str, optional): Colormap for plotting. Defaults to “nipy_spectral”.
+- color_by (Series, optional): Pandas series or similar containing labels to color data points by. Defaults to None.
+- subsample (array-like, optional): Indices to subsample the archetype coefficients ‘A’ for plotting. Defaults to None.
+- s (float, optional): Size of points in the plot. Defaults to None.
+- l_size (int, optional): Size of labels in the legend. Defaults to 30.
+- l_title (str, optional): Title of the legend. Defaults to “Group”.</p>
+<p>Returns:
+tuple: (fig, ax) where ‘fig’ is the figure object and ‘ax’ is the axes object of the plot.</p>
+<p>The function computes distances between archetypes to determine their order, maps these onto a circle,
+and plots them in polar coordinates. Points can be colored by a categorical variable if provided. The function
+aims to provide an intuitive visualization of the relationship between archetypes, highlighting their relative
+distances and potential clustering.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.plot_ELBO">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">plot_ELBO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.plot_ELBO" title="Link to this definition"></a></dt>
+<dd><p>Plots the ELBO loss over SVI steps from the results of model fitting.</p>
+<p>Parameters:
+- res (dict): A dictionary containing the ELBO loss values in the key ‘ELBO’.</p>
+<p>This function creates a line plot showing how the ELBO loss evolved during the optimization process. It’s useful
+for assessing the convergence of the model fitting process. The x-axis represents the SVI step, and the y-axis
+represents the ELBO loss value at that step.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.plot_ELBO_across_runs">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">plot_ELBO_across_runs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res_dictionary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warmup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.plot_ELBO_across_runs" title="Link to this definition"></a></dt>
+<dd><p>Plots a comparison of ELBO losses across different model runs, post-warmup phase.</p>
+<p>Parameters:
+- res_dictionary (dict): A dictionary where keys are descriptive names of model runs (e.g., number of archetypes)</p>
+<blockquote>
+<div><p>and values are dictionaries containing the ‘ELBO’ loss values for those runs.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>warmup (int, optional): Number of initial steps to exclude from the plot to focus on the post-warmup phase. Defaults to 500.</p></li>
+</ul>
+<p>The function creates a boxplot for each key in the res_dictionary, showing the distribution of ELBO values
+across steps after the specified warmup phase. This visualization is helpful for comparing the model fitting
+performance across different configurations or hyperparameter settings, especially to identify which setups
+lead to better convergence based on the ELBO loss metric.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.generate_synthetic_data">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">generate_synthetic_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">archetype_distribution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deterministic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncells</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirichlet_variance_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_cpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.generate_synthetic_data" title="Link to this definition"></a></dt>
+<dd><p>Generates synthetic data using a given model and archetype distribution parameters.</p>
+<p>Parameters:
+- model (dict): A dictionary containing the trained model and its parameters, including ‘inferred_quantities’ with ‘archetypes_inferred’ and the ‘deepAA_obj’.
+- archetype_distribution (Tensor): A tensor representing the distribution of archetypes to be used for generating synthetic data.
+- deterministic (bool, optional): If True, generates data deterministically based on the mean of the distribution. Defaults to False.
+- ncells (int, optional): Number of synthetic data points (cells) to generate. Defaults to 1000.
+- dirichlet_variance_factor (float, optional): A scaling factor applied to the archetype distribution to adjust the variance of the Dirichlet distribution from which the synthetic archetype coefficients are sampled. Defaults to 1.0.
+- to_cpu (bool, optional): If True, moves generated tensors to CPU. Useful if the model is on a GPU and you want to analyze the data on CPU. Defaults to False.
+- seed (int, optional): Seed for the random number generator to ensure reproducibility. Defaults to 3.</p>
+<p>Returns:
+tuple: A tuple containing two elements:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>generate_output (list of Tensors): The generated synthetic data.</p></li>
+<li><p>side_output (list of Tensors or None): The generated side information, if available in the model; otherwise, None.</p></li>
+</ul>
+</div></blockquote>
+<p>The function first samples synthetic archetype coefficients from a Dirichlet distribution, then uses these coefficients to generate synthetic latent representations. These latent representations are then passed through the decoder of the provided model to generate synthetic data and, optionally, side information. The function allows for the generated data to be moved to CPU for further analysis.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.correlation_by_archetype">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">correlation_by_archetype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlation_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spearman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mt_correction_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fdr_bh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.correlation_by_archetype" title="Link to this definition"></a></dt>
+<dd><p>Compute correlations between archetype cell scores and variables in a matrix.</p>
+<p>This function calculates the correlation coefficients between each archetype’s cell scores and each variable (column) in the provided matrix.
+It supports different types of correlation methods and applies multiple testing correction to the p-values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_cells</em><em>, </em><em>n_variables</em><em>)</em>) – A 2D array or list of lists representing the input matrix used for fitting the model.
+Each row corresponds to a cell, and each column corresponds to a variable.</p></li>
+<li><p><strong>inference_result</strong> (<em>dict</em>) – A dictionary containing inference results with the key “inferred_quantities” that maps to another
+dictionary containing “A”. “A” should be a 2D array-like structure with shape (n_cells, n_scores),
+where each column represents the scores for a particular archetype.</p></li>
+<li><p><strong>correlation_type</strong> (<em>str</em><em>, </em><em>optional</em><em> (</em><em>default=&quot;spearman&quot;</em><em>)</em>) – <dl class="simple">
+<dt>The type of correlation to compute. Supported options are:</dt><dd><ul>
+<li><p>’pearson’ : Pearson correlation coefficient</p></li>
+<li><p>’spearman’ : Spearman rank correlation</p></li>
+<li><p>’kendall’ : Kendall tau correlation</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>mt_correction_method</strong> (<em>str</em><em>, </em><em>optional</em><em> (</em><em>default='fdr_bh'</em><em>)</em>) – The method to use for multiple testing correction of p-values.
+Default is Benjamini-Hochberg (<cite>‘fdr_bh’</cite>). Other methods supported by
+<cite>statsmodels.stats.multitest.multipletests</cite> can be used.</p></li>
+<li><p><strong>variable_names</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em><em> (</em><em>default=None</em><em>)</em>) – A list of names for the variables (columns) in the matrix. If not provided,
+variables will be named as ‘Variable_1’, ‘Variable_2’, etc.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A DataFrame containing the correlation results with the following columns:</dt><dd><ul class="simple">
+<li><p>’Variable’ : Name of the variable.</p></li>
+<li><p>’Archetype’ : Identifier for the archetype score.</p></li>
+<li><p>’Correlation’ : Correlation coefficient between the archetype score and the variable.</p></li>
+<li><p>’P-value’ : P-value for the correlation.</p></li>
+<li><p>’Corrected P-value’ : P-value after multiple testing correction.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.compute_feature_importance">
+<span class="sig-prename descclassname"><span class="pre">midaa.</span></span><span class="sig-name descname"><span class="pre">compute_feature_importance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx_modality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.compute_feature_importance" title="Link to this definition"></a></dt>
+<dd><p>Compute feature importance in a MIDAA model by measuring the change in the latent space reconstruction
+when each feature is held out, using the Frobenius norm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>torch.nn.Module</em>) – The trained PyTorch MIDAA object.</p></li>
+<li><p><strong>input_matrix</strong> (<em>array-like</em><em> or </em><em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The input list of data matrices.</p></li>
+<li><p><strong>idx_modality</strong> (<em>int</em><em>,  </em><em>optional</em><em> (</em><em>default=0</em><em>)</em>) – The index of the modality in the input list to compute feature importance for.</p></li>
+<li><p><strong>feature_names</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em><em> (</em><em>default=None</em><em>)</em>) – A list of names for the features (columns) in the input matrix. If not provided,
+features will be named as ‘Feature_1’, ‘Feature_2’, etc.</p></li>
+<li><p><strong>device</strong> (<em>str</em><em>, </em><em>optional</em><em> (</em><em>default='cpu'</em><em>)</em>) – The device to run the computations on. Options are ‘cpu’ or ‘cuda’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A DataFrame containing the feature names and their importance scores with columns:</dt><dd><ul class="simple">
+<li><p>’Feature’: Name of the feature.</p></li>
+<li><p>’ImportanceScore’: Importance score computed using the Frobenius norm.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>For a large number of features this function takes a LOT of time.</p></li>
+<li><p>The input_matrix will be converted to a torch.Tensor if it is not already one.</p></li>
+<li><p>Holding out a feature is performed by setting its values to zero across all samples.</p></li>
+<li><p>The function does not modify the original input_matrix.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Salvatore Milite.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

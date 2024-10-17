@@ -1,0 +1,63 @@
+:orphan:
+
+:py:mod:`midaa.Utils`
+=====================
+
+.. py:module:: midaa.Utils
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Utils.mix_weights
+   midaa.Utils.create_z_fix
+   midaa.Utils.sample_batch
+   midaa.Utils.sample_batch_aux
+   midaa.Utils.sample_batch_by_class_aux
+   midaa.Utils.to_cpu_ot_iterate
+   midaa.Utils.detach_or_iterate
+   midaa.Utils.find_matching_indexes
+   midaa.Utils.select_elements_not_at_indexes
+   midaa.Utils.select_elements_at_indexes
+
+
+
+.. py:function:: mix_weights(beta)
+
+
+.. py:function:: create_z_fix(dim_latent_space)
+
+   Adapted from https://github.com/bmda-unibas/DeepArchetypeAnalysis/blob/master/AT_lib/lib_at.py
+
+
+
+.. py:function:: sample_batch(input_matrix, model_matrix, batch_size)
+
+
+.. py:function:: sample_batch_aux(max_value, batch_size)
+
+
+.. py:function:: sample_batch_by_class_aux(max, model_matrix, batch_size)
+
+
+.. py:function:: to_cpu_ot_iterate(x)
+
+
+.. py:function:: detach_or_iterate(x)
+
+
+.. py:function:: find_matching_indexes(input_list, regex_pattern)
+
+
+.. py:function:: select_elements_not_at_indexes(elements, exclude_indexes)
+
+
+.. py:function:: select_elements_at_indexes(elements, include_indexes)
+
+

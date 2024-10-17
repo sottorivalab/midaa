@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>midaa.Interface &mdash; midaa  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            midaa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../midaa_long_form.html">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementation_and_parameters.html">Finding your way in MIDAAs interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scMulti_multimodal.html">MIDAA 101 (on 10X multiome)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">midaa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">midaa.Interface</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/midaa/Interface/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-midaa.Interface">
+<span id="midaa-interface"></span><h1><a class="reference internal" href="#module-midaa.Interface" title="midaa.Interface"><code class="xref py py-mod docutils literal notranslate"><span class="pre">midaa.Interface</span></code></a><a class="headerlink" href="#module-midaa.Interface" title="Link to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.Interface.fit_MIDAA" title="midaa.Interface.fit_MIDAA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_MIDAA</span></code></a>(input_matrix[, normalization_factor, ...])</p></td>
+<td><p>Fits the MIDAA model to given input data, using specified architecture and optimization parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.Interface.training_loop" title="midaa.Interface.training_loop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">training_loop</span></code></a>(deepAA, input_matrix, model_matrix, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.Interface.initialize_params" title="midaa.Interface.initialize_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_params</span></code></a>(params_run, A, B)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.Interface.handle_z" title="midaa.Interface.handle_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_z</span></code></a>(params_run, fix_Z, Z_fix_release_step, steps, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.Interface.handle_model_matrix" title="midaa.Interface.handle_model_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_model_matrix</span></code></a>(params_run, model_matrix, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.Interface.calculate_loss" title="midaa.Interface.calculate_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_loss</span></code></a>(params_run, fix_Z, deepAA, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.Interface.prepare_final_parameters" title="midaa.Interface.prepare_final_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_final_parameters</span></code></a>(params_run, CUDA)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.Interface.compile_final_dict" title="midaa.Interface.compile_final_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile_final_dict</span></code></a>(params_run, params_input, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.Interface.load_model_from_state_dict" title="midaa.Interface.load_model_from_state_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_model_from_state_dict</span></code></a>(model, input_matrix, path)</p></td>
+<td><p>Loads a model's state dictionary from a specified path and updates the model with inferred quantities</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.fit_MIDAA">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">fit_MIDAA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['NB']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights_reconstruction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side_matrices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_types_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_dec_common</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[256,</span> <span class="pre">512]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_dec_last</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1024]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_dec_last_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_enc_ind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1024]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_enc_common</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[512,</span> <span class="pre">256]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims_enc_pre_Z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[256,</span> <span class="pre">128]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers_independent_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers_independent_types_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[256,</span> <span class="pre">256]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">narchetypes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">just_VAE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linearize_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linearize_decoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VAE_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CUDA</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_Z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_B_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z_fix_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z_fix_release_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reconstruct_input_and_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_steps_phase_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_lr_phase_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_steps_phase_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">350</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_lr_phase_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torch_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.fit_MIDAA" title="Link to this definition"></a></dt>
+<dd><p>Fits the MIDAA model to given input data, using specified architecture and optimization parameters.</p>
+<p>Parameters:</p>
+<ul class="simple">
+<li><p>input_matrix (list of ndarray): Input data matrix, where each entry is a tensor representation of the input data for a different modality.</p></li>
+<li><p>normalization_factor (list of ndarray, optional): Normalization factors for the input data. Default is None.</p></li>
+<li><p>input_types (list of str, optional): Types of input data. Default is [“NB”].</p></li>
+<li><p>loss_weights_reconstruction (list of float, optional): Weights for the reconstruction loss. Default is None.</p></li>
+<li><p>side_matrices (list of ndarray, optional): Side information matrices. Default is None.</p></li>
+<li><p>input_types_side (list of str, optional): Types of side information. Default is None.</p></li>
+<li><p>loss_weights_side (list of float, optional): Weights for the side information loss. Default is None.</p></li>
+<li><p>hidden_dims_dec_common, hidden_dims_dec_last, hidden_dims_dec_last_side,
+hidden_dims_enc_ind, hidden_dims_enc_common, hidden_dims_enc_pre_Z (list of int, optional):
+Dimensions of various layers in the decoder and encoder. Defaults are specified for each.</p></li>
+<li><p>layers_independent_types, layers_independent_types_side (list of str, optional): Types of layers for independent modeling.</p></li>
+<li><p>image_size (list of int, optional): Size of the input images (width, height). Default is [256, 256].</p></li>
+<li><p>narchetypes (int, optional): Number of archetypes to model. Default is 10.</p></li>
+<li><p>model_matrix (ndarray, optional): Matrix representing the model. Default is None.</p></li>
+<li><p>just_VAE (bool, optional): Flag to run only the VAE without the archetypal analysis. Default is False.</p></li>
+<li><p>linearize_encoder, linearize_decoder (bool, optional): Flags to linearize encoder and decoder. Defaults are False.</p></li>
+<li><p>VAE_steps (int, optional): Number of steps to run the VAE. Default is None.</p></li>
+<li><p>CUDA (bool, optional): Flag to use CUDA if available. Default is True.</p></li>
+<li><p>lr (float, optional): Learning rate for the optimizer. Default is 0.005.</p></li>
+<li><p>gamma_lr (float, optional): Learning rate decay factor. Default is 0.1.</p></li>
+<li><p>steps (int, optional): Number of training steps. Default is 2000.</p></li>
+<li><p>fix_Z (bool, optional): Flag to fix Z during training. Default is False.</p></li>
+<li><p>initialization_B_weight (float, optional): Initial weight for B. Default is None.</p></li>
+<li><p>Z_fix_norm (float, optional): Normalization factor for Z when fixed. Default is None.</p></li>
+<li><p>Z_fix_release_step (int, optional): Step to release Z fix. Default is None.</p></li>
+<li><p>reconstruct_input_and_side (bool, optional): Flag to reconstruct both input and side information. Default is False.</p></li>
+<li><p>initialization_input (dict, optional): Initial values for the input. Default is None.</p></li>
+<li><p>initialization_steps_phase_1, initialization_steps_phase_2 (int, optional):
+Number of steps for the two phases of initialization. Defaults are specified.</p></li>
+<li><p>initialization_lr_phase_1, initialization_lr_phase_2 (float, optional):
+Learning rates for the two phases of initialization. Defaults are specified.</p></li>
+<li><p>torch_seed (int, optional): Seed for PyTorch’s RNG. Default is 3.</p></li>
+<li><p>batch_size (int, optional): Batch size for training. Default is 5128.</p></li>
+<li><p>kernel_size, stride, padding, pool_size, pool_stride (int, optional):
+Convolution and pooling parameters. Defaults are specified.</p></li>
+</ul>
+<p>Returns:
+dict: A dictionary containing the final parameters, input parameters, ELBO list, and the DeepAA instance.</p>
+<p>This function configures and trains a MIDAA model based on the specified parameters and data.
+It handles device setting, seed initialization, data preprocessing, and the training loop, including
+potential initialization phases for the model. The final output includes training diagnostics and the
+trained model itself, ready for further analysis or application.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.training_loop">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">training_loop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deepAA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side_matrices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights_reconstruction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights_side</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_B_weight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lrd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VAE_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z_fix_release_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_mode_step1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_mode_step2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CUDA</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.training_loop" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.initialize_params">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">initialize_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.initialize_params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.handle_z">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">handle_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z_fix_release_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.handle_z" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.handle_model_matrix">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">handle_model_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reconstruct_input_and_side</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deepAA</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.handle_model_matrix" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.calculate_loss">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deepAA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side_matrices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights_reconstruction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights_side</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.calculate_loss" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.prepare_final_parameters">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">prepare_final_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CUDA</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.prepare_final_parameters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.compile_final_dict">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">compile_final_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_run</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elbo_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deepAA</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.compile_final_dict" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Interface.load_model_from_state_dict">
+<span class="sig-prename descclassname"><span class="pre">midaa.Interface.</span></span><span class="sig-name descname"><span class="pre">load_model_from_state_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CUDA</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Interface.load_model_from_state_dict" title="Link to this definition"></a></dt>
+<dd><p>Loads a model’s state dictionary from a specified path and updates the model with inferred quantities
+based on a provided input matrix.</p>
+<p>Parameters:
+- model (dict): A dictionary containing the model structure, including the ‘deepAA_obj’ (the model object)</p>
+<blockquote>
+<div><p>and ‘hyperparameters’. This dictionary will be updated with ‘inferred_quantities’ based on the input data.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>input_matrix (list of ndarray): The input data matrix to be used for inference after loading the model,
+where each entry is a tensor representation of the input data for a different modality.</p></li>
+<li><p>path (str): Path to the file containing the saved state dictionary of the model.</p></li>
+<li><p>CUDA (bool, optional): Indicates whether CUDA (GPU) should be used for loading and inference. If False,
+operations will be performed on the CPU. Default is False.</p></li>
+</ul>
+<p>The function loads the model’s state dictionary from the specified path, considering whether CUDA is enabled
+or not. It sets the model to evaluation mode, processes the provided input matrix, and performs inference to
+obtain and update the model with new inferred quantities such as A, B, and Z matrices. It also updates the
+model with any final parameters adjustments based on the model’s hyperparameters.</p>
+<p>Note:
+- The ‘model’ dictionary must contain ‘deepAA_obj’, an instance of the model, and ‘hyperparameters’, a dictionary</p>
+<blockquote>
+<div><p>specifying model configurations like ‘fix_Z’, ‘Z_fix_release_step’, and ‘steps’.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>After loading the state and performing inference, the function updates the ‘model’ dictionary with
+‘inferred_quantities’, which include the results from the inference.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Salvatore Milite.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

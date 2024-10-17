@@ -1,0 +1,64 @@
+:orphan:
+
+:py:mod:`Utils_net-checkpoint`
+==============================
+
+.. py:module:: Utils_net-checkpoint
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   Utils_net-checkpoint.build_multimodal_linear_encoder
+   Utils_net-checkpoint.build_multimodal_linear_decoder
+   Utils_net-checkpoint.build_conv_layer
+   Utils_net-checkpoint.build_conv_layer_reverse
+   Utils_net-checkpoint.build_sequential_layer
+   Utils_net-checkpoint.build_last_layer_from_output_dist
+   Utils_net-checkpoint.build_last_layer_from_output_dist_flat
+   Utils_net-checkpoint.build_last_layer_from_output_dist_conv
+   Utils_net-checkpoint.build_layer_general
+   Utils_net-checkpoint.calculate_flattened_size
+   Utils_net-checkpoint.calculate_flattened_size_decoder
+
+
+
+.. py:function:: build_multimodal_linear_encoder()
+
+
+.. py:function:: build_multimodal_linear_decoder()
+
+
+.. py:function:: build_conv_layer(in_channels, out_channels, flatten=False, kernel_size=3, stride=1, padding=1, pool_size=2, pool_stride=2)
+
+
+.. py:function:: build_conv_layer_reverse(in_channels, out_channels, flatten=False, kernel_size=3, stride=1, padding=1, pool_size=2, pool_stride=2)
+
+
+.. py:function:: build_sequential_layer(dim1, dim2, linearize=False)
+
+
+.. py:function:: build_last_layer_from_output_dist(dim, input_size, output_type, nn_type, **kargs)
+
+
+.. py:function:: build_last_layer_from_output_dist_flat(dim, input_size, output_type)
+
+
+.. py:function:: build_last_layer_from_output_dist_conv(dim, input_size, output_type, kernel_size=3, stride=1, padding=1)
+
+
+.. py:function:: build_layer_general(in_channels, out_channels, nn_type, linearize=False, flatten=False, **kargs)
+
+
+.. py:function:: calculate_flattened_size(image_size, num_conv_layers, D, filter_size, stride, padding, pool_size, pool_stride)
+
+
+.. py:function:: calculate_flattened_size_decoder(image_size, num_conv_layers, D, filter_size, stride, padding, pool_stride)
+
+

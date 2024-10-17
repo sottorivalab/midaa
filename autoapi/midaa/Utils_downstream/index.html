@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>midaa.Utils_downstream &mdash; midaa  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            midaa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../midaa_long_form.html">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementation_and_parameters.html">Finding your way in MIDAAs interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scMulti_multimodal.html">MIDAA 101 (on 10X multiome)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">midaa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">midaa.Utils_downstream</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/midaa/Utils_downstream/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-midaa.Utils_downstream">
+<span id="midaa-utils-downstream"></span><h1><a class="reference internal" href="#module-midaa.Utils_downstream" title="midaa.Utils_downstream"><code class="xref py py-mod docutils literal notranslate"><span class="pre">midaa.Utils_downstream</span></code></a><a class="headerlink" href="#module-midaa.Utils_downstream" title="Link to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.Utils_downstream.rank_features_by_arch" title="midaa.Utils_downstream.rank_features_by_arch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rank_features_by_arch</span></code></a>(X, inference_result, var_names)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#midaa.Utils_downstream.correlation_by_archetype" title="midaa.Utils_downstream.correlation_by_archetype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correlation_by_archetype</span></code></a>(matrix, inference_result[, ...])</p></td>
+<td><p>Compute correlations between archetype cell scores and variables in a matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#midaa.Utils_downstream.compute_feature_importance" title="midaa.Utils_downstream.compute_feature_importance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_feature_importance</span></code></a>(model, input_matrix[, ...])</p></td>
+<td><p>Compute feature importance in a MIDAA model by measuring the change in the latent space reconstruction</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Utils_downstream.rank_features_by_arch">
+<span class="sig-prename descclassname"><span class="pre">midaa.Utils_downstream.</span></span><span class="sig-name descname"><span class="pre">rank_features_by_arch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Utils_downstream.rank_features_by_arch" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Utils_downstream.correlation_by_archetype">
+<span class="sig-prename descclassname"><span class="pre">midaa.Utils_downstream.</span></span><span class="sig-name descname"><span class="pre">correlation_by_archetype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlation_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spearman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mt_correction_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fdr_bh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Utils_downstream.correlation_by_archetype" title="Link to this definition"></a></dt>
+<dd><p>Compute correlations between archetype cell scores and variables in a matrix.</p>
+<p>This function calculates the correlation coefficients between each archetype’s cell scores and each variable (column) in the provided matrix.
+It supports different types of correlation methods and applies multiple testing correction to the p-values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_cells</em><em>, </em><em>n_variables</em><em>)</em>) – A 2D array or list of lists representing the input matrix used for fitting the model.
+Each row corresponds to a cell, and each column corresponds to a variable.</p></li>
+<li><p><strong>inference_result</strong> (<em>dict</em>) – A dictionary containing inference results with the key “inferred_quantities” that maps to another
+dictionary containing “A”. “A” should be a 2D array-like structure with shape (n_cells, n_scores),
+where each column represents the scores for a particular archetype.</p></li>
+<li><p><strong>correlation_type</strong> (<em>str</em><em>, </em><em>optional</em><em> (</em><em>default=&quot;spearman&quot;</em><em>)</em>) – <dl class="simple">
+<dt>The type of correlation to compute. Supported options are:</dt><dd><ul>
+<li><p>’pearson’ : Pearson correlation coefficient</p></li>
+<li><p>’spearman’ : Spearman rank correlation</p></li>
+<li><p>’kendall’ : Kendall tau correlation</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>mt_correction_method</strong> (<em>str</em><em>, </em><em>optional</em><em> (</em><em>default='fdr_bh'</em><em>)</em>) – The method to use for multiple testing correction of p-values.
+Default is Benjamini-Hochberg (<cite>‘fdr_bh’</cite>). Other methods supported by
+<cite>statsmodels.stats.multitest.multipletests</cite> can be used.</p></li>
+<li><p><strong>variable_names</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em><em> (</em><em>default=None</em><em>)</em>) – A list of names for the variables (columns) in the matrix. If not provided,
+variables will be named as ‘Variable_1’, ‘Variable_2’, etc.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A DataFrame containing the correlation results with the following columns:</dt><dd><ul class="simple">
+<li><p>’Variable’ : Name of the variable.</p></li>
+<li><p>’Archetype’ : Identifier for the archetype score.</p></li>
+<li><p>’Correlation’ : Correlation coefficient between the archetype score and the variable.</p></li>
+<li><p>’P-value’ : P-value for the correlation.</p></li>
+<li><p>’Corrected P-value’ : P-value after multiple testing correction.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="midaa.Utils_downstream.compute_feature_importance">
+<span class="sig-prename descclassname"><span class="pre">midaa.Utils_downstream.</span></span><span class="sig-name descname"><span class="pre">compute_feature_importance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx_modality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#midaa.Utils_downstream.compute_feature_importance" title="Link to this definition"></a></dt>
+<dd><p>Compute feature importance in a MIDAA model by measuring the change in the latent space reconstruction
+when each feature is held out, using the Frobenius norm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>torch.nn.Module</em>) – The trained PyTorch MIDAA object.</p></li>
+<li><p><strong>input_matrix</strong> (<em>array-like</em><em> or </em><em>torch.Tensor</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The input list of data matrices.</p></li>
+<li><p><strong>idx_modality</strong> (<em>int</em><em>,  </em><em>optional</em><em> (</em><em>default=0</em><em>)</em>) – The index of the modality in the input list to compute feature importance for.</p></li>
+<li><p><strong>feature_names</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em><em> (</em><em>default=None</em><em>)</em>) – A list of names for the features (columns) in the input matrix. If not provided,
+features will be named as ‘Feature_1’, ‘Feature_2’, etc.</p></li>
+<li><p><strong>device</strong> (<em>str</em><em>, </em><em>optional</em><em> (</em><em>default='cpu'</em><em>)</em>) – The device to run the computations on. Options are ‘cpu’ or ‘cuda’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A DataFrame containing the feature names and their importance scores with columns:</dt><dd><ul class="simple">
+<li><p>’Feature’: Name of the feature.</p></li>
+<li><p>’ImportanceScore’: Importance score computed using the Frobenius norm.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>For a large number of features this function takes a LOT of time.</p></li>
+<li><p>The input_matrix will be converted to a torch.Tensor if it is not already one.</p></li>
+<li><p>Holding out a feature is performed by setting its values to zero across all samples.</p></li>
+<li><p>The function does not modify the original input_matrix.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Salvatore Milite.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

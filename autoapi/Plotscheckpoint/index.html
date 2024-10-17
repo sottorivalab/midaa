@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plots-checkpoint &mdash; midaa  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            midaa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../midaa_long_form.html">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../implementation_and_parameters.html">Finding your way in MIDAAs interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scMulti_multimodal.html">MIDAA 101 (on 10X multiome)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">midaa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Plots-checkpoint</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/autoapi/Plotscheckpoint/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Plots-checkpoint">
+<span id="plots-checkpoint"></span><h1><a class="reference internal" href="#module-Plots-checkpoint" title="Plots-checkpoint"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Plots-checkpoint</span></code></a><a class="headerlink" href="#module-Plots-checkpoint" title="Link to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#Plots-checkpoint.plot_archetypes_simplex" title="Plots-checkpoint.plot_archetypes_simplex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_archetypes_simplex</span></code></a>(res[, distance_type, cmap, ...])</p></td>
+<td><p>Plots the archetypes inferred by the model on a simplex represented in polar coordinates, optionally coloring</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#Plots-checkpoint.plot_ELBO" title="Plots-checkpoint.plot_ELBO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ELBO</span></code></a>(res)</p></td>
+<td><p>Plots the ELBO loss over SVI steps from the results of model fitting.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#Plots-checkpoint.plot_ELBO_across_runs" title="Plots-checkpoint.plot_ELBO_across_runs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ELBO_across_runs</span></code></a>(res_dictionary[, warmup])</p></td>
+<td><p>Plots a comparison of ELBO losses across different model runs, post-warmup phase.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#Plots-checkpoint.plot_archetypes_proportion" title="Plots-checkpoint.plot_archetypes_proportion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_archetypes_proportion</span></code></a>(adata[, by])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="Plots-checkpoint.plot_archetypes_simplex">
+<span class="sig-prename descclassname"><span class="pre">Plots-checkpoint.</span></span><span class="sig-name descname"><span class="pre">plot_archetypes_simplex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nipy_spectral'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Group'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Plots-checkpoint.plot_archetypes_simplex" title="Link to this definition"></a></dt>
+<dd><p>Plots the archetypes inferred by the model on a simplex represented in polar coordinates, optionally coloring
+points by a given attribute.</p>
+<p>Parameters:
+- res (dict): A dictionary containing model results, specifically ‘inferred_quantities’ with archetype coefficients ‘A’.
+- distance_type (str, optional): The type of distance metric to use for determining the order of archetypes. Defaults to “euclidean”.
+- cmap (str, optional): Colormap for plotting. Defaults to “nipy_spectral”.
+- color_by (Series, optional): Pandas series or similar containing labels to color data points by. Defaults to None.
+- subsample (array-like, optional): Indices to subsample the archetype coefficients ‘A’ for plotting. Defaults to None.
+- s (float, optional): Size of points in the plot. Defaults to None.
+- l_size (int, optional): Size of labels in the legend. Defaults to 30.
+- l_title (str, optional): Title of the legend. Defaults to “Group”.</p>
+<p>Returns:
+tuple: (fig, ax) where ‘fig’ is the figure object and ‘ax’ is the axes object of the plot.</p>
+<p>The function computes distances between archetypes to determine their order, maps these onto a circle,
+and plots them in polar coordinates. Points can be colored by a categorical variable if provided. The function
+aims to provide an intuitive visualization of the relationship between archetypes, highlighting their relative
+distances and potential clustering.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Plots-checkpoint.plot_ELBO">
+<span class="sig-prename descclassname"><span class="pre">Plots-checkpoint.</span></span><span class="sig-name descname"><span class="pre">plot_ELBO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Plots-checkpoint.plot_ELBO" title="Link to this definition"></a></dt>
+<dd><p>Plots the ELBO loss over SVI steps from the results of model fitting.</p>
+<p>Parameters:
+- res (dict): A dictionary containing the ELBO loss values in the key ‘ELBO’.</p>
+<p>This function creates a line plot showing how the ELBO loss evolved during the optimization process. It’s useful
+for assessing the convergence of the model fitting process. The x-axis represents the SVI step, and the y-axis
+represents the ELBO loss value at that step.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Plots-checkpoint.plot_ELBO_across_runs">
+<span class="sig-prename descclassname"><span class="pre">Plots-checkpoint.</span></span><span class="sig-name descname"><span class="pre">plot_ELBO_across_runs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res_dictionary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warmup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Plots-checkpoint.plot_ELBO_across_runs" title="Link to this definition"></a></dt>
+<dd><p>Plots a comparison of ELBO losses across different model runs, post-warmup phase.</p>
+<p>Parameters:
+- res_dictionary (dict): A dictionary where keys are descriptive names of model runs (e.g., number of archetypes)</p>
+<blockquote>
+<div><p>and values are dictionaries containing the ‘ELBO’ loss values for those runs.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>warmup (int, optional): Number of initial steps to exclude from the plot to focus on the post-warmup phase. Defaults to 500.</p></li>
+</ul>
+<p>The function creates a boxplot for each key in the res_dictionary, showing the distribution of ELBO values
+across steps after the specified warmup phase. This visualization is helpful for comparing the model fitting
+performance across different configurations or hyperparameter settings, especially to identify which setups
+lead to better convergence based on the ELBO loss metric.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Plots-checkpoint.plot_archetypes_proportion">
+<span class="sig-prename descclassname"><span class="pre">Plots-checkpoint.</span></span><span class="sig-name descname"><span class="pre">plot_archetypes_proportion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cluster'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Plots-checkpoint.plot_archetypes_proportion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Salvatore Milite.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

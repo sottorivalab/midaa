@@ -1,0 +1,296 @@
+:py:mod:`midaa`
+===============
+
+.. py:module:: midaa
+
+
+Package Contents
+----------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.fit_MIDAA
+   midaa.load_model_from_state_dict
+   midaa.get_input_params_adata
+   midaa.add_to_obs_adata
+   midaa.plot_archetypes_simplex
+   midaa.plot_ELBO
+   midaa.plot_ELBO_across_runs
+   midaa.generate_synthetic_data
+   midaa.correlation_by_archetype
+   midaa.compute_feature_importance
+
+
+
+.. py:function:: fit_MIDAA(input_matrix, normalization_factor=None, input_types=['NB'], loss_weights_reconstruction=None, side_matrices=None, input_types_side=None, loss_weights_side=None, hidden_dims_dec_common=[256, 512], hidden_dims_dec_last=[1024], hidden_dims_dec_last_side=None, hidden_dims_enc_ind=[1024], hidden_dims_enc_common=[512, 256], hidden_dims_enc_pre_Z=[256, 128], layers_independent_types=None, layers_independent_types_side=None, image_size=[256, 256], narchetypes=10, model_matrix=None, just_VAE=False, linearize_encoder=False, linearize_decoder=False, VAE_steps=None, CUDA=True, lr=0.005, gamma_lr=0.1, steps=2000, fix_Z=False, function_hook=None, initialization_B_weight=None, Z_fix_norm=None, Z_fix_release_step=None, reconstruct_input_and_side=False, initialization_input=None, initialization_steps_phase_1=1000, initialization_lr_phase_1=0.001, initialization_steps_phase_2=350, initialization_lr_phase_2=0.0005, torch_seed=3, batch_size=5128, kernel_size=3, stride=1, padding=1, pool_size=2, pool_stride=2)
+
+   Fits the MIDAA model to given input data, using specified architecture and optimization parameters.
+
+   Parameters:
+
+   - input_matrix (list of ndarray): Input data matrix, where each entry is a tensor representation of the input data for a different modality.
+   - normalization_factor (list of ndarray, optional): Normalization factors for the input data. Default is None.
+   - input_types (list of str, optional): Types of input data. Default is ["NB"].
+   - loss_weights_reconstruction (list of float, optional): Weights for the reconstruction loss. Default is None.
+   - side_matrices (list of ndarray, optional): Side information matrices. Default is None.
+   - input_types_side (list of str, optional): Types of side information. Default is None.
+   - loss_weights_side (list of float, optional): Weights for the side information loss. Default is None.
+   - hidden_dims_dec_common, hidden_dims_dec_last, hidden_dims_dec_last_side,
+     hidden_dims_enc_ind, hidden_dims_enc_common, hidden_dims_enc_pre_Z (list of int, optional):
+     Dimensions of various layers in the decoder and encoder. Defaults are specified for each.
+   - layers_independent_types, layers_independent_types_side (list of str, optional): Types of layers for independent modeling.
+   - image_size (list of int, optional): Size of the input images (width, height). Default is [256, 256].
+   - narchetypes (int, optional): Number of archetypes to model. Default is 10.
+   - model_matrix (ndarray, optional): Matrix representing the model. Default is None.
+   - just_VAE (bool, optional): Flag to run only the VAE without the archetypal analysis. Default is False.
+   - linearize_encoder, linearize_decoder (bool, optional): Flags to linearize encoder and decoder. Defaults are False.
+   - VAE_steps (int, optional): Number of steps to run the VAE. Default is None.
+   - CUDA (bool, optional): Flag to use CUDA if available. Default is True.
+   - lr (float, optional): Learning rate for the optimizer. Default is 0.005.
+   - gamma_lr (float, optional): Learning rate decay factor. Default is 0.1.
+   - steps (int, optional): Number of training steps. Default is 2000.
+   - fix_Z (bool, optional): Flag to fix Z during training. Default is False.
+   - initialization_B_weight (float, optional): Initial weight for B. Default is None.
+   - Z_fix_norm (float, optional): Normalization factor for Z when fixed. Default is None.
+   - Z_fix_release_step (int, optional): Step to release Z fix. Default is None.
+   - reconstruct_input_and_side (bool, optional): Flag to reconstruct both input and side information. Default is False.
+   - initialization_input (dict, optional): Initial values for the input. Default is None.
+   - initialization_steps_phase_1, initialization_steps_phase_2 (int, optional):
+     Number of steps for the two phases of initialization. Defaults are specified.
+   - initialization_lr_phase_1, initialization_lr_phase_2 (float, optional):
+     Learning rates for the two phases of initialization. Defaults are specified.
+   - torch_seed (int, optional): Seed for PyTorch's RNG. Default is 3.
+   - batch_size (int, optional): Batch size for training. Default is 5128.
+   - kernel_size, stride, padding, pool_size, pool_stride (int, optional):
+     Convolution and pooling parameters. Defaults are specified.
+
+   Returns:
+   dict: A dictionary containing the final parameters, input parameters, ELBO list, and the DeepAA instance.
+
+   This function configures and trains a MIDAA model based on the specified parameters and data.
+   It handles device setting, seed initialization, data preprocessing, and the training loop, including
+   potential initialization phases for the model. The final output includes training diagnostics and the
+   trained model itself, ready for further analysis or application.
+
+
+.. py:function:: load_model_from_state_dict(model, input_matrix, path, CUDA=False)
+
+   Loads a model's state dictionary from a specified path and updates the model with inferred quantities
+   based on a provided input matrix.
+
+   Parameters:
+   - model (dict): A dictionary containing the model structure, including the 'deepAA_obj' (the model object)
+     and 'hyperparameters'. This dictionary will be updated with 'inferred_quantities' based on the input data.
+   - input_matrix (list of ndarray): The input data matrix to be used for inference after loading the model,
+     where each entry is a tensor representation of the input data for a different modality.
+   - path (str): Path to the file containing the saved state dictionary of the model.
+   - CUDA (bool, optional): Indicates whether CUDA (GPU) should be used for loading and inference. If False,
+     operations will be performed on the CPU. Default is False.
+
+   The function loads the model's state dictionary from the specified path, considering whether CUDA is enabled
+   or not. It sets the model to evaluation mode, processes the provided input matrix, and performs inference to
+   obtain and update the model with new inferred quantities such as A, B, and Z matrices. It also updates the
+   model with any final parameters adjustments based on the model's hyperparameters.
+
+   Note:
+   - The 'model' dictionary must contain 'deepAA_obj', an instance of the model, and 'hyperparameters', a dictionary
+     specifying model configurations like 'fix_Z', 'Z_fix_release_step', and 'steps'.
+   - After loading the state and performing inference, the function updates the 'model' dictionary with
+     'inferred_quantities', which include the results from the inference.
+
+
+.. py:function:: get_input_params_adata(adata, is_normalized=True)
+
+   Prepare input parameters for archetypal analysis based on an AnnData object.
+
+   This function extracts the necessary input data, normalization factors, and input distribution types
+   from an AnnData object for use in archetypal analysis or similar models.
+
+   :param adata: An AnnData object containing the dataset. The data matrix `adata.X` should be accessible,
+                 and if `is_normalized` is False, the observation-level metadata `adata.obs["n_counts"]`
+                 should be present.
+   :type adata: AnnData
+   :param is_normalized: Indicates whether the data in `adata.X` is already normalized.
+                         - If `True`, no additional normalization is applied.
+                         - If `False`, normalization factors are computed based on the total counts per observation.
+   :type is_normalized: bool, optional (default=True)
+
+   :returns: * **input_data** (*list of np.ndarray*) -- A list containing the input data matrix extracted from `adata.X`. The data matrix is wrapped
+               in a list to maintain consistency with expected input formats for downstream analysis.
+             * **normalization** (*list of np.ndarray*) -- A list containing the normalization factors for each observation (cell).
+               - If `is_normalized` is `True`, this is an array of ones, indicating no additional normalization.
+               - If `is_normalized` is `False`, this is an array of normalization factors computed from `adata.obs["n_counts"]` divided by the total counts across all observations.
+             * **input_distribution** (*list of str*) -- A list containing the input distribution type for the data.
+               - If `is_normalized` is `True`, the distribution is set to `"G"` (Gaussian).
+               - If `is_normalized` is `False`, the distribution is set to `"NB"` (Negative Binomial).
+
+
+.. py:function:: add_to_obs_adata(inf_res, adata)
+
+   Add inferred archetype scores and embeddings to an AnnData object.
+
+   This function updates an AnnData object by adding the inferred archetype scores to `adata.obs`
+   and the low-dimensional embeddings to `adata.obsm` based on the results from an archetypal analysis.
+
+   :param inf_res: A dictionary containing the inference results from an archetypal analysis model.
+                   Expected keys in the dictionary:
+                   - `"hyperparameters"`: A dictionary with the key `"narchetypes"` indicating the number of archetypes.
+                   - `"inferred_quantities"`: A dictionary containing:
+                       - `"A"`: A 2D numpy array of shape `(n_samples, narchetypes)` with the archetype scores for each sample.
+                       - `"Z"`: A 2D numpy array with the low-dimensional embeddings for visualization or further analysis.
+   :type inf_res: dict
+   :param adata: The AnnData object to be updated. The object will be modified in place with new observations
+                 and embeddings added.
+   :type adata: AnnData
+
+   :returns: * **adata** (*AnnData*) -- The updated AnnData object with new fields added to `.obs` and `.obsm`.
+             * **col_names** (*list of str*) -- A list of column names added to `adata.obs`, corresponding to the archetype scores.
+
+
+.. py:function:: plot_archetypes_simplex(res, distance_type='euclidean', cmap='nipy_spectral', color_by=None, subsample=None, s=None, l_size=30, l_title='Group')
+
+   Plots the archetypes inferred by the model on a simplex represented in polar coordinates, optionally coloring
+   points by a given attribute.
+
+   Parameters:
+   - res (dict): A dictionary containing model results, specifically 'inferred_quantities' with archetype coefficients 'A'.
+   - distance_type (str, optional): The type of distance metric to use for determining the order of archetypes. Defaults to "euclidean".
+   - cmap (str, optional): Colormap for plotting. Defaults to "nipy_spectral".
+   - color_by (Series, optional): Pandas series or similar containing labels to color data points by. Defaults to None.
+   - subsample (array-like, optional): Indices to subsample the archetype coefficients 'A' for plotting. Defaults to None.
+   - s (float, optional): Size of points in the plot. Defaults to None.
+   - l_size (int, optional): Size of labels in the legend. Defaults to 30.
+   - l_title (str, optional): Title of the legend. Defaults to "Group".
+
+   Returns:
+   tuple: (fig, ax) where 'fig' is the figure object and 'ax' is the axes object of the plot.
+
+   The function computes distances between archetypes to determine their order, maps these onto a circle,
+   and plots them in polar coordinates. Points can be colored by a categorical variable if provided. The function
+   aims to provide an intuitive visualization of the relationship between archetypes, highlighting their relative
+   distances and potential clustering.
+
+
+.. py:function:: plot_ELBO(res)
+
+   Plots the ELBO loss over SVI steps from the results of model fitting.
+
+   Parameters:
+   - res (dict): A dictionary containing the ELBO loss values in the key 'ELBO'.
+
+   This function creates a line plot showing how the ELBO loss evolved during the optimization process. It's useful
+   for assessing the convergence of the model fitting process. The x-axis represents the SVI step, and the y-axis
+   represents the ELBO loss value at that step.
+
+
+.. py:function:: plot_ELBO_across_runs(res_dictionary, warmup=500)
+
+   Plots a comparison of ELBO losses across different model runs, post-warmup phase.
+
+   Parameters:
+   - res_dictionary (dict): A dictionary where keys are descriptive names of model runs (e.g., number of archetypes)
+     and values are dictionaries containing the 'ELBO' loss values for those runs.
+   - warmup (int, optional): Number of initial steps to exclude from the plot to focus on the post-warmup phase. Defaults to 500.
+
+   The function creates a boxplot for each key in the res_dictionary, showing the distribution of ELBO values
+   across steps after the specified warmup phase. This visualization is helpful for comparing the model fitting
+   performance across different configurations or hyperparameter settings, especially to identify which setups
+   lead to better convergence based on the ELBO loss metric.
+
+
+.. py:function:: generate_synthetic_data(model, archetype_distribution, deterministic: bool = False, ncells: int = 1000, dirichlet_variance_factor: float = 1.0, to_cpu=False, seed=3)
+
+   Generates synthetic data using a given model and archetype distribution parameters.
+
+   Parameters:
+   - model (dict): A dictionary containing the trained model and its parameters, including 'inferred_quantities' with 'archetypes_inferred' and the 'deepAA_obj'.
+   - archetype_distribution (Tensor): A tensor representing the distribution of archetypes to be used for generating synthetic data.
+   - deterministic (bool, optional): If True, generates data deterministically based on the mean of the distribution. Defaults to False.
+   - ncells (int, optional): Number of synthetic data points (cells) to generate. Defaults to 1000.
+   - dirichlet_variance_factor (float, optional): A scaling factor applied to the archetype distribution to adjust the variance of the Dirichlet distribution from which the synthetic archetype coefficients are sampled. Defaults to 1.0.
+   - to_cpu (bool, optional): If True, moves generated tensors to CPU. Useful if the model is on a GPU and you want to analyze the data on CPU. Defaults to False.
+   - seed (int, optional): Seed for the random number generator to ensure reproducibility. Defaults to 3.
+
+   Returns:
+   tuple: A tuple containing two elements:
+     - generate_output (list of Tensors): The generated synthetic data.
+     - side_output (list of Tensors or None): The generated side information, if available in the model; otherwise, None.
+
+   The function first samples synthetic archetype coefficients from a Dirichlet distribution, then uses these coefficients to generate synthetic latent representations. These latent representations are then passed through the decoder of the provided model to generate synthetic data and, optionally, side information. The function allows for the generated data to be moved to CPU for further analysis.
+
+
+.. py:function:: correlation_by_archetype(matrix, inference_result, correlation_type='spearman', mt_correction_method='fdr_bh', variable_names=None)
+
+   Compute correlations between archetype cell scores and variables in a matrix.
+
+   This function calculates the correlation coefficients between each archetype's cell scores and each variable (column) in the provided matrix.
+   It supports different types of correlation methods and applies multiple testing correction to the p-values.
+
+   :param matrix: A 2D array or list of lists representing the input matrix used for fitting the model.
+                  Each row corresponds to a cell, and each column corresponds to a variable.
+   :type matrix: array-like, shape (n_cells, n_variables)
+   :param inference_result: A dictionary containing inference results with the key "inferred_quantities" that maps to another
+                            dictionary containing "A". "A" should be a 2D array-like structure with shape (n_cells, n_scores),
+                            where each column represents the scores for a particular archetype.
+   :type inference_result: dict
+   :param correlation_type:
+                            The type of correlation to compute. Supported options are:
+                                - 'pearson' : Pearson correlation coefficient
+                                - 'spearman' : Spearman rank correlation
+                                - 'kendall' : Kendall tau correlation
+   :type correlation_type: str, optional (default="spearman")
+   :param mt_correction_method: The method to use for multiple testing correction of p-values.
+                                Default is Benjamini-Hochberg (`'fdr_bh'`). Other methods supported by
+                                `statsmodels.stats.multitest.multipletests` can be used.
+   :type mt_correction_method: str, optional (default='fdr_bh')
+   :param variable_names: A list of names for the variables (columns) in the matrix. If not provided,
+                          variables will be named as 'Variable_1', 'Variable_2', etc.
+   :type variable_names: list of str, optional (default=None)
+
+   :returns:
+
+             A DataFrame containing the correlation results with the following columns:
+                 - 'Variable' : Name of the variable.
+                 - 'Archetype' : Identifier for the archetype score.
+                 - 'Correlation' : Correlation coefficient between the archetype score and the variable.
+                 - 'P-value' : P-value for the correlation.
+                 - 'Corrected P-value' : P-value after multiple testing correction.
+   :rtype: pandas.DataFrame
+
+
+.. py:function:: compute_feature_importance(model, input_matrix, idx_modality=0, feature_names=None, device='cpu')
+
+   Compute feature importance in a MIDAA model by measuring the change in the latent space reconstruction
+   when each feature is held out, using the Frobenius norm.
+
+   :param model: The trained PyTorch MIDAA object.
+   :type model: torch.nn.Module
+   :param input_matrix: The input list of data matrices.
+   :type input_matrix: array-like or torch.Tensor, shape (n_samples, n_features)
+   :param idx_modality: The index of the modality in the input list to compute feature importance for.
+   :type idx_modality: int,  optional (default=0)
+   :param feature_names: A list of names for the features (columns) in the input matrix. If not provided,
+                         features will be named as 'Feature_1', 'Feature_2', etc.
+   :type feature_names: list of str, optional (default=None)
+   :param device: The device to run the computations on. Options are 'cpu' or 'cuda'.
+   :type device: str, optional (default='cpu')
+
+   :returns:
+
+             A DataFrame containing the feature names and their importance scores with columns:
+                 - 'Feature': Name of the feature.
+                 - 'ImportanceScore': Importance score computed using the Frobenius norm.
+   :rtype: pandas.DataFrame
+
+   .. rubric:: Notes
+
+   - For a large number of features this function takes a LOT of time.
+   - The input_matrix will be converted to a torch.Tensor if it is not already one.
+   - Holding out a feature is performed by setting its values to zero across all samples.
+   - The function does not modify the original input_matrix.
+
+

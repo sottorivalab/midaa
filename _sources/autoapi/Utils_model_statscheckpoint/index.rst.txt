@@ -1,0 +1,40 @@
+:orphan:
+
+:py:mod:`Utils_model_stats-checkpoint`
+======================================
+
+.. py:module:: Utils_model_stats-checkpoint
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   Utils_model_stats-checkpoint.calculate_BIC
+   Utils_model_stats-checkpoint.log_lk
+   Utils_model_stats-checkpoint.retrieve_params
+   Utils_model_stats-checkpoint.calculate_number_of_params
+   Utils_model_stats-checkpoint.calculate_BIC
+
+
+
+.. py:function:: calculate_BIC(res)
+
+
+.. py:function:: log_lk(deepAA, input_matrix, UMI, model_matrix)
+
+
+.. py:function:: retrieve_params()
+
+
+.. py:function:: calculate_number_of_params(params)
+
+
+.. py:function:: calculate_BIC(res)
+
+

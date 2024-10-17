@@ -1,0 +1,32 @@
+:orphan:
+
+:py:mod:`midaa.Utils_guide`
+===========================
+
+.. py:module:: midaa.Utils_guide
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Utils_guide.compute_auxiliary_params_guide_input
+   midaa.Utils_guide.compute_auxiliary_params_guide_side
+   midaa.Utils_guide.compute_auxiliary_params_guide
+
+
+
+.. py:function:: compute_auxiliary_params_guide_input(input_types, n_dim_input, input_matrix)
+
+
+.. py:function:: compute_auxiliary_params_guide_side(input_types_side, input_matrix_side, n_dim_input_side)
+
+
+.. py:function:: compute_auxiliary_params_guide(input_types, n_dim_input, input_matrix, input_types_side, input_matrix_side, n_dim_input_side)
+
+

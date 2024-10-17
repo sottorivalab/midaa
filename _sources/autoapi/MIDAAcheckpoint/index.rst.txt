@@ -1,0 +1,60 @@
+:orphan:
+
+:py:mod:`MIDAA-checkpoint`
+==========================
+
+.. py:module:: MIDAA-checkpoint
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   MIDAA-checkpoint.MIDAA
+
+
+
+
+.. py:class:: MIDAA(n_dim_input, input_types, n_dim_input_side=None, input_types_side=None, batch_size=5120, hidden_dims_dec_common=[128, 256], hidden_dims_dec_last=[1024], hidden_dims_dec_last_side=None, hidden_dims_enc_ind=[512], hidden_dims_enc_common=[256, 128], hidden_dims_enc_pre_Z=[128, 64], layers_independent_types=None, layers_independent_types_side=None, output_types_side=None, image_size=[256, 256], theta_bounds=(1e-05, 10000), init_loc=0.1, init_theta=1, prior_loc=10, narchetypes=10, fix_Z=False, Z_fix_norm=None, Z_fix_release=False, initialization_mode_step1=False, initialization_mode_step2=False, just_VAE=False, linearize_encoder=False, linearize_decoder=False, kernel_size=3, stride=1, padding=1, pool_size=2, pool_stride=2)
+
+
+   Bases: :py:obj:`midaa.Decoder.nn.Module`
+
+   Base class for all neural network modules.
+
+   Your models should also subclass this class.
+
+   Modules can also contain other Modules, allowing to nest them in
+   a tree structure. You can assign the submodules as regular attributes::
+
+       import torch.nn as nn
+       import torch.nn.functional as F
+
+       class Model(nn.Module):
+           def __init__(self):
+               super(Model, self).__init__()
+               self.conv1 = nn.Conv2d(1, 20, 5)
+               self.conv2 = nn.Conv2d(20, 20, 5)
+
+           def forward(self, x):
+               x = F.relu(self.conv1(x))
+               return F.relu(self.conv2(x))
+
+   Submodules assigned in this way will be registered, and will have their
+   parameters converted too when you call :meth:`to`, etc.
+
+   :ivar training: Boolean represents whether this module is in training or
+                   evaluation mode.
+   :vartype training: bool
+
+   .. py:method:: model(input_matrix, model_matrix, norm_factors, input_matrix_side, loss_weights_reconstruction=None, loss_weights_side=None, initialization_input=None, initialization_B_weight=None)
+
+
+   .. py:method:: guide(input_matrix, model_matrix, norm_factors, input_matrix_side, loss_weights_reconstruction=None, loss_weights_side=None, initialization_input=None, initialization_B_weight=None)
+
+
+

@@ -1,0 +1,97 @@
+:orphan:
+
+:py:mod:`midaa.Utils_downstream`
+================================
+
+.. py:module:: midaa.Utils_downstream
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Utils_downstream.rank_features_by_arch
+   midaa.Utils_downstream.correlation_by_archetype
+   midaa.Utils_downstream.compute_feature_importance
+
+
+
+.. py:function:: rank_features_by_arch(X, inference_result, var_names, scale=True, plot=True)
+
+
+.. py:function:: correlation_by_archetype(matrix, inference_result, correlation_type='spearman', mt_correction_method='fdr_bh', variable_names=None)
+
+   Compute correlations between archetype cell scores and variables in a matrix.
+
+   This function calculates the correlation coefficients between each archetype's cell scores and each variable (column) in the provided matrix.
+   It supports different types of correlation methods and applies multiple testing correction to the p-values.
+
+   :param matrix: A 2D array or list of lists representing the input matrix used for fitting the model.
+                  Each row corresponds to a cell, and each column corresponds to a variable.
+   :type matrix: array-like, shape (n_cells, n_variables)
+   :param inference_result: A dictionary containing inference results with the key "inferred_quantities" that maps to another
+                            dictionary containing "A". "A" should be a 2D array-like structure with shape (n_cells, n_scores),
+                            where each column represents the scores for a particular archetype.
+   :type inference_result: dict
+   :param correlation_type:
+                            The type of correlation to compute. Supported options are:
+                                - 'pearson' : Pearson correlation coefficient
+                                - 'spearman' : Spearman rank correlation
+                                - 'kendall' : Kendall tau correlation
+   :type correlation_type: str, optional (default="spearman")
+   :param mt_correction_method: The method to use for multiple testing correction of p-values.
+                                Default is Benjamini-Hochberg (`'fdr_bh'`). Other methods supported by
+                                `statsmodels.stats.multitest.multipletests` can be used.
+   :type mt_correction_method: str, optional (default='fdr_bh')
+   :param variable_names: A list of names for the variables (columns) in the matrix. If not provided,
+                          variables will be named as 'Variable_1', 'Variable_2', etc.
+   :type variable_names: list of str, optional (default=None)
+
+   :returns:
+
+             A DataFrame containing the correlation results with the following columns:
+                 - 'Variable' : Name of the variable.
+                 - 'Archetype' : Identifier for the archetype score.
+                 - 'Correlation' : Correlation coefficient between the archetype score and the variable.
+                 - 'P-value' : P-value for the correlation.
+                 - 'Corrected P-value' : P-value after multiple testing correction.
+   :rtype: pandas.DataFrame
+
+
+.. py:function:: compute_feature_importance(model, input_matrix, idx_modality=0, feature_names=None, device='cpu')
+
+   Compute feature importance in a MIDAA model by measuring the change in the latent space reconstruction
+   when each feature is held out, using the Frobenius norm.
+
+   :param model: The trained PyTorch MIDAA object.
+   :type model: torch.nn.Module
+   :param input_matrix: The input list of data matrices.
+   :type input_matrix: array-like or torch.Tensor, shape (n_samples, n_features)
+   :param idx_modality: The index of the modality in the input list to compute feature importance for.
+   :type idx_modality: int,  optional (default=0)
+   :param feature_names: A list of names for the features (columns) in the input matrix. If not provided,
+                         features will be named as 'Feature_1', 'Feature_2', etc.
+   :type feature_names: list of str, optional (default=None)
+   :param device: The device to run the computations on. Options are 'cpu' or 'cuda'.
+   :type device: str, optional (default='cpu')
+
+   :returns:
+
+             A DataFrame containing the feature names and their importance scores with columns:
+                 - 'Feature': Name of the feature.
+                 - 'ImportanceScore': Importance score computed using the Frobenius norm.
+   :rtype: pandas.DataFrame
+
+   .. rubric:: Notes
+
+   - For a large number of features this function takes a LOT of time.
+   - The input_matrix will be converted to a torch.Tensor if it is not already one.
+   - Holding out a feature is performed by setting its values to zero across all samples.
+   - The function does not modify the original input_matrix.
+
+

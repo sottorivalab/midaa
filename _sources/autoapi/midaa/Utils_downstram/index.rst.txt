@@ -1,0 +1,24 @@
+:orphan:
+
+:py:mod:`midaa.Utils_downstram`
+===============================
+
+.. py:module:: midaa.Utils_downstram
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Utils_downstram.rank_features_by_arch
+
+
+
+.. py:function:: rank_features_by_arch(X, inference_result, var_names, scale=True, plot=True)
+
+

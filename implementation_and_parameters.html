@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finding your way in MIDAAs interface &mdash; midaa  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MIDAA 101 (on 10X multiome)" href="scMulti_multimodal.html" />
+    <link rel="prev" title="From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis" href="midaa_long_form.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            midaa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="midaa_long_form.html">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Finding your way in MIDAAs interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#training-parameters">Training Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-parameters">Model Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-parameters">Network parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scMulti_multimodal.html">MIDAA 101 (on 10X multiome)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">midaa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Finding your way in MIDAAs interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/implementation_and_parameters.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="finding-your-way-in-midaas-interface">
+<h1>Finding your way in MIDAAs interface<a class="headerlink" href="#finding-your-way-in-midaas-interface" title="Link to this heading"></a></h1>
+<p>The idea with which we conceived MIDAA was to give great flexibility in structuring the network and tuning most of the hyperparameters both at the level of architecture and inference. The very definition of the training interface is actually quite scary. But don’t despair this notebook will tell you exactly what knobs move what. As nice as it is to have easy-to-use tools with few parameters, I am convinced that knowing exactly what you are running in great detail allows you to get better results and (maybe) learn something new.</p>
+<p>Let us begin with a brief idea of how the package is structured:</p>
+<ul class="simple">
+<li><p>First we have an interface function that allows us to do an entire training cycle at fixed parameters and takes care of almost everything.</p></li>
+<li><p>The probabilistic model is defined in Pyro and has a model function that describes the generative process and a driving function that describes the variational distributions for inference</p></li>
+<li><p>The two most important parts of the model, i.e., the decoder and encoder are implemented as modules of PyTorch</p></li>
+</ul>
+<p>We will go through these 3 blocks and what parameters you can tune in the interface. To show this we will use a simple unimodal single cell PBMC dataset (a real classic of single-cell methods’ tutorials).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../src/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You need scanpy for this tutorial </span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">midaa</span> <span class="k">as</span> <span class="nn">maa</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">adata</span> <span class="o">=</span>  <span class="n">sc</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">pbmc3k_processed</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;louvain&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:394: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  cax = scatter(
+</pre></div>
+</div>
+<img alt="_images/a016c47d3b2dd9edd9644f3bda7553081f2c5179044d063fa5295927bd56be41.png" src="_images/a016c47d3b2dd9edd9644f3bda7553081f2c5179044d063fa5295927bd56be41.png" />
+</div>
+</div>
+<p>Let me also introduce the 4 main parameters of MIDAA:</p>
+<ul class="simple">
+<li><p>The input data, it should be provided as a list of numpy arrays, one for each modality</p></li>
+<li><p>A normalization factor, this is especially useful when you work with raw counts. The normalization factors are modality specific and are applied before computing the likelihood. For instance if we call <span class="math notranslate nohighlight">\(\beta\)</span> the output of the last layer of the decoder and the normalization factors as <span class="math notranslate nohighlight">\(\nu\)</span> and our likelihood of choice is Poisson then the rate of the Poisson is gonna be computed as <span class="math notranslate nohighlight">\(exp(\beta) * \nu\)</span>.</p></li>
+<li><p>The likelihood used to compute the reconstruction loss of the data, we currently support: Gaussian (G), Poisson (P), Negative Binomial (NB), Categorical (C), Bernoulli (B), Beta (Beta). Again likelihoods are modality specific and are list of strings.</p></li>
+<li><p>The number of archetypes to fit.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">]</span> <span class="c1"># as midaaa is designed for multiomics data you can still run on single modality but the input needs to be a list like [modality_1, modality_2, ...]</span>
+<span class="n">normalization_factor</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+<span class="n">likelihoods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">]</span>
+<span class="n">narchetypes</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="training-parameters">
+<h2>Training Parameters<a class="headerlink" href="#training-parameters" title="Link to this heading"></a></h2>
+<p>The two main parameters you can change are the number of steps and the learning rate. In our simulations we find that learning rates around 1e-3 and 1e-4 work well. Regarding the number of steps, they really depend on the problem but generally &gt;500 is enough to get a decent model. We just want to highlight that for us a step menas a complete epoch, so the number of actual gradient iterations will be dependent on the batch size and number of samples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 29763494.00000  : 100%|██████████| 600/600 [00:12&lt;00:00, 47.32it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see how our model converges nicely and recapitulates the 3 main celltype groups we have (T-cells, B-cells and monocyte/dendritic)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maa</span><span class="o">.</span><span class="n">plot_ELBO</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/75a6ae7c904d1d28c8d3cf5e08f08ccc16c9b4163f6f51a3ddc71a517194c3eb.png" src="_images/75a6ae7c904d1d28c8d3cf5e08f08ccc16c9b4163f6f51a3ddc71a517194c3eb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">arc_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f8d3caa9525c7235ad646f28776589b01875d7009de49b51059a692357807050.png" src="_images/f8d3caa9525c7235ad646f28776589b01875d7009de49b51059a692357807050.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A high learning rate generates instabilities and lead to bad fits</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 29761718.00000  : 100%|██████████| 600/600 [00:12&lt;00:00, 48.53it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">arc_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/be564b81168d6e47ae4e9ddb8b3dfb366061ab6f5bfd2be9149ad7afd1988e8a.png" src="_images/be564b81168d6e47ae4e9ddb8b3dfb366061ab6f5bfd2be9149ad7afd1988e8a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A low learning rate does not converge</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 30254284.00000  : 100%|██████████| 600/600 [00:12&lt;00:00, 48.09it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maa</span><span class="o">.</span><span class="n">plot_ELBO</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2aa9d0f96f2a9cffd466898492701655577f5b047448bcff5de429bfa81e2c05.png" src="_images/2aa9d0f96f2a9cffd466898492701655577f5b047448bcff5de429bfa81e2c05.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">arc_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6a8457a54b47b70545176696d117539cb951001c97f76752d44427d83a5a194a.png" src="_images/6a8457a54b47b70545176696d117539cb951001c97f76752d44427d83a5a194a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same for a low number of steps</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 30122298.00000  : 100%|██████████| 10/10 [00:00&lt;00:00, 45.33it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maa</span><span class="o">.</span><span class="n">plot_ELBO</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e8ebb84b570ce4ad0c2e20f88d15081d3a4b79bbeb55396f9e4c42c3b0b6b480.png" src="_images/e8ebb84b570ce4ad0c2e20f88d15081d3a4b79bbeb55396f9e4c42c3b0b6b480.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">arc_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/71bc13257d4a6b86acd034acbca71d5a344cbd797137d080102ad97a3fc763e8.png" src="_images/71bc13257d4a6b86acd034acbca71d5a344cbd797137d080102ad97a3fc763e8.png" />
+</div>
+</div>
+<p>The last 4 parameters we want to show in this section are quite important: the <code class="docutils literal notranslate"><span class="pre">gamma_lr</span></code> , the <code class="docutils literal notranslate"><span class="pre">setorch_seeded</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> and the <code class="docutils literal notranslate"><span class="pre">CUDA</span></code> parameter. We will just explain what they do as it is quite striaghtforward:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">torch_seed</span></code>: sets the torch seed to make the pseudonumber generation reproducible for that run</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CUDA</span></code>: moves model fitting calculation on the GPU (highly suggested if you have a GPU)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code> : the number of examples for each gradient update (beware that 1 step of the <code class="docutils literal notranslate"><span class="pre">steps</span></code> parameter is always a full epoch), you should set this parameter based on how big is the data and how powerfull is your hardware, generally batches that are too small make the convergence slow and relatively noisy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamma_lr</span></code>: in MIDAA we have an exponential learning rate schedule, the final learning rate will be <code class="docutils literal notranslate"><span class="pre">gamma_lr</span> <span class="pre">*</span> <span class="pre">lr</span></code>, while at each step <code class="docutils literal notranslate"><span class="pre">lr**(1/n_steps)</span></code></p></li>
+</ul>
+</section>
+<section id="model-parameters">
+<h2>Model Parameters<a class="headerlink" href="#model-parameters" title="Link to this heading"></a></h2>
+<p>MIDAA model does not have many parameters but the few it has are particularly important. We suggest to have at least some familiarity with this section before running the model on real data. The main three parameters of the model have already been defined at the start of this notebook: the number of archetypes, the normalization factors and, the likelihood distribution. Other 2 important parameters are <code class="docutils literal notranslate"><span class="pre">linearize_encoder</span></code> and <code class="docutils literal notranslate"><span class="pre">linearize_decoder</span></code>, they set respectively the encoder and the decoder as simple torch linear layers, without any activation function or regularization like wights dropout.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.0005</span><span class="p">,</span> 
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span><span class="p">,</span>
+    <span class="n">linearize_encoder</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">linearize_decoder</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 29853852.00000  : 100%|██████████| 500/500 [00:42&lt;00:00, 11.78it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maa</span><span class="o">.</span><span class="n">plot_ELBO</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/38cf487c29490cc1de5cfb294cbb6b3fc99f8847b96a00a5e134d4783d46c73e.png" src="_images/38cf487c29490cc1de5cfb294cbb6b3fc99f8847b96a00a5e134d4783d46c73e.png" />
+</div>
+</div>
+<p>We see that while the reconstruction of the linear model is not as good as the non-linear one, it still able to get what is going on inside our sample. The main advantage of having a linear encoder or decoder is that we can recover all the nice properties of linear dimensionality reduction and it might help us against overfitting in simple scenario.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">arc_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e040d5d7d0532d9a7bbb5f2d0b5fca0b6cf0192f3ecfc8a8fce9679a35794d95.png" src="_images/e040d5d7d0532d9a7bbb5f2d0b5fca0b6cf0192f3ecfc8a8fce9679a35794d95.png" />
+</div>
+</div>
+<p>We also implement two other models in the MIDAA package, one is based on a different latent space and loss formulation (more info in this other <a class="reference external" href="https://sottorivalab.github.io/daario/midaa_long_form.html">tutorial</a> ) and one is a simple multi-modality VAE where we just learn the latent space with an isotrophic Gaussian prior.</p>
+<p>Regarding the first case you have 2 parameters to tweak:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_fix_norm</span></code>: this is the most important one, is the portion of the loss that regularizes the inferred archetypes with the fixed ones, in general a value too big will make the A and B matrices very distant in terms of their archetypal representation, while a too big of a value will force the model to ignore the actual likelihood</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z_fix_release_step</span></code>: this is an added option to start relaxing the fixed archetypes after some iterations. The option is the number of epochs from which to start learning the fixed archetypes as a parameter.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span> 
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="n">fix_Z</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># This let us select the model of Keller et al. 2019</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span><span class="p">,</span>
+    <span class="n">Z_fix_norm</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span> <span class="c1"># I suggest you to play a bit with this parameter to see the effect on the final model </span>
+    <span class="n">Z_fix_release_step</span> <span class="o">=</span> <span class="mi">400</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 29795376.00000  : 100%|██████████| 500/500 [00:10&lt;00:00, 46.53it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">arc_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0beadc7abf5a779b0494f8f1853412781ca10b382c7d5d0f91474baa05350b0b.png" src="_images/0beadc7abf5a779b0494f8f1853412781ca10b382c7d5d0f91474baa05350b0b.png" />
+</div>
+</div>
+<p>For the variational autoencoder you just have to set to <code class="docutils literal notranslate"><span class="pre">True</span></code> the <code class="docutils literal notranslate"><span class="pre">just_VAE</span></code> option. Note that to control the number of hidden dimensions you still have to change the number of archetypes (even if AA is not actually performed). For instance if we want a latetn representation with 2 dimension we need to set the number of archetypes to 3 (and in general the number of latent dimensions is 1 minus the number of archetypes)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span> 
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="n">just_VAE</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> 
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span> <span class="c1"># Remember the number of  latent variables is 1 - narchetypes</span>
+
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 29764586.00000  : 100%|██████████| 500/500 [00:09&lt;00:00, 54.18it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Of course the archetypes here are completely randomic</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">arc_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c4dc6691659c7348513d3200b568462cadd68568009eafeb590e18b73ced0b6f.png" src="_images/c4dc6691659c7348513d3200b568462cadd68568009eafeb590e18b73ced0b6f.png" />
+</div>
+</div>
+<p>But we cna visualize the latent space</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;X_VAE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;inferred_quantities&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="s2">&quot;X_VAE&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;louvain&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:394: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  cax = scatter(
+</pre></div>
+</div>
+<img alt="_images/a87a7d3599e4ee65d4edbecae1b82e35c790fca32855579ede2306c3f7ea73da.png" src="_images/a87a7d3599e4ee65d4edbecae1b82e35c790fca32855579ede2306c3f7ea73da.png" />
+</div>
+</div>
+<p>To conclude we will show how to use the classification/regression feature of MIDAA. The idea is that you might have side data that you want to either classify or regress (to use the model on test data) or you want their reconstructionto influence the archetype reconstruction but without encoding them (again generally to use the same model on other non annotated instances or to save memory and efficiency if you don’t care about their encoding). Let me show you an example with the cell type labels</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will get a one-hot encoded representation</span>
+<span class="n">side_mat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;louvain&quot;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;louvain&#39;</span><span class="p">)</span> 
+<span class="n">side_mat</span> <span class="o">=</span> <span class="n">side_mat</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="n">side_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">side_mat</span><span class="p">]</span> <span class="c1"># similar to the input </span>
+<span class="n">likelihoods_side</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="c1"># we need a likelihood for the side data, note that we do not have normalization (this is just a design choice to simplify the interface)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">side_matrices</span> <span class="o">=</span> <span class="n">side_data</span><span class="p">,</span>
+    <span class="n">input_types_side</span> <span class="o">=</span> <span class="n">likelihoods_side</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 29750192.00000  : 100%|██████████| 600/600 [00:15&lt;00:00, 39.01it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time we visualize the data by projecting the data into a 2d polytope, this is quite a good way to visualize the actual high dimensional simplex.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maa</span><span class="o">.</span><span class="n">plot_archetypes_simplex</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_by</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;louvain&quot;</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Set1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 1 Axes&gt;, &lt;PolarAxes: &gt;)
+</pre></div>
+</div>
+<img alt="_images/c3bd79f201b2e222b3cff48343218d65431300a94e14a7b48f6bc9b5d80e3950.png" src="_images/c3bd79f201b2e222b3cff48343218d65431300a94e14a7b48f6bc9b5d80e3950.png" />
+</div>
+</div>
+<p>What I didn’t tell you is that of course we have a parameter to scale the contribution to the likelihood of the side and the input data, by default they are divided by the number of feature to be in the same range, but you can of course modify it, let’s see an example. Note how you can use the same parameters to weight the relative importance of each modality in the input and each side data. By default they are also rescaled based on the number of features they have (i.e. if you have RNA-seq with 30000 genes and methylation with 450k CpG islands and side data with a Categorical variable with 6 classes, the relative contributions are gonna be respectively 1/30000, 1/450k and 1/6)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">side_matrices</span> <span class="o">=</span> <span class="n">side_data</span><span class="p">,</span>
+    <span class="n">input_types_side</span> <span class="o">=</span> <span class="n">likelihoods_side</span><span class="p">,</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="c1"># the number of cell types we have</span>
+    <span class="n">loss_weights_side</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="c1"># loss normalization factor for the side data</span>
+    <span class="n">loss_weights_reconstruction</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># loss normalization factor for the input data</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 23401272.00000  : 100%|██████████| 1000/1000 [00:24&lt;00:00, 41.46it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># See how the cell types are super separated</span>
+<span class="n">maa</span><span class="o">.</span><span class="n">plot_archetypes_simplex</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_by</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;louvain&quot;</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Set1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 1 Axes&gt;, &lt;PolarAxes: &gt;)
+</pre></div>
+</div>
+<img alt="_images/0fb950dc22f5ad5c88ed8570bf5a551bba96386581e39be4371c37b1a519f6d7.png" src="_images/0fb950dc22f5ad5c88ed8570bf5a551bba96386581e39be4371c37b1a519f6d7.png" />
+</div>
+</div>
+</section>
+<section id="network-parameters">
+<h2>Network parameters<a class="headerlink" href="#network-parameters" title="Link to this heading"></a></h2>
+<p>Up until now we did not care much about the network to go from the input to the latent representation and back, but the is also quite customizable.</p>
+<p>For now the model supports just convolution and linear networks (though we plan to make that part general and give some constructors for commonly used networks). You can modify the dimension of the encoder in the 3 different points:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hidden_dims_enc_ind</span></code>: A list with hidden nodes dimension for the independent MLPs that are applied to each modality</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hidden_dims_enc_common</span></code>: A list with hidden nodes dimension for the MLP that takes as input the concatenation of the independent MLPs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hidden_dims_enc_pre_Z</span></code>: A list with hidden nodes dimension for the MLP that takes as input the common MLP and embed it into the latent space + learn the archetypal matrices</p></li>
+</ul>
+<p>While for the decoder:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hidden_dims_dec_common</span></code>: A list with hidden nodes dimension for the MLP that takes as input the reconstructed latents space by the archetypes (ABZ)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hidden_dims_dec_last</span></code>: A list with hidden nodes dimension for the set of MLPs that takes as input the output of the common MLP and outputs each reconstructed modality</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hidden_dims_dec_last_side</span></code>: A list with hidden nodes dimension for the set of MLPs that takes as input the output of the common MLP and outputs each reconstructed side data</p></li>
+</ul>
+<p>We will not tweak all these parameters as the space is huge and show just an example where we specify them directly, we encourage you as usual to play with them by yourself.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="n">input_data</span><span class="p">,</span>
+    <span class="n">normalization_factor</span><span class="p">,</span>
+    <span class="n">likelihoods</span><span class="p">,</span>
+    <span class="n">hidden_dims_enc_ind</span> <span class="o">=</span> <span class="p">[</span><span class="mi">512</span><span class="p">],</span>
+    <span class="n">hidden_dims_enc_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">256</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span>
+    <span class="n">hidden_dims_enc_pre_Z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
+    <span class="n">hidden_dims_dec_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span>
+    <span class="n">hidden_dims_dec_last</span> <span class="o">=</span> <span class="p">[</span><span class="mi">256</span><span class="p">,</span><span class="mi">512</span><span class="p">],</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 29773284.00000  : 100%|██████████| 600/600 [00:13&lt;00:00, 45.43it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maa</span><span class="o">.</span><span class="n">plot_archetypes_simplex</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_by</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;louvain&quot;</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Set1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 1 Axes&gt;, &lt;PolarAxes: &gt;)
+</pre></div>
+</div>
+<img alt="_images/0781fc9680b70241d744c62853534c57470588db7502cc239df38f14355009d2.png" src="_images/0781fc9680b70241d744c62853534c57470588db7502cc239df38f14355009d2.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="midaa_long_form.html" class="btn btn-neutral float-left" title="From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scMulti_multimodal.html" class="btn btn-neutral float-right" title="MIDAA 101 (on 10X multiome)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Salvatore Milite.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

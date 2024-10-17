@@ -1,0 +1,127 @@
+:orphan:
+
+:py:mod:`midaa.Interface`
+=========================
+
+.. py:module:: midaa.Interface
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Interface.fit_MIDAA
+   midaa.Interface.training_loop
+   midaa.Interface.initialize_params
+   midaa.Interface.handle_z
+   midaa.Interface.handle_model_matrix
+   midaa.Interface.calculate_loss
+   midaa.Interface.prepare_final_parameters
+   midaa.Interface.compile_final_dict
+   midaa.Interface.load_model_from_state_dict
+
+
+
+.. py:function:: fit_MIDAA(input_matrix, normalization_factor=None, input_types=['NB'], loss_weights_reconstruction=None, side_matrices=None, input_types_side=None, loss_weights_side=None, hidden_dims_dec_common=[256, 512], hidden_dims_dec_last=[1024], hidden_dims_dec_last_side=None, hidden_dims_enc_ind=[1024], hidden_dims_enc_common=[512, 256], hidden_dims_enc_pre_Z=[256, 128], layers_independent_types=None, layers_independent_types_side=None, image_size=[256, 256], narchetypes=10, model_matrix=None, just_VAE=False, linearize_encoder=False, linearize_decoder=False, VAE_steps=None, CUDA=True, lr=0.005, gamma_lr=0.1, steps=2000, fix_Z=False, function_hook=None, initialization_B_weight=None, Z_fix_norm=None, Z_fix_release_step=None, reconstruct_input_and_side=False, initialization_input=None, initialization_steps_phase_1=1000, initialization_lr_phase_1=0.001, initialization_steps_phase_2=350, initialization_lr_phase_2=0.0005, torch_seed=3, batch_size=5128, kernel_size=3, stride=1, padding=1, pool_size=2, pool_stride=2)
+
+   Fits the MIDAA model to given input data, using specified architecture and optimization parameters.
+
+   Parameters:
+
+   - input_matrix (list of ndarray): Input data matrix, where each entry is a tensor representation of the input data for a different modality.
+   - normalization_factor (list of ndarray, optional): Normalization factors for the input data. Default is None.
+   - input_types (list of str, optional): Types of input data. Default is ["NB"].
+   - loss_weights_reconstruction (list of float, optional): Weights for the reconstruction loss. Default is None.
+   - side_matrices (list of ndarray, optional): Side information matrices. Default is None.
+   - input_types_side (list of str, optional): Types of side information. Default is None.
+   - loss_weights_side (list of float, optional): Weights for the side information loss. Default is None.
+   - hidden_dims_dec_common, hidden_dims_dec_last, hidden_dims_dec_last_side,
+     hidden_dims_enc_ind, hidden_dims_enc_common, hidden_dims_enc_pre_Z (list of int, optional):
+     Dimensions of various layers in the decoder and encoder. Defaults are specified for each.
+   - layers_independent_types, layers_independent_types_side (list of str, optional): Types of layers for independent modeling.
+   - image_size (list of int, optional): Size of the input images (width, height). Default is [256, 256].
+   - narchetypes (int, optional): Number of archetypes to model. Default is 10.
+   - model_matrix (ndarray, optional): Matrix representing the model. Default is None.
+   - just_VAE (bool, optional): Flag to run only the VAE without the archetypal analysis. Default is False.
+   - linearize_encoder, linearize_decoder (bool, optional): Flags to linearize encoder and decoder. Defaults are False.
+   - VAE_steps (int, optional): Number of steps to run the VAE. Default is None.
+   - CUDA (bool, optional): Flag to use CUDA if available. Default is True.
+   - lr (float, optional): Learning rate for the optimizer. Default is 0.005.
+   - gamma_lr (float, optional): Learning rate decay factor. Default is 0.1.
+   - steps (int, optional): Number of training steps. Default is 2000.
+   - fix_Z (bool, optional): Flag to fix Z during training. Default is False.
+   - initialization_B_weight (float, optional): Initial weight for B. Default is None.
+   - Z_fix_norm (float, optional): Normalization factor for Z when fixed. Default is None.
+   - Z_fix_release_step (int, optional): Step to release Z fix. Default is None.
+   - reconstruct_input_and_side (bool, optional): Flag to reconstruct both input and side information. Default is False.
+   - initialization_input (dict, optional): Initial values for the input. Default is None.
+   - initialization_steps_phase_1, initialization_steps_phase_2 (int, optional):
+     Number of steps for the two phases of initialization. Defaults are specified.
+   - initialization_lr_phase_1, initialization_lr_phase_2 (float, optional):
+     Learning rates for the two phases of initialization. Defaults are specified.
+   - torch_seed (int, optional): Seed for PyTorch's RNG. Default is 3.
+   - batch_size (int, optional): Batch size for training. Default is 5128.
+   - kernel_size, stride, padding, pool_size, pool_stride (int, optional):
+     Convolution and pooling parameters. Defaults are specified.
+
+   Returns:
+   dict: A dictionary containing the final parameters, input parameters, ELBO list, and the DeepAA instance.
+
+   This function configures and trains a MIDAA model based on the specified parameters and data.
+   It handles device setting, seed initialization, data preprocessing, and the training loop, including
+   potential initialization phases for the model. The final output includes training diagnostics and the
+   trained model itself, ready for further analysis or application.
+
+
+.. py:function:: training_loop(deepAA, input_matrix, model_matrix, normalization_factor, side_matrices, initialization_input, loss_weights_reconstruction, loss_weights_side, initialization_B_weight, batch_size, lr, steps, lrd, VAE_steps, fix_Z, Z_fix_release_step, initialization_mode_step1=False, initialization_mode_step2=False, CUDA=True, function_hook=None)
+
+
+.. py:function:: initialize_params(params_run, A, B)
+
+
+.. py:function:: handle_z(params_run, fix_Z, Z_fix_release_step, steps, Z, A, B)
+
+
+.. py:function:: handle_model_matrix(params_run, model_matrix, reconstruct_input_and_side, A, deepAA)
+
+
+.. py:function:: calculate_loss(params_run, fix_Z, deepAA, input_matrix, model_matrix, normalization_factor, side_matrices, loss_weights_reconstruction, loss_weights_side)
+
+
+.. py:function:: prepare_final_parameters(params_run, CUDA)
+
+
+.. py:function:: compile_final_dict(params_run, params_input, elbo_list, deepAA)
+
+
+.. py:function:: load_model_from_state_dict(model, input_matrix, path, CUDA=False)
+
+   Loads a model's state dictionary from a specified path and updates the model with inferred quantities
+   based on a provided input matrix.
+
+   Parameters:
+   - model (dict): A dictionary containing the model structure, including the 'deepAA_obj' (the model object)
+     and 'hyperparameters'. This dictionary will be updated with 'inferred_quantities' based on the input data.
+   - input_matrix (list of ndarray): The input data matrix to be used for inference after loading the model,
+     where each entry is a tensor representation of the input data for a different modality.
+   - path (str): Path to the file containing the saved state dictionary of the model.
+   - CUDA (bool, optional): Indicates whether CUDA (GPU) should be used for loading and inference. If False,
+     operations will be performed on the CPU. Default is False.
+
+   The function loads the model's state dictionary from the specified path, considering whether CUDA is enabled
+   or not. It sets the model to evaluation mode, processes the provided input matrix, and performs inference to
+   obtain and update the model with new inferred quantities such as A, B, and Z matrices. It also updates the
+   model with any final parameters adjustments based on the model's hyperparameters.
+
+   Note:
+   - The 'model' dictionary must contain 'deepAA_obj', an instance of the model, and 'hyperparameters', a dictionary
+     specifying model configurations like 'fix_Z', 'Z_fix_release_step', and 'steps'.
+   - After loading the state and performing inference, the function updates the 'model' dictionary with
+     'inferred_quantities', which include the results from the inference.
+
+

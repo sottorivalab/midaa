@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis &mdash; midaa  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Finding your way in MIDAAs interface" href="implementation_and_parameters.html" />
+    <link rel="prev" title="Multiomics Integration via Deep Archetypal Analysis (MIDAA)" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            midaa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#archetypal-analysis">Archetypal Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-deep-archetypal-analysis">Why deep archetypal analysis?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#midaa">MIDAA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="implementation_and_parameters.html">Finding your way in MIDAAs interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scMulti_multimodal.html">MIDAA 101 (on 10X multiome)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">midaa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/midaa_long_form.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="from-classic-archetypal-analysis-to-multimodal-deep-archetypal-analysis">
+<h1>From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis<a class="headerlink" href="#from-classic-archetypal-analysis-to-multimodal-deep-archetypal-analysis" title="Link to this heading"></a></h1>
+<section id="archetypal-analysis">
+<h2>Archetypal Analysis<a class="headerlink" href="#archetypal-analysis" title="Link to this heading"></a></h2>
+<p>Archetypal Analysis is a technique in statistics and machine learning designed to uncover the extreme points within a dataset, termed archetypes. These archetypes represent the most distinct or extreme manifestations within the data space, suggesting that every data point can be approximated as a mixture of these archetypal forms.
+Given a dataset represented by the matrix <span class="math notranslate nohighlight">\(X\)</span>, where each row corresponds to a d-dimensional data point, the objective of archetypal analysis is to identify a matrix <span class="math notranslate nohighlight">\(A\)</span>, which encapsulates the archetypes, and a matrix <span class="math notranslate nohighlight">\(B\)</span>, which contains coefficients that express each data point in <span class="math notranslate nohighlight">\(X\)</span> as convex combinations of the archetypes in <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>The core optimization challenge in archetypal analysis is to minimize the reconstruction error between the dataset <span class="math notranslate nohighlight">\(X\)</span> and its approximation <span class="math notranslate nohighlight">\(ABX\)</span>, formally expressed as:</p>
+<div class="math notranslate nohighlight">
+\[\min_{A, B} \|X - ABX\|^2_F\]</div>
+<p>subject to constraints for both <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> that ensure the convexity of the combinations, with <span class="math notranslate nohighlight">\(B_{ij} \geq 0\)</span> for all elements to guarantee non-negativity, and <span class="math notranslate nohighlight">\(\sum_{j} B_{ij} = 1\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>, ensuring that the coefficients for each data point sum to one.
+Similarly, constraints are applied to <span class="math notranslate nohighlight">\(A\)</span> to ensure its columns can be interpreted as mixtures of data points, hence <span class="math notranslate nohighlight">\(A_{ij} \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_{j} A_{ij} = 1\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>.
+These constraints ensure that each data point in <span class="math notranslate nohighlight">\(X\)</span> is represented as a convex combination of archetypes, making the solution interpretable and reflective of the underlying structure of the dataset.</p>
+<p>The original algorithm proposed by <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/00401706.1994.10485840">Cutler and Breiman</a> is based on the idea of solving alternating interative least square problems. Namely, the algorithm operates iteratively, alternating between two main steps: updating coefficients B for a fixed set of archetypes <span class="math notranslate nohighlight">\(A\)</span>, and then updating <span class="math notranslate nohighlight">\(A\)</span> given <span class="math notranslate nohighlight">\(B\)</span>. Initially, <span class="math notranslate nohighlight">\(A\)</span> is populated with randomly selected data points. In each iteration, <span class="math notranslate nohighlight">\(B\)</span> is updated to represent each data point as a convex combination of the current archetypes, and then <span class="math notranslate nohighlight">\(A\)</span> is updated to better fit the data points based on the new coefficients. The process iterates until the change in <span class="math notranslate nohighlight">\(A\)</span> between iterations, measured using the Frobenius norm <span class="math notranslate nohighlight">\(\|A_{new} - A_{old}\|_F\)</span>, falls below a predefined convergence threshold, or a maximum number of iterations is reached.</p>
+<p>Let us first define some convenience function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Some code was taken/adapted from the amazing implementation in</span>
+<span class="c1"># https://github.com/aleixalcacer/archetypes</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">nnls</span>
+
+
+<span class="k">def</span> <span class="nf">frobenius_norm_difference</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the Frobenius norm of the difference between two matrices.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">M1</span> <span class="o">-</span> <span class="n">M2</span><span class="p">,</span> <span class="s1">&#39;fro&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">initialize_archetypes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Randomly initialize archetypes.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># For A and B we just sample from a dirichlet distribution</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span>
+
+<span class="k">def</span> <span class="nf">optimize_nnls</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span><span class="n">M2</span><span class="p">):</span>
+    
+    <span class="c1"># Add some constants to enforce the convexity of the final matrix</span>
+    <span class="n">M1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">M2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">M1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">M2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    
+    <span class="c1"># Solve the actual non-negative least square problem</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">T</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <span class="n">nnls</span><span class="p">(</span><span class="n">M2</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">M1</span><span class="o">.</span><span class="n">T</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span>
+    
+    <span class="c1"># Check convexity + remove nans</span>
+    <span class="n">res</span> <span class="o">/=</span> <span class="n">res</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">res</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">res</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">res</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="k">def</span> <span class="nf">update_archetypes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">H</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update archetypes Z for fixed coefficients.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">optimize_nnls</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">update_weights</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">H</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update coefficients A for fixed archetypes&quot;&quot;&quot;</span>
+    <span class="k">return</span>  <span class="n">optimize_nnls</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">H</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then run the training loop and have a look at the results. For this example we choose a toy dataset of body measuremnts for 3 different species of penguins.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># code a function that performs archetypal analysis</span>
+<span class="k">def</span> <span class="nf">archetypal_analysis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform archetypal analysis.&quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">initialize_archetypes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">X</span>
+    <span class="n">loss_old</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">update_weights</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">X</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">update_archetypes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">X</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">frobenius_norm_difference</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A</span> <span class="o">@</span> <span class="n">H</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">loss_old</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">loss_old</span> <span class="o">-</span> <span class="n">loss</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;penguins&#39;</span><span class="p">)</span>
+<span class="n">penguins</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.1</td>
+      <td>18.7</td>
+      <td>181.0</td>
+      <td>3750.0</td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.5</td>
+      <td>17.4</td>
+      <td>186.0</td>
+      <td>3800.0</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>40.3</td>
+      <td>18.0</td>
+      <td>195.0</td>
+      <td>3250.0</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>36.7</td>
+      <td>19.3</td>
+      <td>193.0</td>
+      <td>3450.0</td>
+      <td>Female</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We will work with just 2 dimensions as it’s easier to understand what is happening, but of course AA can be extended to inputs of arbitraty dimensions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span>  <span class="n">penguins</span><span class="p">[</span><span class="o">~</span><span class="n">penguins</span><span class="p">[</span><span class="s1">&#39;body_mass_g&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;bill_length_mm&#39;, ylabel=&#39;body_mass_g&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/fa4863b704752c7e3deeed2895e29a43a6c4a2c58822532ebdf4d9423f628cb7.png" src="_images/fa4863b704752c7e3deeed2895e29a43a6c4a2c58822532ebdf4d9423f628cb7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We standardize as it improves stability of the algorithm</span>
+
+<span class="n">X_df</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]]</span>
+<span class="n">X_df</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_df</span><span class="o">-</span><span class="n">X_df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">X_df</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_df</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">A</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="n">archetypal_analysis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see the algorithm correctly fits a trangle across the 2D space of the data. The archetypes are the red points and the data points are colored by species. To give a bit of interpretation we have small penguins with a short bill, which are mainly represented by Adelie specie. Another archetype has low body mass and a long bill, while the last one his a big penguin with a somewhat long bill. The main point of archetypal analysis is that it gives us the possibility to reason continously by comparison to some extreme prototypes. It gives us a different look on our data compared to clustering and works very well when we have some continous process (be it differentiation or fitness optimization) underlying our data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate the archetypes</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">X</span>
+
+<span class="n">X_df</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span>
+
+<span class="c1"># plot the archetypes together to this scatterplot in the same plots, and connect them by a triangle</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">H</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">H</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;bill_length_mm&#39;, ylabel=&#39;body_mass_g&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/510f2a7b08a572cef326195e8534067df1cd5edcbc50f901f1819b0439942a51.png" src="_images/510f2a7b08a572cef326195e8534067df1cd5edcbc50f901f1819b0439942a51.png" />
+</div>
+</div>
+</section>
+<section id="why-deep-archetypal-analysis">
+<h2>Why deep archetypal analysis?<a class="headerlink" href="#why-deep-archetypal-analysis" title="Link to this heading"></a></h2>
+<p>There are two main reasons why we would like to move from the standard analysis we saw before:</p>
+<ul class="simple">
+<li><p>Better scaling properties</p></li>
+<li><p>Working in non-linear latent space</p></li>
+</ul>
+<p>Let’s briefly talk about them before looking at an implementation. Regarding the scaling behaviour of the classical algorithm we presented before, it is quite clear how it becomes quite slow for big input matrices as solving the non-negative least squares becomes expensive. Improvements on that have been proposed, like the use of the Frank-Wolf algorithm. Despite this, the idea of being able to express matrices A and B as a function of the input and the ability to optimize using classical SGD is certainly appealing for large datasets. Another important point is the space where to perform the AA. In our toy dataset we had only two features but of course in reality it commonly happens to work in very large spaces. What you tend to do is first perform dimensionality reduction for example with a PCA and then run the AA on the loadings of the PCA. Of course, real dataset can be very complicated and the idea of being able to use neural networks to both reduce the dimensionality in a non-linear way becomes a key component to get good results in real case scenarios.</p>
+<p>These two ideas converge in attempts to extend AA into the Deep Learning framework as in <a class="reference external" href="https://doi.org/10.48550/arXiv.1901.10799">Keller et al. 2019</a>. Initially we started from their idea and expanded it to multi-modal data, we then change the formulation of the model to improve on some aspects, but that’s the topic of the next section, so no spoilers for now. Going back to Deep Archetypal Analysis the actual formulation is quite straightforward, as we said we want a neural network to learn the 2 matrices A and B as an arbitrary function of the data <span class="math notranslate nohighlight">\(f^\theta(X)\)</span>. The approach used is to fix a standard simplex in the latent space (let us call its vertices <span class="math notranslate nohighlight">\(Z^{\text{fixed}}\)</span> and learn a mapping function from <span class="math notranslate nohighlight">\(X\)</span> to this simplex with our network <span class="math notranslate nohighlight">\(f^\theta(X)\)</span>. If you think for a bit this is exactly equivalent to learn the matrix <span class="math notranslate nohighlight">\(A\)</span> given as a set of archetypes <span class="math notranslate nohighlight">\(Z^{\text{fixed}}\)</span> and our final reconstruction is nothing else but <span class="math notranslate nohighlight">\(Z^{*} = AZ^{\text{fixed}}\)</span>. We then reconstruct back the input using a decoder neural network that takes as input <span class="math notranslate nohighlight">\(Z^{*}\)</span>.</p>
+<p>So what about <span class="math notranslate nohighlight">\(B\)</span>? How can we make sure that <span class="math notranslate nohighlight">\(Z\)</span> is also a convex combination of our data points in latent space? A possible solution is to add a term in the loss. Namely, if you recall that the archetypes structure given the matrices above can be written as is <span class="math notranslate nohighlight">\(BAZ^{\text{fix}}\)</span> we just have to force it to be equal to our latent simplex. We then add this term to the final loss.</p>
+<div class="math notranslate nohighlight">
+\[\ell=\left\|Z^{\text {fixed }}-B A Z^{\text {fixed }}\right\|_2^2=\left\|Z^{\text {fixed }}-Z^{\text {pred }}\right\|_2^2\]</div>
+<p>The final loss is the usual ELBO of a Variational Autoencoder (please refer to the original paper and to <a class="reference external" href="https://doi.org/10.48550/arXiv.1312.6114">Kingma et al. 2013</a>  for more information) minus this new loss.\</p>
+<p>But now it is time to have a look at this model in practice, we have implemented it in MIDAA and on a single modality it should work almost identically to the model proposed in <a class="reference external" href="https://doi.org/10.48550/arXiv.1901.10799">Keller et al. 2019</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/home/salvatore.milite/work/python_packages/daario/src/&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">midaa</span> <span class="k">as</span> <span class="nn">maa</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># More information on what that is in other tutorials</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">X</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span>
+    <span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">],</span>    
+    <span class="n">hidden_dims_enc_ind</span> <span class="o">=</span> <span class="p">[</span><span class="mi">128</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the encoder</span>
+    <span class="n">hidden_dims_enc_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the encoder</span>
+    <span class="n">hidden_dims_enc_pre_Z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the encoder before the Z layer</span>
+    <span class="n">hidden_dims_dec_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the decoder</span>
+    <span class="n">hidden_dims_dec_last</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the decoder last layer</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="c1"># Learning rate</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">linearize_decoder</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># space is super simple we don&#39;t need non-linearities</span>
+    <span class="n">linearize_encoder</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="c1"># space is super simple we don&#39;t need non-linearities</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="n">fix_Z</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># this makes us use the model definition from Keller et al. 2019</span>
+    <span class="n">Z_fix_norm</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">CUDA</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 3027.17725  : 100%|██████████| 300/300 [00:13&lt;00:00, 22.55it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<p>Interestingly we see how archetypes in this case look quite far away from the point cloud, also they look very influenced by outliers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate the archetypes</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;inferred_quantities&quot;</span><span class="p">][</span><span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">X</span>
+
+<span class="n">X_df</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span>
+
+<span class="c1"># plot the archetypes together to this scatterplot in the same plots, and connect them by a triangle</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">H</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">H</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;bill_length_mm&#39;, ylabel=&#39;body_mass_g&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/37e09bc4fdba8838a346a22c80df089262e53dca5deebcfc30adc58ed1905af1.png" src="_images/37e09bc4fdba8838a346a22c80df089262e53dca5deebcfc30adc58ed1905af1.png" />
+</div>
+</div>
+</section>
+<section id="midaa">
+<h2>MIDAA<a class="headerlink" href="#midaa" title="Link to this heading"></a></h2>
+<p>MIDAAs’ idea is to expand this reasoning to multimodal data with an arbitrary number of features. What we do is to first is to perform a step of dimensionality reduction using a modality specific autoencoder, for each modality. We then concatenate the last layer embedding and</p>
+<a class="reference internal image-reference" href="_images/architecture_scheme.png"><img alt="_images/architecture_scheme.png" src="_images/architecture_scheme.png" style="width: 797px; height: 355px;" /></a>
+<p>The previous formulation had two problems, the first being that not the loss of reconstruction of archetypes needed to be manually weighted. This value is highly specific to the dataset and in general choosing one that is too small will result in us having inferred archetypes that are far from those actually used for reconstruction, one that is too large will cause the model to ignore the autoencoder loss. Furthermore, by fixing the plexus in latent space, we assume that the distance between the archetypes is the same (in latent space). This is not necessarily a problem if the decoder is flexible enough, but it makes the interpretation of latent space problematic when we want to interpret it. For this reason, in MIDAA we use a different formulation of latent space and one more similar to a classical VAE. Specifically, our encoder also generates a latent space <span class="math notranslate nohighlight">\(Z\)</span> (that in this case in not a simplex). We then solve the usual archetypal analysis problem in this latent space:</p>
+<div class="math notranslate nohighlight">
+\[Z^{*} = ABZ\]</div>
+<p>We then reconstruct the input and eventual side information with the usual decoder. To regularize the latent space we constrain <span class="math notranslate nohighlight">\(Z\)</span> to live in an hypercube of dimension <span class="math notranslate nohighlight">\([-1,1]^{K-1}\)</span> where <span class="math notranslate nohighlight">\(K\)</span> is the number of archetypes (more info and benchmarks in the paper*).</p>
+<p>So let’s fit this model to our penguins data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">midaa</span> <span class="k">as</span> <span class="nn">maa</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># More information on what that is in other tutorials</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">X</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span>
+    <span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">],</span>    
+    <span class="n">hidden_dims_enc_ind</span> <span class="o">=</span> <span class="p">[</span><span class="mi">128</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the encoder</span>
+    <span class="n">hidden_dims_enc_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the encoder</span>
+    <span class="n">hidden_dims_enc_pre_Z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the encoder before the Z layer</span>
+    <span class="n">hidden_dims_dec_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the decoder</span>
+    <span class="n">hidden_dims_dec_last</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the decoder last layer</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="c1"># Learning rate</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="n">linearize_decoder</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># space is super simple we don&#39;t need non-linearities</span>
+    <span class="n">linearize_encoder</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="c1"># space is super simple we don&#39;t need non-linearities</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="n">CUDA</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 2578.61450  : 100%|██████████| 300/300 [00:04&lt;00:00, 73.38it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<p>While this is just a single instance of the model, it looks like our formulation in this case tend to care less about outliers and generate archetypes that are closer to the actual sample space.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate the archetypes</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;inferred_quantities&quot;</span><span class="p">][</span><span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">@</span> <span class="n">X</span>
+
+<span class="n">X_df</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span>
+
+<span class="c1"># plot the archetypes together to this scatterplot in the same plots, and connect them by a triangle</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">H</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">H</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;bill_length_mm&#39;, ylabel=&#39;body_mass_g&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/9058763b322515ec5be912ed7eb569d16f1f42acf5c43ea50123d2000b800770.png" src="_images/9058763b322515ec5be912ed7eb569d16f1f42acf5c43ea50123d2000b800770.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Multiomics Integration via Deep Archetypal Analysis (MIDAA)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="implementation_and_parameters.html" class="btn btn-neutral float-right" title="Finding your way in MIDAAs interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Salvatore Milite.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

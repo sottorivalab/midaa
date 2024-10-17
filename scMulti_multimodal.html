@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIDAA 101 (on 10X multiome) &mdash; midaa  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Finding your way in MIDAAs interface" href="implementation_and_parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            midaa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="midaa_long_form.html">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation_and_parameters.html">Finding your way in MIDAAs interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MIDAA 101 (on 10X multiome)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#x-multiomics-analysis">10x Multiomics analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-new-data">Generating new data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">midaa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MIDAA 101 (on 10X multiome)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/scMulti_multimodal.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="midaa-101-on-10x-multiome">
+<h1>MIDAA 101 (on 10X multiome)<a class="headerlink" href="#midaa-101-on-10x-multiome" title="Link to this heading"></a></h1>
+<section id="x-multiomics-analysis">
+<h2>10x Multiomics analysis<a class="headerlink" href="#x-multiomics-analysis" title="Link to this heading"></a></h2>
+<p>As our first tutorial we will use the CD34+ positive 10X ATAC + GEX multiome dataset from <a class="reference external" href="https://www.nature.com/articles/s41587-019-0068-4">Setty et al.</a>. The dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/home/salvatore.milite/work/python_packages/daario/src/&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># you need some extra packages to run the tutorial you can find the list on tutorial_requirements.txt</span>
+
+<span class="kn">import</span> <span class="nn">midaa</span> <span class="k">as</span> <span class="nn">maa</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># I like snapatac but you can you use whatever you want for preprocessing atac</span>
+<span class="kn">import</span> <span class="nn">snapatac2</span> <span class="k">as</span> <span class="nn">snap</span>
+<span class="kn">import</span> <span class="nn">muon</span> <span class="k">as</span> <span class="nn">mu</span>
+<span class="kn">import</span> <span class="nn">mudata</span>
+<span class="kn">from</span> <span class="nn">muon</span> <span class="kn">import</span> <span class="n">atac</span> <span class="k">as</span> <span class="n">ac</span>
+<span class="kn">from</span> <span class="nn">pyjaspar</span> <span class="kn">import</span> <span class="n">jaspardb</span>
+<span class="kn">import</span> <span class="nn">pychromvar</span> <span class="k">as</span> <span class="nn">pc</span>
+
+<span class="c1"># sorry I&#39;m kinda in love with ggplot </span>
+<span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">stat_smooth</span><span class="p">,</span> <span class="n">facet_wrap</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">theme_classic</span><span class="p">,</span> <span class="n">theme</span><span class="p">,</span> <span class="n">ggtitle</span><span class="p">,</span> <span class="n">ggsave</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">]</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">90</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data can be obtained from the server of the original authors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !mkdir data/</span>
+<span class="c1"># !wget https://dp-lab-data-public.s3.amazonaws.com/SEACells-multiome/cd34_multiome_rna.h5ad -O data/cd34_multiome_rna_processed.h5ad # RNA data</span>
+<span class="c1"># !wget https://dp-lab-data-public.s3.amazonaws.com/SEACells-multiome/cd34_multiome_atac.h5ad -O data/cd34_multiome_atac.h5ad # ATAC data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_atac</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./data/cd34_multiome_atac.h5ad&#39;</span><span class="p">)</span>
+<span class="n">ad_rna</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./data/cd34_multiome_rna_processed.h5ad&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">ad_rna</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;celltype&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:394: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  cax = scatter(
+</pre></div>
+</div>
+<img alt="_images/d5b5d87052060e922b0d9479d61726d238c1fd97ac424c044b6fcad6c2beda8a.png" src="_images/d5b5d87052060e922b0d9479d61726d238c1fd97ac424c044b6fcad6c2beda8a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">ad_atac</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;celltype&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:394: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  cax = scatter(
+</pre></div>
+</div>
+<img alt="_images/aec312a98d548bc1d80ef227029b74447efe81bd01c21b9c7fda6f36e8efe809.png" src="_images/aec312a98d548bc1d80ef227029b74447efe81bd01c21b9c7fda6f36e8efe809.png" />
+</div>
+</div>
+<p>We will first run a bit of very fast and rough pre-processing on the atac dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will make the dataset a little bit more manageble by </span>
+<span class="c1"># using a subset of highly variable peaks </span>
+<span class="n">ad_atac_hv</span> <span class="o">=</span> <span class="n">ad_atac</span>
+<span class="n">snap</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">select_features</span><span class="p">(</span><span class="n">ad_atac</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="c1"># We do the same for RNA, but you can fit the model on the </span>
+<span class="c1"># whole dataset, this is mainly for a matter of efficiency</span>
+<span class="n">ad_rna_hv</span> <span class="o">=</span> <span class="n">ad_rna</span><span class="p">[:,</span><span class="n">ad_rna</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s2">&quot;highly_variable&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">ad_atac_hv</span> <span class="o">=</span> <span class="n">ad_atac</span><span class="p">[:,</span><span class="n">ad_atac</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s2">&quot;selected&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">ad_atac_hv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-12 15:31:13 - INFO - Selected 10000 features.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale and normalize so we cna use a Gaussian likelihood</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">ad_rna_hv</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_total</span><span class="p">(</span><span class="n">ad_atac_hv</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">ad_atac_hv</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">ad_atac_hv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need a minimum of 3 inputs types to run MIDAA: the actual data matrices, an optional normalization factor and a likelihood type. We have a simple parser function for AnnData objects but it is always better to understand how to do it explicitly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">ad_rna_hv</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">X</span><span class="p">]</span>
+<span class="n">normalization</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ad_rna_hv</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="c1"># If you have a normalization factor for each cell, you can provide it here, we used scaled data so no need for that</span>
+<span class="n">input_distribution</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">]</span> <span class="c1"># G for Gaussian, P for Poisson, NB for Negative Binomial, B for Bernoulli, Beta for Beta distribution and C for Categorical</span>
+
+<span class="c1"># As a quick note, as you see MIDAA is developed for multi-modal data, </span>
+<span class="c1"># so even if you use it for a single modality the inputs are always lists.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will now run a for loop to test different models (depending on what is you final goal you might even fix the number of archetypes to be in the range 5-10 as this could probably be enough, or maybe if you already know how many extreme groups you have):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A way to increase the network size fast</span>
+<span class="n">MULT</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># This takes around 15 minutes on a NVIDIA V100 32GB</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+    <span class="n">models</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+        <span class="n">input_data</span><span class="p">,</span>
+        <span class="n">normalization</span><span class="p">,</span>
+        <span class="n">input_distribution</span><span class="p">,</span>
+        <span class="n">hidden_dims_dec_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">,</span> <span class="mi">128</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the common decoder</span>
+        <span class="n">hidden_dims_dec_last</span> <span class="o">=</span> <span class="p">[</span><span class="mi">256</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the modality specific decoder</span>
+        <span class="n">hidden_dims_enc_ind</span> <span class="o">=</span> <span class="p">[</span><span class="mi">128</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the modality specific encoder</span>
+        <span class="n">hidden_dims_enc_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the common encoder</span>
+        <span class="n">hidden_dims_enc_pre_Z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the matrix specific encoder</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="c1"># Learning rate</span>
+        <span class="n">gamma_lr</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="c1"># Learning rate decay factor</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> 
+        <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">9000</span><span class="p">,</span>
+        <span class="n">torch_seed</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 411358432.00000  : 100%|██████████| 1000/1000 [01:56&lt;00:00,  8.62it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+ELBO: 411193952.00000  : 100%|██████████| 1000/1000 [01:55&lt;00:00,  8.62it/s]
+ELBO: 411180704.00000  : 100%|██████████| 1000/1000 [01:56&lt;00:00,  8.61it/s]
+ELBO: 411094816.00000  : 100%|██████████| 1000/1000 [01:56&lt;00:00,  8.62it/s]
+ELBO: 411099968.00000  : 100%|██████████| 1000/1000 [01:56&lt;00:00,  8.61it/s]
+ELBO: 411067808.00000  : 100%|██████████| 1000/1000 [01:55&lt;00:00,  8.63it/s]
+ELBO: 411077184.00000  : 100%|██████████| 1000/1000 [01:55&lt;00:00,  8.63it/s]
+ELBO: 411017408.00000  : 100%|██████████| 1000/1000 [01:55&lt;00:00,  8.63it/s]
+ELBO: 410968736.00000  : 100%|██████████| 1000/1000 [01:59&lt;00:00,  8.40it/s]
+ELBO: 411006688.00000  : 100%|██████████| 1000/1000 [01:55&lt;00:00,  8.62it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see how 5 is a potential candidate for a representative group of archetypes, then we have another drop of the loss at 10 which can also be used for a more refined analysis. We will go for 5 in this tutorial, but remember to explore more solutions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maa</span><span class="o">.</span><span class="n">plot_ELBO_across_runs</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span> <span class="c1"># warm-up 950 epochs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-12 16:42:17 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2024-04-12 16:42:17 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+</pre></div>
+</div>
+<img alt="_images/4171a49f68c0d5fede382860a6260ff4f2d9c30c87cb4b383d28dc7d7f43eec6.png" src="_images/4171a49f68c0d5fede382860a6260ff4f2d9c30c87cb4b383d28dc7d7f43eec6.png" />
+</div>
+</div>
+<p>Let’s first save the model as the computation is quite expensive!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">best_model</span><span class="p">[</span><span class="s2">&quot;deepAA_obj&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;best_model_aa_state_dict.pth&quot;</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">best_model</span><span class="p">[</span><span class="s2">&quot;inferred_quantities&quot;</span><span class="p">],</span> <span class="s2">&quot;best_model_aa_inferred_quantities.pth&quot;</span><span class="p">)</span>
+
+<span class="c1"># We can also save the ELBO values for this run</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">({</span><span class="n">k</span><span class="p">:</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;ELBO&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span> <span class="s2">&quot;ELBO_dict.pth&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To reload the model in the future you initialize it with the same parameters </span>
+
+ <span class="n">best_model</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_MIDAA</span><span class="p">(</span>
+        <span class="n">input_data</span><span class="p">,</span>
+        <span class="n">normalization</span><span class="p">,</span>
+        <span class="n">input_distribution</span><span class="p">,</span>
+        <span class="n">hidden_dims_dec_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">,</span> <span class="mi">128</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the common decoder</span>
+        <span class="n">hidden_dims_dec_last</span> <span class="o">=</span> <span class="p">[</span><span class="mi">256</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the modality specific decoder</span>
+        <span class="n">hidden_dims_enc_ind</span> <span class="o">=</span> <span class="p">[</span><span class="mi">128</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the modality specific encoder</span>
+        <span class="n">hidden_dims_enc_common</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the common encoder</span>
+        <span class="n">hidden_dims_enc_pre_Z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span> <span class="o">*</span> <span class="n">MULT</span><span class="p">],</span> <span class="c1"># Hidden dimensions of the matrix specific encoder</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="c1"># Learning rate</span>
+        <span class="n">gamma_lr</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="c1"># Learning rate decay factor</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> 
+        <span class="n">narchetypes</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">9000</span><span class="p">,</span>
+        <span class="n">torch_seed</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">)</span>
+ <span class="c1"># and then run</span>
+ <span class="n">maa</span><span class="o">.</span><span class="n">load_model_from_state_dict</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span><span class="n">input_data</span><span class="p">,</span> <span class="s2">&quot;best_model_aa_state_dict.pth&quot;</span><span class="p">)</span> <span class="c1"># you need the initialized model, the same input and the state dict file</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After this digression we can go on with our analysis and try to visualize the archetypes results. We can see how archetype follow mostly the erythroid lineage, with archetype 2,3 and 5 being related to Dendritic, stem and monocyte lines. Archetype 4 is still mostly in the transitioning stem cell portion of the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utility functions to add archetypes weights to the anndata object</span>
+
+<span class="n">ad_rna</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span> <span class="n">ad_rna</span><span class="p">)</span>
+<span class="n">ad_atac</span><span class="p">,</span> <span class="n">arc_names</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">add_to_obs_adata</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span> <span class="n">ad_atac</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">ad_rna</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">arc_names</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;inferno&quot;</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">add_outline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:371: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39;, &#39;norm&#39; will be ignored
+  ax.scatter(
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:381: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39;, &#39;norm&#39; will be ignored
+  ax.scatter(
+</pre></div>
+</div>
+<img alt="_images/e1ca7d1d2b3e04a8c3329bc2c12658d03f299c98d62e1fad046608451bbb83f6.png" src="_images/e1ca7d1d2b3e04a8c3329bc2c12658d03f299c98d62e1fad046608451bbb83f6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">ad_atac</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">arc_names</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;inferno&quot;</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">add_outline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6b88c97483f2922701be261cb96a811b23ff98ff1e2115fd12b61123932b73ff.png" src="_images/6b88c97483f2922701be261cb96a811b23ff98ff1e2115fd12b61123932b73ff.png" />
+</div>
+</div>
+<p>Another way of visualizing MIDAA is to plot a 2d projection of the latent space on a polytope (this visualization is quite reflective of the latent space even though it  gets a bit hard to understand if you have a lot of archetypes)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maa</span><span class="o">.</span><span class="n">plot_archetypes_simplex</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span>  <span class="n">s</span> <span class="o">=</span>  <span class="mi">5</span><span class="p">,</span> <span class="n">color_by</span><span class="o">=</span><span class="n">ad_rna</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Set1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 405x405 with 1 Axes&gt;, &lt;PolarAxes: &gt;)
+</pre></div>
+</div>
+<img alt="_images/9104e919926c75e91002c3adaef5f7ae802d83e847ccc6b890b39000db07a9e3.png" src="_images/9104e919926c75e91002c3adaef5f7ae802d83e847ccc6b890b39000db07a9e3.png" />
+</div>
+</div>
+<p>Then we can exploit the chromatin to look at some transcription factors involved in the differentiation and look at how they correlate with the archetypes. To do so we will first compute TF deviations using pychromVAR</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mdata</span> <span class="o">=</span> <span class="n">mudata</span><span class="o">.</span><span class="n">MuData</span><span class="p">({</span><span class="s2">&quot;rna&quot;</span><span class="p">:</span> <span class="n">ad_rna</span><span class="p">,</span> <span class="s2">&quot;atac&quot;</span><span class="p">:</span> <span class="n">ad_atac</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For more information you can look at the pychromVAR documentation (https://pychromvar.readthedocs.io/en/latest/)</span>
+
+<span class="n">pc</span><span class="o">.</span><span class="n">get_genome</span><span class="p">(</span><span class="s2">&quot;hg38&quot;</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">add_peak_seq</span><span class="p">(</span><span class="n">mdata</span><span class="p">,</span> <span class="n">genome_file</span><span class="o">=</span><span class="s2">&quot;./hg38.fa&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;:|-&quot;</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">add_gc_bias</span><span class="p">(</span><span class="n">mdata</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">get_bg_peaks</span><span class="p">(</span><span class="n">mdata</span><span class="p">)</span>
+
+<span class="c1"># get motifs</span>
+<span class="n">jdb_obj</span> <span class="o">=</span> <span class="n">jaspardb</span><span class="p">(</span><span class="n">release</span><span class="o">=</span><span class="s1">&#39;JASPAR2020&#39;</span><span class="p">)</span>
+<span class="n">motifs</span> <span class="o">=</span> <span class="n">jdb_obj</span><span class="o">.</span><span class="n">fetch_motifs</span><span class="p">(</span>
+    <span class="n">collection</span> <span class="o">=</span> <span class="s1">&#39;CORE&#39;</span><span class="p">,</span>
+    <span class="n">tax_group</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vertebrates&#39;</span><span class="p">])</span>
+
+<span class="n">pc</span><span class="o">.</span><span class="n">match_motif</span><span class="p">(</span><span class="n">mdata</span><span class="p">,</span> <span class="n">motifs</span><span class="o">=</span><span class="n">motifs</span><span class="p">)</span>
+
+<span class="n">dev</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">compute_deviations</span><span class="p">(</span><span class="n">mdata</span><span class="p">)</span>
+
+<span class="n">dev</span><span class="o">.</span><span class="n">write_h5ad</span><span class="p">(</span><span class="s2">&quot;data/chromvar_deviations.h5ad&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ELBO: 9907476.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 18.85it/s]
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/pyro/primitives.py:137: RuntimeWarning: trying to observe a value outside of inference at loss
+  warnings.warn(
+ELBO: 9901263.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 19.10it/s]
+ELBO: 9899080.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 18.79it/s]
+ELBO: 9892848.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 18.89it/s]
+ELBO: 9889298.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 18.90it/s]
+ELBO: 9889507.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 19.03it/s]
+ELBO: 9892396.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 19.02it/s]
+ELBO: 9888861.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 19.05it/s]
+ELBO: 9884211.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 19.13it/s]
+ELBO: 9881814.00000  : 100%|██████████| 250/250 [00:13&lt;00:00, 19.07it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dev</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s2">&quot;data/chromvar_deviations.h5ad&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We are again moving stuff around for plotting </span>
+<span class="n">mdata</span><span class="o">.</span><span class="n">mod</span><span class="p">[</span><span class="s1">&#39;chromvar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dev</span>
+<span class="n">mdata</span><span class="o">.</span><span class="n">mod</span><span class="p">[</span><span class="s1">&#39;chromvar&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">dev</span>
+<span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;chromvar&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;X_umap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;rna&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;X_umap&quot;</span><span class="p">]</span>
+
+<span class="n">mdata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;rna_umap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;rna&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;X_umap&quot;</span><span class="p">]</span>
+<span class="n">mdata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;atac_umap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;atac&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;X_umap&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will pick as example GATA1 and TCF3 which are important in respectively erythroid and dendritic differentiation. We can also see how their expression is quite low.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;chromvar&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MA0035.4.GATA1&#39;</span><span class="p">,</span> <span class="s2">&quot;MA0522.3.TCF3&quot;</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;inferno&quot;</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">add_outline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:371: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39;, &#39;norm&#39; will be ignored
+  ax.scatter(
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:381: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39;, &#39;norm&#39; will be ignored
+  ax.scatter(
+</pre></div>
+</div>
+<img alt="_images/09e994bfb301153209cc17fdbd09089d17db1d5b0c9c8930562e271bb9959630.png" src="_images/09e994bfb301153209cc17fdbd09089d17db1d5b0c9c8930562e271bb9959630.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;rna&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GATA1&#39;</span><span class="p">,</span> <span class="s2">&quot;TCF3&quot;</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;inferno&quot;</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">add_outline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7924e09f443607e608a19ddfcd0fab157ce4a63db142e453dc7353447c1a83ee.png" src="_images/7924e09f443607e608a19ddfcd0fab157ce4a63db142e453dc7353447c1a83ee.png" />
+</div>
+</div>
+<p>We now want to correlate the TF score to the archetypes weight, so we take archetypes 1 and 2 as we saw they were recapitulating erythroid and dendritic lineages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_plot_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+ <span class="s2">&quot;TCF3&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;chromvar&quot;</span><span class="p">][:,</span><span class="s2">&quot;MA0522.3.TCF3&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+ <span class="s2">&quot;modality&quot;</span> <span class="p">:</span> <span class="s2">&quot;atac&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;archetype2&quot;</span> <span class="p">:</span> <span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;rna&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;arc2&quot;</span><span class="p">]</span>
+<span class="p">},</span> <span class="n">index</span> <span class="o">=</span> <span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;rna&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+
+<span class="n">df_plot_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+ <span class="s2">&quot;GATA1&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;chromvar&quot;</span><span class="p">][:,</span><span class="s2">&quot;MA0035.4.GATA1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+ <span class="s2">&quot;modality&quot;</span> <span class="p">:</span> <span class="s2">&quot;atac&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;archetype1&quot;</span> <span class="p">:</span> <span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;rna&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;arc1&quot;</span><span class="p">]</span>
+<span class="p">},</span> <span class="n">index</span> <span class="o">=</span> <span class="n">mdata</span><span class="p">[</span><span class="s2">&quot;rna&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And indeed we have a pretty satisfying correlation, which hints at the fact that maybe we did not waste the last hour but we are actually extracting some biology here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">ggplot</span><span class="p">(</span><span class="n">df_plot_2</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s2">&quot;archetype1&quot;</span><span class="p">,</span> <span class="s2">&quot;GATA1&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="s2">&quot;archetype1&quot;</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">geom_point</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">stat_smooth</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;darkblue&quot;</span><span class="p">)</span> <span class="o">+</span>
+    <span class="n">xlim</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.77</span><span class="p">])</span> <span class="o">+</span> <span class="n">theme_classic</span><span class="p">()</span> <span class="o">+</span> <span class="n">theme</span><span class="p">(</span><span class="n">legend_position</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span> <span class="o">+</span>
+    <span class="n">ggtitle</span><span class="p">(</span><span class="s2">&quot;GATA1 accesibility&quot;</span><span class="p">)</span> 
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/plotnine/layer.py:364: PlotnineWarning: geom_point : Removed 4449 rows containing missing values.
+</pre></div>
+</div>
+<img alt="_images/d214e094bc84b62cac4295092da71e160632da5ed340efc781fd49240e39dfb6.png" src="_images/d214e094bc84b62cac4295092da71e160632da5ed340efc781fd49240e39dfb6.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure Size: (640 x 480)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">ggplot</span><span class="p">(</span><span class="n">df_plot_1</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s2">&quot;archetype2&quot;</span><span class="p">,</span> <span class="s2">&quot;TCF3&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="s2">&quot;archetype2&quot;</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">geom_point</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">stat_smooth</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;darkblue&quot;</span><span class="p">)</span> <span class="o">+</span>
+    <span class="n">xlim</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.75</span><span class="p">])</span> <span class="o">+</span> <span class="n">theme_classic</span><span class="p">()</span> <span class="o">+</span> <span class="n">theme</span><span class="p">(</span><span class="n">legend_position</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span> <span class="o">+</span>
+    <span class="n">ggtitle</span><span class="p">(</span><span class="s2">&quot;TCF3 accesibility&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/plotnine/layer.py:364: PlotnineWarning: geom_point : Removed 4473 rows containing missing values.
+</pre></div>
+</div>
+<img alt="_images/b457ed2cafec667f9f49b76c0872f9a7589e2a17e6f0e6eb2c9558d52e2e2120.png" src="_images/b457ed2cafec667f9f49b76c0872f9a7589e2a17e6f0e6eb2c9558d52e2e2120.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure Size: (640 x 480)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once you have the archetypes you can do a lot of stuff with them, by using them as if they were proper sample :</p>
+<ul class="simple">
+<li><p>You can GSEA on their expression profile</p></li>
+<li><p>You can look at how they evolve over space</p></li>
+<li><p>You can compute enrichment of features across one archetype weights</p></li>
+<li><p>You can use archetype weights as covariates in a survival model</p></li>
+</ul>
+<p>Imagination is you only limit!</p>
+</section>
+<section id="generating-new-data">
+<h2>Generating new data<a class="headerlink" href="#generating-new-data" title="Link to this heading"></a></h2>
+<p>But want I would like to show in this last part of the tutorial which is less straightforward to use is how we can use our model in a generative fashion to simulate synthetic data. The idea is that we specify some coordinates in the simplex and then we sample from teh corresponding Dirichlet distribution. For instance in this example here we will sample a dataste mostly composed by 2 archetypes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AA_distribution</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1e-16</span><span class="p">,</span><span class="mf">1e-16</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+
+<span class="c1"># We have a custom function for this, just give the concentration of a Dirichlet distribution or a full A matrix</span>
+<span class="n">synthetic_matrices</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">generate_synthetic_data</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span> <span class="n">AA_distribution</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">to_cpu</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then treat it as a normal single cell experiment and try to look at some markers in ATAC and RNA space</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anndata</span> <span class="k">as</span> <span class="nn">ad</span>
+
+
+<span class="n">cell_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cell_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">synthetic_matrices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+
+<span class="n">ad_synt_rna</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">synthetic_matrices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span> 
+<span class="n">ad_synt_rna</span><span class="o">.</span><span class="n">obs_names</span> <span class="o">=</span> <span class="n">cell_names</span>
+<span class="n">ad_synt_rna</span><span class="o">.</span><span class="n">var_names</span> <span class="o">=</span> <span class="n">ad_rna_hv</span><span class="o">.</span><span class="n">var_names</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">ad_synt_rna</span><span class="p">)</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">pca</span><span class="p">(</span><span class="n">ad_synt_rna</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">ad_synt_rna</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">ad_synt_rna</span> <span class="p">)</span>
+
+<span class="c1"># MPO is a stem marker and MEIS1 a dendritic one</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">ad_synt_rna</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span> <span class="s2">&quot;MPO&quot;</span><span class="p">,</span> <span class="s2">&quot;MEIS1&quot;</span><span class="p">],</span>  <span class="n">save</span> <span class="o">=</span> <span class="s2">&quot;umap_rna_markers_synthetic.pdf&quot;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;inferno&quot;</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">add_outline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">vmax</span> <span class="o">=</span> <span class="s2">&quot;p95&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: saving figure to file figures/umapumap_rna_markers_synthetic.pdf
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:371: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39;, &#39;norm&#39; will be ignored
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:381: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39;, &#39;norm&#39; will be ignored
+</pre></div>
+</div>
+<img alt="_images/f8f1ee55684bfb11f399f9ba2810404942975d6e884aae96a004783c917a78a6.png" src="_images/f8f1ee55684bfb11f399f9ba2810404942975d6e884aae96a004783c917a78a6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">anndata</span> <span class="k">as</span> <span class="nn">ad</span>
+
+
+<span class="n">ad_synt_atac</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">synthetic_matrices</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="n">ad_synt_atac</span><span class="o">.</span><span class="n">obs_names</span> <span class="o">=</span> <span class="n">cell_names</span>
+<span class="n">ad_synt_atac</span><span class="o">.</span><span class="n">var_names</span> <span class="o">=</span> <span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">var_names</span>
+<span class="n">ad_synt_atac</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">var</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">ad_synt_atac</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We look at the gene promoters </span>
+<span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s2">&quot;nearestGene&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;MPO&quot;</span><span class="p">][[</span><span class="s2">&quot;distToGeneStart&quot;</span><span class="p">,</span> <span class="s2">&quot;peakType&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>distToGeneStart</th>
+      <th>peakType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>chr17:58281664-58282164</th>
+      <td>12058</td>
+      <td>Promoter</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="n">ad_atac_hv</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s2">&quot;nearestGene&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;MEIS1&quot;</span><span class="p">][[</span><span class="s2">&quot;distToGeneStart&quot;</span><span class="p">,</span> <span class="s2">&quot;peakType&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>distToGeneStart</th>
+      <th>peakType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>chr2:66433317-66433817</th>
+      <td>115</td>
+      <td>Promoter</td>
+    </tr>
+    <tr>
+      <th>chr2:66434847-66435347</th>
+      <td>1645</td>
+      <td>Promoter</td>
+    </tr>
+    <tr>
+      <th>chr2:66481155-66481655</th>
+      <td>47953</td>
+      <td>Intronic</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_synt_atac</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;X_umap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ad_synt_rna</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;X_umap&quot;</span><span class="p">]</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">ad_synt_atac</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;chr17:58281664-58282164&quot;</span><span class="p">,</span> <span class="s2">&quot;chr2:66433317-66433817&quot;</span><span class="p">],</span>  <span class="n">save</span> <span class="o">=</span> <span class="s2">&quot;umap_atac_markers_synthetic.pdf&quot;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;inferno&quot;</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">add_outline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">vmax</span> <span class="o">=</span> <span class="s2">&quot;p95&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: saving figure to file figures/umapumap_atac_markers_synthetic.pdf
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:371: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39;, &#39;norm&#39; will be ignored
+/home/salvatore.milite/miniconda3/envs/scdeepaa/lib/python3.11/site-packages/scanpy/plotting/_tools/scatterplots.py:381: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39;, &#39;norm&#39; will be ignored
+</pre></div>
+</div>
+<img alt="_images/c9d04486ce811ed052f517223ce04c8ba0cec96e015b82cfb94af16e0698d297.png" src="_images/c9d04486ce811ed052f517223ce04c8ba0cec96e015b82cfb94af16e0698d297.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="implementation_and_parameters.html" class="btn btn-neutral float-left" title="Finding your way in MIDAAs interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Salvatore Milite.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+:orphan:
+
+:py:mod:`midaa.Likelihood`
+==========================
+
+.. py:module:: midaa.Likelihood
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Likelihood.compute_loss
+   midaa.Likelihood.compute_side_loss
+   midaa.Likelihood.compute_total_loss
+
+
+
+.. py:function:: compute_loss(input_types, n_dim_input, input_reconstructed, norm_factors, input_matrix, loss_weights_reconstruction)
+
+
+.. py:function:: compute_side_loss(input_types_side, n_dim_input, side_reconstructed, input_matrix_side, loss_weights_side)
+
+
+.. py:function:: compute_total_loss(input_types, n_dim_input, input_reconstructed, norm_factors, input_matrix, loss_weights_reconstruction, input_types_side=None, side_reconstructed=None, input_matrix_side=None, n_dim_input_side=None, loss_weights_side=None)
+
+

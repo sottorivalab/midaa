@@ -1,0 +1,70 @@
+:orphan:
+
+:py:mod:`midaa.Utils_parsers`
+=============================
+
+.. py:module:: midaa.Utils_parsers
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Utils_parsers.get_input_params_adata
+   midaa.Utils_parsers.add_to_obs_adata
+
+
+
+.. py:function:: get_input_params_adata(adata, is_normalized=True)
+
+   Prepare input parameters for archetypal analysis based on an AnnData object.
+
+   This function extracts the necessary input data, normalization factors, and input distribution types
+   from an AnnData object for use in archetypal analysis or similar models.
+
+   :param adata: An AnnData object containing the dataset. The data matrix `adata.X` should be accessible,
+                 and if `is_normalized` is False, the observation-level metadata `adata.obs["n_counts"]`
+                 should be present.
+   :type adata: AnnData
+   :param is_normalized: Indicates whether the data in `adata.X` is already normalized.
+                         - If `True`, no additional normalization is applied.
+                         - If `False`, normalization factors are computed based on the total counts per observation.
+   :type is_normalized: bool, optional (default=True)
+
+   :returns: * **input_data** (*list of np.ndarray*) -- A list containing the input data matrix extracted from `adata.X`. The data matrix is wrapped
+               in a list to maintain consistency with expected input formats for downstream analysis.
+             * **normalization** (*list of np.ndarray*) -- A list containing the normalization factors for each observation (cell).
+               - If `is_normalized` is `True`, this is an array of ones, indicating no additional normalization.
+               - If `is_normalized` is `False`, this is an array of normalization factors computed from `adata.obs["n_counts"]` divided by the total counts across all observations.
+             * **input_distribution** (*list of str*) -- A list containing the input distribution type for the data.
+               - If `is_normalized` is `True`, the distribution is set to `"G"` (Gaussian).
+               - If `is_normalized` is `False`, the distribution is set to `"NB"` (Negative Binomial).
+
+
+.. py:function:: add_to_obs_adata(inf_res, adata)
+
+   Add inferred archetype scores and embeddings to an AnnData object.
+
+   This function updates an AnnData object by adding the inferred archetype scores to `adata.obs`
+   and the low-dimensional embeddings to `adata.obsm` based on the results from an archetypal analysis.
+
+   :param inf_res: A dictionary containing the inference results from an archetypal analysis model.
+                   Expected keys in the dictionary:
+                   - `"hyperparameters"`: A dictionary with the key `"narchetypes"` indicating the number of archetypes.
+                   - `"inferred_quantities"`: A dictionary containing:
+                       - `"A"`: A 2D numpy array of shape `(n_samples, narchetypes)` with the archetype scores for each sample.
+                       - `"Z"`: A 2D numpy array with the low-dimensional embeddings for visualization or further analysis.
+   :type inf_res: dict
+   :param adata: The AnnData object to be updated. The object will be modified in place with new observations
+                 and embeddings added.
+   :type adata: AnnData
+
+   :returns: * **adata** (*AnnData*) -- The updated AnnData object with new fields added to `.obs` and `.obsm`.
+             * **col_names** (*list of str*) -- A list of column names added to `adata.obs`, corresponding to the archetype scores.
+
+

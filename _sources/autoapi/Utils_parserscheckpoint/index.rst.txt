@@ -1,0 +1,28 @@
+:orphan:
+
+:py:mod:`Utils_parsers-checkpoint`
+==================================
+
+.. py:module:: Utils_parsers-checkpoint
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   Utils_parsers-checkpoint.get_input_params_adata
+   Utils_parsers-checkpoint.add_to_obs_adata
+
+
+
+.. py:function:: get_input_params_adata(adata, is_normalized=True)
+
+
+.. py:function:: add_to_obs_adata(inf_res, adata)
+
+

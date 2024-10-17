@@ -1,0 +1,36 @@
+:orphan:
+
+:py:mod:`midaa.Utils_model_stats`
+=================================
+
+.. py:module:: midaa.Utils_model_stats
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Utils_model_stats.log_lk
+   midaa.Utils_model_stats.retrieve_params
+   midaa.Utils_model_stats.calculate_number_of_params
+   midaa.Utils_model_stats.calculate_BIC
+
+
+
+.. py:function:: log_lk(deepAA, input_matrix, UMI, model_matrix)
+
+
+.. py:function:: retrieve_params()
+
+
+.. py:function:: calculate_number_of_params(params)
+
+
+.. py:function:: calculate_BIC(res)
+
+

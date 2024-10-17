@@ -1,0 +1,63 @@
+:orphan:
+
+:py:mod:`Utils-checkpoint`
+==========================
+
+.. py:module:: Utils-checkpoint
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   Utils-checkpoint.mix_weights
+   Utils-checkpoint.create_z_fix
+   Utils-checkpoint.sample_batch
+   Utils-checkpoint.sample_batch_aux
+   Utils-checkpoint.sample_batch_by_class_aux
+   Utils-checkpoint.to_cpu_ot_iterate
+   Utils-checkpoint.detach_or_iterate
+   Utils-checkpoint.find_matching_indexes
+   Utils-checkpoint.select_elements_not_at_indexes
+   Utils-checkpoint.select_elements_at_indexes
+
+
+
+.. py:function:: mix_weights(beta)
+
+
+.. py:function:: create_z_fix(dim_latent_space)
+
+   Adapted from https://github.com/bmda-unibas/DeepArchetypeAnalysis/blob/master/AT_lib/lib_at.py
+
+
+
+.. py:function:: sample_batch(input_matrix, model_matrix, batch_size)
+
+
+.. py:function:: sample_batch_aux(max_value, batch_size)
+
+
+.. py:function:: sample_batch_by_class_aux(max, model_matrix, batch_size)
+
+
+.. py:function:: to_cpu_ot_iterate(x)
+
+
+.. py:function:: detach_or_iterate(x)
+
+
+.. py:function:: find_matching_indexes(input_list, regex_pattern)
+
+
+.. py:function:: select_elements_not_at_indexes(elements, exclude_indexes)
+
+
+.. py:function:: select_elements_at_indexes(elements, include_indexes)
+
+

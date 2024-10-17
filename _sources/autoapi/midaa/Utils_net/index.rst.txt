@@ -1,0 +1,64 @@
+:orphan:
+
+:py:mod:`midaa.Utils_net`
+=========================
+
+.. py:module:: midaa.Utils_net
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   midaa.Utils_net.build_multimodal_linear_encoder
+   midaa.Utils_net.build_multimodal_linear_decoder
+   midaa.Utils_net.build_conv_layer
+   midaa.Utils_net.build_conv_layer_reverse
+   midaa.Utils_net.build_sequential_layer
+   midaa.Utils_net.build_last_layer_from_output_dist
+   midaa.Utils_net.build_last_layer_from_output_dist_flat
+   midaa.Utils_net.build_last_layer_from_output_dist_conv
+   midaa.Utils_net.build_layer_general
+   midaa.Utils_net.calculate_flattened_size
+   midaa.Utils_net.calculate_flattened_size_decoder
+
+
+
+.. py:function:: build_multimodal_linear_encoder()
+
+
+.. py:function:: build_multimodal_linear_decoder()
+
+
+.. py:function:: build_conv_layer(in_channels, out_channels, flatten=False, kernel_size=3, stride=1, padding=1, pool_size=2, pool_stride=2)
+
+
+.. py:function:: build_conv_layer_reverse(in_channels, out_channels, flatten=False, kernel_size=3, stride=1, padding=1, pool_size=2, pool_stride=2)
+
+
+.. py:function:: build_sequential_layer(dim1, dim2, linearize=False)
+
+
+.. py:function:: build_last_layer_from_output_dist(dim, input_size, output_type, nn_type, **kargs)
+
+
+.. py:function:: build_last_layer_from_output_dist_flat(dim, input_size, output_type)
+
+
+.. py:function:: build_last_layer_from_output_dist_conv(dim, input_size, output_type, kernel_size=3, stride=1, padding=1)
+
+
+.. py:function:: build_layer_general(in_channels, out_channels, nn_type, linearize=False, flatten=False, **kargs)
+
+
+.. py:function:: calculate_flattened_size(image_size, num_conv_layers, D, filter_size, stride, padding, pool_size, pool_stride)
+
+
+.. py:function:: calculate_flattened_size_decoder(image_size, num_conv_layers, D, filter_size, stride, padding, pool_stride)
+
+

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiomics Integration via Deep Archetypal Analysis (MIDAA) &mdash; midaa  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis" href="midaa_long_form.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            midaa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="midaa_long_form.html">From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation_and_parameters.html">Finding your way in MIDAAs interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scMulti_multimodal.html">MIDAA 101 (on 10X multiome)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">midaa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Multiomics Integration via Deep Archetypal Analysis (MIDAA)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="multiomics-integration-via-deep-archetypal-analysis-midaa">
+<h1>Multiomics Integration via Deep Archetypal Analysis (MIDAA)<a class="headerlink" href="#multiomics-integration-via-deep-archetypal-analysis-midaa" title="Link to this heading"></a></h1>
+<p>MIDAA is a package designed for performing Deep Archetypal Analysis on multiomics data. The documentation can be find here <a class="reference external" href="https://sottorivalab.github.io/midaa/">https://sottorivalab.github.io/midaa/</a></p>
+<p><em>The package is under active development, expect breaking changes (we just changed the tool name ;) ) and incomplete documentation for a bit</em>
+<em>I’ll try my best to speed this up, if something is broken or you need help please open an issue, do not be shy!</em>
+<br/><br/>
+<a class="reference internal" href="https://github.com/sottorivalab/daario/blob/69f8399cadfcb10ba1bc483cd4405b823efda64c/logo.png?raw=true"><img alt="https://github.com/sottorivalab/daario/blob/69f8399cadfcb10ba1bc483cd4405b823efda64c/logo.png?raw=true" class="align-left" src="https://github.com/sottorivalab/daario/blob/69f8399cadfcb10ba1bc483cd4405b823efda64c/logo.png?raw=true" style="width: 200px;" /></a></p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Soon on pypi</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/sottorivalab/midaa.git
+<span class="c1"># you need poetry installed</span>
+poetry<span class="w"> </span>install<span class="w"> </span>
+</pre></div>
+</div>
+<p><br/><br/></p>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
+<p>midaa encodes you multi-modal data into a latent simplex:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Z^*} =   \mathbf{A}  \mathbf{B}  \mathbf{Z} 
+\]</div>
+<p>midaa leans the matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span> in an amortized fashion, namely we learn a function that takes in input the different data modalities <span class="math notranslate nohighlight">\(\mathbf{X_g}\)</span> indexed by <span class="math notranslate nohighlight">\(g\)</span> and learns the 3 matrices. As you could have got from the name, we parametrize the function as a neural network.
+The network is implemented in a Variational Autoencdoer fashion, so we have and encoding and decoding function as well as probabilistic definition of the matrix factorization problem above.
+Both the encoder and the decoder have a shared portion where data fusion occurs and an independent piece where modality specific encoding and decoding takes place.</p>
+<p>If you are happy with that we have some cool tutorials that will show you how to use MIDAA on real <a class="reference external" href="https://sottorivalab.github.io/daario/scMulti_multimodal.ipynb">multi-omics data</a>.</p>
+<p>Otherwise, the best way to start is to read <a class="reference external" href="https://sottorivalab.github.io/daario/midaa_long_form.html">this</a> or the companion <a class="reference external" href="https://www.biorxiv.org/content/10.1101/2024.04.05.588238v1">paper</a> and understand what MIDAA actually does in details and what are the <a class="reference external" href="https://sottorivalab.github.io/daario/implementation_and_parameters.ipynb">parameters</a> you can play with.</p>
+<p>A minimal example to run the tool:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">import</span> <span class="nn">midaa</span> <span class="k">as</span> <span class="nn">maa</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+
+<span class="n">adata</span> <span class="o">=</span>  <span class="n">sc</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">pbmc3k_processed</span><span class="p">()</span>
+<span class="n">input_matrix</span><span class="p">,</span> <span class="n">norm_factors</span><span class="p">,</span> <span class="n">input_distribution</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">get_input_params_adata</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+
+<span class="n">narchetypes</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">aa_result</span> <span class="o">=</span> <span class="n">maa</span><span class="o">.</span><span class="n">fit_deepAA</span><span class="p">(</span>
+    <span class="n">input_matrix</span><span class="p">,</span>
+    <span class="n">norm_factors</span><span class="p">,</span>
+    <span class="n">input_distribution</span><span class="p">,</span>
+    <span class="n">narchetypes</span> <span class="o">=</span> <span class="n">narchetypes</span>
+    <span class="p">)</span>
+
+
+</pre></div>
+</div>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h2>
+<p>Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.</p>
+</section>
+<section id="todos-slow-but-steady">
+<h2>ToDOs  (slow but steady):  🔨<a class="headerlink" href="#todos-slow-but-steady" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>[ ] Final API Documnetation</p></li>
+<li><p>[X] Tutorial math on AA</p></li>
+<li><p>[X] Tutorial parameters and networks</p></li>
+<li><p>[X] Quick start</p></li>
+<li><p>[ ] Allow the user to specify its own encoder/decoder</p></li>
+<li><p>[ ] Provide some module builders</p></li>
+<li><p>[ ] Test batch/covariate correction in latent space</p></li>
+</ul>
+</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Link to this heading"></a></h2>
+<p>If you have used midaa in your research, consider citing:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="w"> </span><span class="p">{</span><span class="nl">milite2024</span><span class="p">,</span>
+<span class="w">	</span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Salvatore Milite and Giulio Caravagna and Andrea Sottoriva}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Interpretable Multi-Omics Data Integration with Deep Archetypal Analysis}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2024}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">doi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1101/2024.04.05.588238}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Cold Spring Harbor Laboratory}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">URL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://www.biorxiv.org/content/early/2024/04/09/2024.04.05.588238}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{bioRxiv}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">midaa</span></code> was created by Salvatore Milite. It is licensed under the terms of the MIT license.</p>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">midaa</span></code> was created with <a class="reference external" href="https://cookiecutter.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code></a> and the <code class="docutils literal notranslate"><span class="pre">py-pkgs-cookiecutter</span></code> <a class="reference external" href="https://github.com/py-pkgs/py-pkgs-cookiecutter">template</a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="midaa_long_form.html" class="btn btn-neutral float-right" title="From Classic Archetypal Analysis to Multimodal Deep Archetypal Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Salvatore Milite.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
