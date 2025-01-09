@@ -5,22 +5,34 @@ description = "A package to perform deep Archetypal Analysis on multi-omics data
 authors = ["Salvatore Milite"]
 license = "MIT"
 readme = "README.md"
+packages = [
+    { include = "midaa", from = "src" }
+]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
+torch = "^2.2.0"
+numpy = "^1.26.0"
 pyro-ppl = "^1.9.0"
 tqdm = "^4.66.2"
-python-tsp = "^0.4.1"
+python-tsp = "*"
 seaborn = "^0.13.2"
-
-
-[tool.poetry.dev-dependencies]
+pandas = "^2.2.0"
+scipy = "^1.12.0"
+matplotlib = "^3.8.0"
 
 [tool.poetry.group.dev.dependencies]
 myst-nb = "^1.0.0"
 sphinx-autoapi = "^3.0.0"
 sphinx-rtd-theme = "^2.0.0"
+pytest = "^8.0.0"
+jupyter = "^1.0.0"
+black = "^24.2.0"
+pylint = "^3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+

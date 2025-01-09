@@ -379,7 +379,7 @@ def training_loop(deepAA, input_matrix, model_matrix,
                     for site in param_capture.trace.nodes.values()]
                 names = [site
                     for site in param_capture.trace.nodes.keys()]
-                regex_B = "encoder\$\$\$layers_latent\.1\.[0-9]*"
+                regex_B = r"encoder\$\$\$layers_latent\.1\.[0-9]*"
 
                 
 
