@@ -26,6 +26,7 @@ myst-nb = "^1.0.0"
 sphinx-autoapi = "^3.0.0"
 sphinx-rtd-theme = "^2.0.0"
 pytest = "^8.0.0"
+pytest-cov = "^4.1.0"
 jupyter = "^1.0.0"
 black = "^24.2.0"
 pylint = "^3.0.0"
@@ -33,6 +34,11 @@ pylint = "^3.0.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "--cov=midaa --cov-report=xml"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
 
 
 

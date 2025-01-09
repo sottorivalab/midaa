@@ -19,17 +19,27 @@ jobs:
 
       - name: Install poetry
         uses: snok/install-poetry@v1
++       with:
++         version: 1.8.2
++         virtualenvs-create: true
++         virtualenvs-in-project: true
 
       - name: Install package
         run: poetry install
 
++     - name: List installed packages
++       run: poetry show
+
       - name: Test with pytest
-        run: poetry run pytest tests/ --cov=midaa --cov-report=xml
+-       run: poetry run pytest
++       run: poetry run pytest tests/ -v
 
       - name: Use Codecov to track coverage
         uses: codecov/codecov-action@v2
         with:
           files: ./coverage.xml # coverage report
++         fail_ci_if_error: true
++         verbose: true
 
       - name: Build documentation
         run: poetry run make html --directory docs/
