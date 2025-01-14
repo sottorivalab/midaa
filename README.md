@@ -39,9 +39,9 @@ midaa leans the matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{Z}$ in an amort
 The network is implemented in a Variational Autoencdoer fashion, so we have and encoding and decoding function as well as probabilistic definition of the matrix factorization problem above.
 Both the encoder and the decoder have a shared portion where data fusion occurs and an independent piece where modality specific encoding and decoding takes place.
 
-If you are happy with that we have some cool tutorials that will show you how to use MIDAA on real [multi-omics data](https://sottorivalab.github.io/midaa/scMulti_multimodal.ipynb).
+If you are happy with that we have some cool tutorials that will show you how to use MIDAA on real [multi-omics data](https://sottorivalab.github.io/midaa/scMulti_multimodal.html).
 
-Otherwise, the best way to start is to read [this](https://sottorivalab.github.io/midaa/midaa_long_form.html) or the companion [paper](https://www.biorxiv.org/content/10.1101/2024.04.05.588238v1) and understand what MIDAA actually does in details and what are the [parameters](https://sottorivalab.github.io/midaa/implementation_and_parameters.ipynb) you can play with.
+Otherwise, the best way to start is to read [this](https://sottorivalab.github.io/midaa/midaa_long_form.html) or the companion [paper](https://www.biorxiv.org/content/10.1101/2024.04.05.588238v1) and understand what MIDAA actually does in details and what are the [parameters](https://sottorivalab.github.io/midaa/implementation_and_parameters.html) you can play with.
 
 
 A minimal example to run the tool:
