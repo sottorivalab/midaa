@@ -56,7 +56,7 @@ input_matrix, norm_factors, input_distribution = maa.get_input_params_adata(adat
 
 narchetypes = 5
 
-aa_result = maa.fit_deepAA(
+aa_result = maa.fit_MIDAA(
     input_matrix,
     norm_factors,
     input_distribution,
@@ -76,7 +76,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 - [X] Tutorial math on AA
 - [X] Tutorial parameters and networks
 - [X] Quick start 
-- [ ] Allow the user to specify its own encoder/decoder
+- [ ] Allow the user to specify its encoder/decoder
 - [ ] Provide some module builders
 - [ ] Test batch/covariate correction in latent space 
 
