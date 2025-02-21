@@ -22,6 +22,7 @@ pip install poetry
 git clone https://github.com/sottorivalab/midaa.git
 cd midaa
 # you need poetry installed
+poetry lock # might be necessary
 poetry install
 # or 
 poetry build
