@@ -13,8 +13,10 @@ MIDAA is a package designed for performing Deep Archetypal Analysis on multiomic
 ## Installation
 
 ```bash
+# Better to do tihs in a virtual or conda env
 # Soon on pypi
 git clone https://github.com/sottorivalab/midaa.git
+cd midaa
 # you need poetry installed
 poetry install
 # or 
