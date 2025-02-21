@@ -16,7 +16,8 @@ MIDAA is a package designed for performing Deep Archetypal Analysis on multiomic
 # Better to do this in a virtual or conda env, here I'll go with conda
 # As for some packages there is still no wheel I suggest stick with python 3.11 or 3.12
 conda create -n MIDAA python=3.11
-conda activate MIDAA  
+conda activate MIDAA
+pip install poetry 
 # Soon on pypi
 git clone https://github.com/sottorivalab/midaa.git
 cd midaa
