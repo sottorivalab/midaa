@@ -51,7 +51,7 @@ def plot_archetypes_simplex(res, distance_type = "euclidean", cmap = "nipy_spect
     labels = 360 * dists
     labels = labels.cumsum()[:-1]
     labels = np.append(0,labels)
-    aa = res["inferred_quantities"]["A"]
+    aa = res["inferred_quantities"]["A"][:,permutation]
     labels_rad = np.radians(labels)
     r = (np.sqrt( (aa * np.cos(labels_rad)).sum(axis=1)**2 + (aa * np.sin(labels_rad)).sum(axis=1)**2))
     theta = np.arctan2((aa * np.sin(labels_rad)).sum(axis=1) , (aa * np.cos(labels_rad)).sum(axis=1))
